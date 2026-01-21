@@ -716,12 +716,7 @@
             rgba(0, 0, 0, 0.5) 20%,
             black 40%
           );
-          mask-image: linear-gradient(
-            to bottom,
-            transparent 0%,
-            rgba(0, 0, 0, 0.5) 20%,
-            black 40%
-          );
+          mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.5) 20%, black 40%);
         }
 
         .afm-hero-content {
@@ -1509,10 +1504,159 @@
         width: 24px;
         height: 24px;
       }
+
+      /* ============================================
+         WELCOME OVERLAY - Full Screen Portal
+         ============================================ */
+      .afm-welcome-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f5eee0;
+        transition:
+          opacity 0.4s ease-out,
+          visibility 0.4s ease-out;
+      }
+
+      .afm-welcome-overlay.fade-out {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      /* Product Grid Background */
+      .afm-welcome-grid {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 32px;
+        padding: 48px;
+        opacity: 0.35;
+        overflow: hidden;
+      }
+
+      .afm-welcome-grid-item {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .afm-welcome-grid-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: grayscale(20%);
+      }
+
+      /* Muting Layer */
+      .afm-welcome-mute {
+        position: absolute;
+        inset: 0;
+        background: rgba(245, 238, 224, 0.6);
+        backdrop-filter: blur(1px);
+      }
+
+      /* Welcome Badge - Collab Style (Vertical) */
+      .afm-welcome-badge {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 32px 48px;
+        border-radius: 32px;
+        box-shadow:
+          0 8px 40px rgba(0, 0, 0, 0.15),
+          0 0 0 1px rgba(255, 255, 255, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(8px);
+      }
+
+      .afm-welcome-badge img:first-of-type {
+        height: 96px;
+        width: auto;
+      }
+
+      .afm-welcome-badge-x {
+        margin-top: -25px;
+        font-size: 24px;
+        font-weight: 700;
+        color: #ef3e36;
+      }
+
+      .afm-welcome-badge-heart {
+        height: 104px;
+        width: auto;
+        transform-origin: center;
+        animation: heartPulse 1.6s ease-in-out forwards;
+      }
+
+      @keyframes heartPulse {
+        0% {
+          transform: scale(1);
+        }
+        25% {
+          transform: scale(0.85);
+        }
+        100% {
+          transform: scale(1.5);
+        }
+      }
+
+      /* Responsive Welcome Overlay */
+      @media (max-width: 768px) {
+        .afm-welcome-grid {
+          grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+          gap: 20px;
+          padding: 24px;
+        }
+
+        .afm-welcome-badge {
+          padding: 24px 36px;
+          gap: 16px;
+        }
+
+        .afm-welcome-badge img:first-of-type {
+          height: 72px;
+        }
+
+        .afm-welcome-badge-heart {
+          height: 80px;
+        }
+
+        .afm-welcome-badge-x {
+          font-size: 20px;
+        }
+      }
     </style>
   </head>
 
   <body>
+    <!-- ============================================
+         WELCOME OVERLAY - Displayed on Load
+         ============================================ -->
+    <div class="afm-welcome-overlay" id="welcomeOverlay">
+      <!-- Product Grid Background -->
+      <div class="afm-welcome-grid" id="welcomeGrid"></div>
+
+      <!-- Muting Layer -->
+      <div class="afm-welcome-mute"></div>
+
+      <!-- Collab Badge -->
+      <div class="afm-welcome-badge">
+        <img src="./afm-logo.avif" alt="Action Figure Miles" />
+        <span class="afm-welcome-badge-x">×</span>
+        <img src="./swapnice_logo.png" alt="Swapnice" class="afm-welcome-badge-heart" />
+      </div>
+    </div>
+
     <!-- EVERYTHING must live inside this root -->
     <div id="afm-activate">
       <!-- ============================================
@@ -1915,6 +2059,43 @@
 
     <!-- JavaScript -->
     <script>
+      // Welcome Overlay - Populate grid and animate
+      (function initWelcomeOverlay() {
+        const overlay = document.getElementById('welcomeOverlay');
+        const grid = document.getElementById('welcomeGrid');
+        if (!overlay || !grid) return;
+
+        // Product image to tile in the grid
+        const productSrc = './product_1.webp';
+
+        // Calculate how many grid items we need to fill the screen
+        const cols = Math.ceil(window.innerWidth / 172); // 140px + 32px gap
+        const rows = Math.ceil(window.innerHeight / 172);
+        const totalItems = cols * rows + 10; // Extra buffer
+
+        // Populate grid with product images
+        for (let i = 0; i < totalItems; i++) {
+          const item = document.createElement('div');
+          item.className = 'afm-welcome-grid-item';
+          const img = document.createElement('img');
+          img.src = productSrc;
+          img.alt = '';
+          img.loading = 'eager';
+          item.appendChild(img);
+          grid.appendChild(item);
+        }
+
+        // Fade out when heart reaches 2x size (end of 1.6s animation)
+        setTimeout(() => {
+          overlay.classList.add('fade-out');
+        }, 2200);
+
+        // Remove from DOM after fade completes (1.6s animation + 0.4s fade)
+        setTimeout(() => {
+          overlay.remove();
+        }, 2400);
+      })();
+
       window.addEventListener('load', () => {
         const layer = document.querySelector('.afm-video-layer');
         const v = layer?.querySelector('video');
