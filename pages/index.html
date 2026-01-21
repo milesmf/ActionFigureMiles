@@ -919,89 +919,289 @@
       }
 
       /* ============================================
-         MAIN CONTENT - Max Width 896px (4xl)
+         NARRATIVE BODY - Story-Driven Vertical Flow
          ============================================ */
-      .afm-main {
-        max-width: 896px;
+      .afm-narrative {
+        max-width: 800px;
         margin: 0 auto;
-        padding: 80px 40px;
+        padding: 120px 40px 100px;
       }
 
       @media (max-width: 768px) {
-        .afm-main {
-          padding: 64px 24px;
+        .afm-narrative {
+          padding: 80px 24px 64px;
         }
       }
 
-      .afm-section-title {
-        font-size: clamp(28px, 5vw, 40px);
-        font-weight: 700;
-        text-align: center;
-        margin-bottom: 16px;
-        color: #1a1a1a;
+      /* Story Beat - Each narrative section */
+      .afm-beat {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        margin-bottom: 120px;
       }
 
-      .afm-section-desc {
+      .afm-beat:last-child {
+        margin-bottom: 0;
+      }
+
+      .afm-beat.afm-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 768px) {
+        .afm-beat {
+          margin-bottom: 80px;
+        }
+      }
+
+      /* Beat alignment variations for asymmetry */
+      .afm-beat--left {
+        text-align: left;
+        padding-right: 15%;
+      }
+
+      .afm-beat--center {
         text-align: center;
-        font-size: 18px;
-        color: #555;
-        margin-bottom: 48px;
-        max-width: 600px;
+        max-width: 640px;
         margin-left: auto;
         margin-right: auto;
       }
 
-      /* Feature Cards */
-      .afm-features {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 24px;
-        margin-bottom: 64px;
+      .afm-beat--right {
+        text-align: right;
+        padding-left: 15%;
       }
 
-      .afm-feature-card {
-        background: #fff;
-        border-radius: 20px;
-        padding: 32px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-        transition:
-          transform 0.2s,
-          box-shadow 0.2s;
+      @media (max-width: 768px) {
+        .afm-beat--left,
+        .afm-beat--right {
+          padding-left: 0;
+          padding-right: 0;
+          text-align: left;
+        }
       }
 
-      .afm-feature-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      }
-
-      .afm-feature-icon {
-        width: 56px;
-        height: 56px;
-        background: #ef3e36;
-        border-radius: 16px;
-        display: flex;
+      /* Beat marker - subtle accent */
+      .afm-beat-marker {
+        display: inline-flex;
         align-items: center;
-        justify-content: center;
-        margin-bottom: 20px;
+        gap: 12px;
+        margin-bottom: 24px;
+        opacity: 0.7;
       }
 
-      .afm-feature-icon svg {
-        width: 28px;
-        height: 28px;
-        color: #fff;
+      .afm-beat-marker::before {
+        content: '';
+        width: 24px;
+        height: 2px;
+        background: #ef3e36;
+        border-radius: 1px;
       }
 
-      .afm-feature-title {
-        font-size: 20px;
+      .afm-beat-marker span {
+        font-size: 11px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #ef3e36;
         font-weight: 600;
-        margin-bottom: 8px;
+      }
+
+      .afm-beat--right .afm-beat-marker {
+        flex-direction: row-reverse;
+      }
+
+      .afm-beat--center .afm-beat-marker {
+        justify-content: center;
+      }
+
+      .afm-beat--center .afm-beat-marker::before {
+        display: none;
+      }
+
+      /* Beat headline - typography leads */
+      .afm-beat-headline {
+        font-size: clamp(28px, 5vw, 44px);
+        font-weight: 700;
+        line-height: 1.15;
+        margin: 0 0 20px 0;
         color: #1a1a1a;
       }
 
-      .afm-feature-desc {
-        font-size: 15px;
-        color: #666;
-        line-height: 1.5;
+      .afm-beat-headline em {
+        font-style: normal;
+        color: #ef3e36;
+      }
+
+      /* Beat body copy */
+      .afm-beat-body {
+        font-size: clamp(16px, 2.5vw, 19px);
+        line-height: 1.65;
+        color: #444;
+        margin: 0;
+        max-width: 520px;
+      }
+
+      .afm-beat--center .afm-beat-body {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .afm-beat--right .afm-beat-body {
+        margin-left: auto;
+      }
+
+      /* Beat visual accent - optional icon/symbol */
+      .afm-beat-accent {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        background: rgba(239, 62, 54, 0.08);
+        border-radius: 14px;
+        margin-bottom: 20px;
+      }
+
+      .afm-beat-accent svg {
+        width: 24px;
+        height: 24px;
+        color: #ef3e36;
+        opacity: 0.9;
+      }
+
+      .afm-beat--right .afm-beat-accent {
+        margin-left: auto;
+      }
+
+      .afm-beat--center .afm-beat-accent {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* Teaser frame - for Beat 3 visual tease */
+      .afm-beat-teaser {
+        margin-top: 40px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .afm-beat-teaser-frame {
+        width: 280px;
+        height: 180px;
+        background: linear-gradient(135deg, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.08) 100%);
+        border-radius: 16px;
+        overflow: hidden;
+        position: relative;
+        box-shadow:
+          0 4px 20px rgba(0, 0, 0, 0.06),
+          inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+      }
+
+      .afm-beat-teaser-frame::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          transparent 40%,
+          rgba(239, 62, 54, 0.05) 60%,
+          transparent 80%
+        );
+        animation: teaserShimmer 4s ease-in-out infinite;
+      }
+
+      @keyframes teaserShimmer {
+        0%, 100% { opacity: 0.5; transform: translateX(-20%); }
+        50% { opacity: 1; transform: translateX(20%); }
+      }
+
+      .afm-beat-teaser-inner {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+      }
+
+      .afm-beat-teaser-icon {
+        width: 40px;
+        height: 40px;
+        background: rgba(239, 62, 54, 0.1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .afm-beat-teaser-icon svg {
+        width: 20px;
+        height: 20px;
+        color: #ef3e36;
+        opacity: 0.8;
+      }
+
+      .afm-beat-teaser-label {
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #888;
+        font-weight: 500;
+      }
+
+      .afm-beat--center .afm-beat-teaser {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        text-align: center;
+      }
+
+      .afm-beat--center .afm-beat-teaser-frame {
+        margin: 0 auto;
+      }
+
+      @media (max-width: 768px) {
+        .afm-beat-teaser-frame {
+          width: 100%;
+          max-width: 280px;
+        }
+      }
+
+      /* Collab badge - AFM x Swapnice */
+      .afm-collab-mark {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-top: 32px;
+        opacity: 0.6;
+      }
+
+      .afm-collab-mark::before,
+      .afm-collab-mark::after {
+        content: '';
+        height: 1px;
+        flex: 1;
+        background: linear-gradient(to right, transparent, rgba(0,0,0,0.1), transparent);
+      }
+
+      .afm-collab-mark span {
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #888;
+        white-space: nowrap;
+      }
+
+      .afm-beat--left .afm-collab-mark,
+      .afm-beat--right .afm-collab-mark {
+        max-width: 360px;
+      }
+
+      .afm-beat--right .afm-collab-mark {
+        margin-left: auto;
       }
 
       /* ============================================
@@ -2049,7 +2249,7 @@
         <!-- Transition gradient to content -->
         <div class="afm-hero-transition">
           <div class="afm-scroll-hint">
-            <span>See what unlocks</span>
+            <span>What changed</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -2064,79 +2264,84 @@
       </header>
 
       <!-- ============================================
-           MAIN CONTENT - Max Width 896px
+           NARRATIVE BODY - Story-Driven Initiation
            ============================================ -->
-      <main class="afm-main">
-        <h2 class="afm-section-title">What You Unlock</h2>
-        <p class="afm-section-desc">This is what activation gives you.</p>
+      <main class="afm-narrative">
 
-        <div class="afm-features">
-          <div class="afm-feature-card">
-            <div class="afm-feature-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                />
-              </svg>
-            </div>
-            <h3 class="afm-feature-title">Proof It's Real</h3>
-            <p class="afm-feature-desc">
-              Your pair comes with permanent proof of authenticity. Show anyone, anytime.
-            </p>
+        <!-- Beat 1: Transformation - What just changed? -->
+        <section class="afm-beat afm-beat--left">
+          <div class="afm-beat-marker">
+            <span>The Shift</span>
           </div>
+          <div class="afm-beat-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z" />
+            </svg>
+          </div>
+          <h2 class="afm-beat-headline">
+            This isn't merch.<br/>
+            <em>It's activated.</em>
+          </h2>
+          <p class="afm-beat-body">
+            The object you're holding now carries a living digital identity. It knows you. It responds to you. What was static is now something more.
+          </p>
+          <div class="afm-collab-mark">
+            <span>AFM Object + Swapnice Engine</span>
+          </div>
+        </section>
 
-          <div class="afm-feature-card">
-            <div class="afm-feature-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                />
-              </svg>
-            </div>
-            <h3 class="afm-feature-title">Early Access</h3>
-            <p class="afm-feature-desc">
-              Get first look at drops, hidden content, and experiences before anyone else.
-            </p>
+        <!-- Beat 2: Trust - Why does it matter? -->
+        <section class="afm-beat afm-beat--right">
+          <div class="afm-beat-marker">
+            <span>The Bond</span>
           </div>
+          <div class="afm-beat-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+            </svg>
+          </div>
+          <h2 class="afm-beat-headline">
+            Verified.<br/>
+            <em>Permanent.</em><br/>
+            Yours.
+          </h2>
+          <p class="afm-beat-body">
+            Your ownership is authenticated and recorded. Not a receipt that fades — a connection that travels with you, provable anywhere, anytime.
+          </p>
+        </section>
 
-          <div class="afm-feature-card">
-            <div class="afm-feature-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
-                />
-              </svg>
-            </div>
-            <h3 class="afm-feature-title">Ownership That Evolves</h3>
-            <p class="afm-feature-desc">
-              Your connection grows over time. New rewards unlock as you stay activated.
-            </p>
+        <!-- Beat 3: Access - What do I do now? -->
+        <section class="afm-beat afm-beat--center">
+          <div class="afm-beat-marker">
+            <span>The Inside</span>
           </div>
-        </div>
+          <div class="afm-beat-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+            </svg>
+          </div>
+          <h2 class="afm-beat-headline">
+            What comes next<br/>
+            <em>only opens inside.</em>
+          </h2>
+          <p class="afm-beat-body">
+            Early drops. Hidden content. Founder-level access to experiences that don't exist yet. The app isn't a store — it's where your activation lives.
+          </p>
+          <div class="afm-beat-teaser">
+            <div class="afm-beat-teaser-frame">
+              <div class="afm-beat-teaser-inner">
+                <div class="afm-beat-teaser-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z" />
+                  </svg>
+                </div>
+                <span class="afm-beat-teaser-label">AFM Pilot Preview</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
       </main>
 
       <!-- ============================================
@@ -2389,6 +2594,42 @@
         const p = v.play();
         if (p && typeof p.catch === 'function') p.catch(fail);
       });
+
+      // Narrative Beats - Scroll-triggered reveal animation
+      (function initNarrativeBeats() {
+        const beats = document.querySelectorAll('.afm-beat');
+        if (!beats.length) return;
+
+        // Respect reduced motion preference
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion) {
+          beats.forEach(beat => beat.classList.add('afm-visible'));
+          return;
+        }
+
+        const observerOptions = {
+          root: null,
+          rootMargin: '0px 0px -80px 0px',
+          threshold: 0.15
+        };
+
+        const revealBeat = (entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('afm-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        };
+
+        const observer = new IntersectionObserver(revealBeat, observerOptions);
+        beats.forEach((beat, index) => {
+          // Stagger the animation delay slightly for each beat
+          beat.style.transitionDelay = `${index * 0.1}s`;
+          observer.observe(beat);
+        });
+      })();
+
       function handleEmailSubmit(event) {
         event.preventDefault();
 
