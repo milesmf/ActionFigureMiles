@@ -937,7 +937,9 @@
       .afm-beat {
         opacity: 0;
         transform: translateY(40px);
-        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        transition:
+          opacity 0.8s ease-out,
+          transform 0.8s ease-out;
         margin-bottom: 120px;
       }
 
@@ -1090,7 +1092,7 @@
       .afm-beat-teaser-frame {
         width: 280px;
         height: 180px;
-        background: linear-gradient(135deg, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.08) 100%);
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.08) 100%);
         border-radius: 16px;
         overflow: hidden;
         position: relative;
@@ -1113,8 +1115,15 @@
       }
 
       @keyframes teaserShimmer {
-        0%, 100% { opacity: 0.5; transform: translateX(-20%); }
-        50% { opacity: 1; transform: translateX(20%); }
+        0%,
+        100% {
+          opacity: 0.5;
+          transform: translateX(-20%);
+        }
+        50% {
+          opacity: 1;
+          transform: translateX(20%);
+        }
       }
 
       .afm-beat-teaser-inner {
@@ -1184,7 +1193,7 @@
         content: '';
         height: 1px;
         flex: 1;
-        background: linear-gradient(to right, transparent, rgba(0,0,0,0.1), transparent);
+        background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1), transparent);
       }
 
       .afm-collab-mark span {
@@ -1216,7 +1225,7 @@
         padding: 10px;
         display: flex;
         flex-direction: column;
-        gap: 48px;
+        gap: 24px;
       }
 
       @media (max-width: 768px) {
@@ -1427,7 +1436,8 @@
       }
 
       @keyframes footerBoltPulse {
-        0%, 100% {
+        0%,
+        100% {
           transform: scale(1);
           filter: drop-shadow(0 0 0 transparent);
         }
@@ -1455,7 +1465,9 @@
           0 2px 12px rgba(0, 0, 0, 0.08),
           0 0 0 1px rgba(0, 0, 0, 0.04);
         cursor: pointer;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
       }
 
       .afm-footer-qr-box:hover {
@@ -1559,7 +1571,7 @@
         justify-content: center;
         gap: 24px;
         font-size: 13px;
-        padding-top: 8px;
+        padding: 12px;
       }
 
       .afm-footer-legal a {
@@ -2267,50 +2279,62 @@
            NARRATIVE BODY - Story-Driven Initiation
            ============================================ -->
       <main class="afm-narrative">
-
         <!-- Beat 1: Transformation - What just changed? -->
         <section class="afm-beat afm-beat--left">
-          
           <h2 class="afm-beat-headline">
-            This isn't merch.<br/>
+            This isn't merch.<br />
             <em>It's activated.</em>
           </h2>
           <p class="afm-beat-body">
-            The object you're holding now carries a living digital identity. It knows you. It responds to you. What was static is now something more.
+            The object you're holding now carries a living digital identity. It knows you. It
+            responds to you. What was static is now something more.
           </p>
-          
         </section>
 
         <!-- Beat 2: Trust - Why does it matter? -->
         <section class="afm-beat afm-beat--right">
-          
           <h2 class="afm-beat-headline">
-            Verified.<br/>
-            <em>Permanent.</em><br/>
+            Verified.<br />
+            <em>Permanent.</em><br />
             Yours.
           </h2>
           <p class="afm-beat-body">
-            Your ownership is authenticated and recorded. Not a receipt that fades — a connection that travels with you, provable anywhere, anytime.
+            Your ownership is authenticated and recorded. Not a receipt that fades — a connection
+            that travels with you, provable anywhere, anytime.
           </p>
         </section>
 
         <!-- Beat 3: Access - What do I do now? -->
         <section class="afm-beat afm-beat--center">
-        
           <h2 class="afm-beat-headline">
-            What comes next<br/>
+            What comes next<br />
             <em>only opens inside.</em>
           </h2>
           <p class="afm-beat-body">
-            Early drops. Hidden content. Founder-level access to experiences that don't exist yet. The app isn't a store — it's where your activation lives.
+            Early drops. Hidden content. Founder-level access to experiences that don't exist yet.
+            The app isn't a store — it's where your activation lives.
           </p>
           <div class="afm-beat-teaser">
             <div class="afm-beat-teaser-frame">
               <div class="afm-beat-teaser-inner">
                 <div class="afm-beat-teaser-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z"
+                    />
                   </svg>
                 </div>
                 <span class="afm-beat-teaser-label">AFM Pilot Preview</span>
@@ -2318,7 +2342,6 @@
             </div>
           </div>
         </section>
-
       </main>
 
       <!-- ============================================
@@ -2328,61 +2351,74 @@
         <!-- Footer Portal - Activation Continuation -->
         <footer class="afm-footer-portal">
           <div class="afm-footer-portal-inner">
-
             <!-- Dual Activation Paths -->
             <div class="afm-footer-paths">
-            <!-- Path 1: Download the App -->
-            <div class="afm-footer-path">
-            
-              <h3 class="afm-footer-path-title">Get the App</h3>
-              <p class="afm-footer-path-desc">Unlock your superpowers. Download now and begin your transformation.</p>
+              <!-- Path 1: Download the App -->
+              <div class="afm-footer-path">
+                <h3 class="afm-footer-path-title">Get the App</h3>
+                <p class="afm-footer-path-desc">
+                  Unlock your superpowers. Download now and begin your transformation.
+                </p>
 
-              <button class="afm-footer-download-cta" onclick="openModal()">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
-                </svg>
-                <span>Download the App</span>
-              </button>
+                <button class="afm-footer-download-cta" onclick="openModal()">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2.5"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z"
+                    />
+                  </svg>
+                  <span>Download the App</span>
+                </button>
 
-              <!-- QR Code Section -->
-              <div class="afm-footer-qr-section">
-                <div class="afm-footer-qr-box" onclick="openModal()" title="Scan to download">
-                  <img src="./download_app.png" alt="Download QR Code" />
-                </div>
-                <div class="afm-footer-qr-hint">
-                  <strong>Scan to activate</strong>
-                  Point your camera here
+                <!-- QR Code Section -->
+                <div class="afm-footer-qr-section">
+                  <div class="afm-footer-qr-box" onclick="openModal()" title="Scan to download">
+                    <img src="./download_app.png" alt="Download QR Code" />
+                  </div>
+                  <div class="afm-footer-qr-hint">
+                    <strong>Scan to activate</strong>
+                    Point your camera here
+                  </div>
                 </div>
               </div>
+
+              <!-- Divider -->
+              <div class="afm-footer-divider"></div>
+
+              <!-- Path 2: Join Founders Circle -->
+              <div class="afm-footer-path">
+                <h3 class="afm-footer-path-title">Founders Circle</h3>
+                <p class="afm-footer-path-desc">
+                  Not ready yet? Join the inner circle and be first to know when new powers unlock.
+                </p>
+
+                <form
+                  class="afm-footer-email-form"
+                  id="emailCaptureForm"
+                  onsubmit="handleEmailSubmit(event)"
+                >
+                  <div class="afm-footer-input-wrapper">
+                    <input
+                      type="email"
+                      class="afm-footer-email-input"
+                      id="emailInput"
+                      name="email"
+                      required
+                      placeholder="Enter your email"
+                      aria-label="Email address"
+                    />
+                  </div>
+                  <button type="submit" class="afm-footer-email-submit">Join the Circle</button>
+                </form>
+              </div>
             </div>
-
-            <!-- Divider -->
-            <div class="afm-footer-divider"></div>
-
-            <!-- Path 2: Join Founders Circle -->
-            <div class="afm-footer-path"> 
-            
-              <h3 class="afm-footer-path-title">Founders Circle</h3>
-              <p class="afm-footer-path-desc">Not ready yet? Join the inner circle and be first to know when new powers unlock.</p>
-
-              <form class="afm-footer-email-form" id="emailCaptureForm" onsubmit="handleEmailSubmit(event)">
-                <div class="afm-footer-input-wrapper">
-                  <input
-                    type="email"
-                    class="afm-footer-email-input"
-                    id="emailInput"
-                    name="email"
-                    required
-                    placeholder="Enter your email"
-                    aria-label="Email address"
-                  />
-                </div>
-                <button type="submit" class="afm-footer-email-submit">Join the Circle</button>
-              </form>
-
-              <p class="afm-footer-privacy-note">No spam. Only meaningful updates.</p>
-            </div>
-          </div>
           </div>
         </footer>
 
@@ -2574,18 +2610,18 @@
         // Respect reduced motion preference
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (prefersReducedMotion) {
-          beats.forEach(beat => beat.classList.add('afm-visible'));
+          beats.forEach((beat) => beat.classList.add('afm-visible'));
           return;
         }
 
         const observerOptions = {
           root: null,
           rootMargin: '0px 0px -80px 0px',
-          threshold: 0.15
+          threshold: 0.15,
         };
 
         const revealBeat = (entries, observer) => {
-          entries.forEach(entry => {
+          entries.forEach((entry) => {
             if (entry.isIntersecting) {
               entry.target.classList.add('afm-visible');
               observer.unobserve(entry.target);
