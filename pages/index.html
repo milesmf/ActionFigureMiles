@@ -157,212 +157,43 @@
 
       .afm-badge-inner {
         display: flex;
-        gap: 16px;
         align-items: center;
-        background: rgba(255, 255, 255, 0.95);
-        padding: 8px 20px;
-        border-radius: 100px;
+        gap: 0;
+        background: rgba(255, 255, 255, 0.97);
+        padding: 12px 24px;
+        border-radius: 16px;
         box-shadow:
-          0 4px 24px rgba(0, 0, 0, 0.15),
-          0 0 0 1px rgba(255, 255, 255, 0.3),
-          inset 0 1px 0 rgba(255, 255, 255, 0.8);
+          0 4px 24px rgba(0, 0, 0, 0.12),
+          0 0 0 1px rgba(0, 0, 0, 0.04);
         backdrop-filter: blur(8px);
         position: relative;
-        height: 100px;
+        max-height: 80px;
       }
 
-      /* Pulsing glow ring around badge */
-      .afm-badge-inner::after {
-        content: '';
-        position: absolute;
-        inset: -3px;
-        border-radius: 100px;
-        /* background: linear-gradient(90deg, #ef3e36, #ff6b5b, #ef3e36); */
-        background-size: 200% 100%;
-        animation: badgeGlow 3s linear infinite;
-        z-index: -1;
-        opacity: 0.6;
-      }
-
-      @keyframes badgeGlow {
-        0% {
-          background-position: 0% 50%;
-        }
-        100% {
-          background-position: 200% 50%;
-        }
-      }
-
-      .afm-badge-inner img:first-of-type {
-        height: 44px;
-        width: auto;
-      }
-
-      .afm-badge-inner img:last-of-type {
-        height: 125px;
-        width: auto;
-      }
-
-      .afm-badge-x {
-        font-size: 16px;
-        font-weight: 700;
-        color: #ef3e36;
-        opacity: 1;
-        margin-right: -20px !important;
-      }
-
-      /* ============================================
-         MOTION LAYER - Background Energy
-         ============================================ */
-      .afm-motion-layer {
-        position: absolute;
-        inset: 0;
-        z-index: 2;
-        pointer-events: none;
-        overflow: hidden;
-      }
-
-      /* Orbiting activation rings */
-      .afm-orbit-ring {
-        position: absolute;
-        border: 2px solid rgba(255, 255, 255, 0.08);
-        border-radius: 50%;
-        animation: orbitExpand 8s ease-in-out infinite;
-      }
-
-      .afm-orbit-ring:nth-child(1) {
-        width: 300px;
-        height: 300px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        animation-delay: 0s;
-      }
-
-      .afm-orbit-ring:nth-child(2) {
-        width: 500px;
-        height: 500px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        animation-delay: -2s;
-      }
-
-      .afm-orbit-ring:nth-child(3) {
-        width: 700px;
-        height: 700px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        animation-delay: -4s;
-      }
-
-      @keyframes orbitExpand {
-        0%,
-        100% {
-          opacity: 0;
-          transform: translate(-50%, -50%) scale(0.8);
-        }
-        50% {
-          opacity: 1;
-          transform: translate(-50%, -50%) scale(1);
-        }
-      }
-
-      /* Floating particles */
-      .afm-particle {
-        position: absolute;
-        width: 6px;
-        height: 6px;
-        background: rgba(255, 255, 255, 0.4);
-        border-radius: 50%;
-        animation: particleFloat 12s ease-in-out infinite;
-      }
-
-      .afm-particle:nth-child(4) {
-        left: 10%;
-        top: 20%;
-        animation-delay: 0s;
-      }
-      .afm-particle:nth-child(5) {
-        left: 85%;
-        top: 30%;
-        animation-delay: -2s;
-        width: 8px;
-        height: 8px;
-      }
-      .afm-particle:nth-child(6) {
-        left: 15%;
-        top: 70%;
-        animation-delay: -4s;
-      }
-      .afm-particle:nth-child(7) {
-        left: 90%;
-        top: 75%;
-        animation-delay: -6s;
-        width: 4px;
-        height: 4px;
-      }
-      .afm-particle:nth-child(8) {
-        left: 5%;
-        top: 50%;
-        animation-delay: -8s;
-      }
-      .afm-particle:nth-child(9) {
-        left: 70%;
-        top: 15%;
-        animation-delay: -3s;
-        width: 10px;
-        height: 10px;
-      }
-
-      @keyframes particleFloat {
-        0%,
-        100% {
-          transform: translateY(0) translateX(0) scale(1);
-          opacity: 0.3;
-        }
-        25% {
-          transform: translateY(-30px) translateX(15px) scale(1.2);
-          opacity: 0.7;
-        }
-        50% {
-          transform: translateY(-10px) translateX(-10px) scale(0.9);
-          opacity: 0.5;
-        }
-        75% {
-          transform: translateY(-40px) translateX(20px) scale(1.1);
-          opacity: 0.6;
-        }
-      }
-
-      /* Swapnice icon orbiting element */
-      .afm-orbit-icon {
-        position: absolute;
-        width: 48px;
-        height: 48px;
-        background: rgba(255, 255, 255, 0.15);
-        border-radius: 12px;
+      .afm-badge-logo {
         display: flex;
         align-items: center;
         justify-content: center;
-        animation: iconOrbit 20s linear infinite;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
       }
 
-      .afm-orbit-icon svg {
-        width: 24px;
-        height: 24px;
-        color: rgba(255, 255, 255, 0.9);
+      .afm-badge-logo img {
+        height: auto;
+        display: block;
       }
 
-      @keyframes iconOrbit {
-        0% {
-          transform: rotate(0deg) translateX(200px) rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg) translateX(200px) rotate(-360deg);
-        }
+      .afm-badge-logo:first-of-type img {
+        width: 150px;
+      }
+
+      .afm-badge-logo:last-of-type img {
+        width: 150px;
+      }
+
+      .afm-badge-divider {
+        width: 2px;
+        height: 44px;
+        background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.15), transparent);
+        margin-left: 18px;
       }
 
       /* ============================================
@@ -455,12 +286,99 @@
         }
       }
 
+      /* ============================================
+         CHALK UNDERLINE ANIMATION
+         ============================================ */
+      .afm-chalk-underline {
+        position: relative;
+        display: inline-block;
+      }
+
+      .afm-chalk-underline::after {
+        content: '';
+        position: absolute;
+        left: -4%;
+        right: -4%;
+        bottom: 0;
+        height: 12px;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 12' preserveAspectRatio='none'%3E%3Cpath d='M2 6 L398 6' stroke='%23ffffff' stroke-width='5' fill='none' stroke-linecap='round' opacity='0.95'/%3E%3Cpath d='M4 8 L396 8' stroke='%23ffffff' stroke-width='2' fill='none' stroke-linecap='round' opacity='0.4'/%3E%3Cpath d='M6 4 L394 4' stroke='%23ffffff' stroke-width='1.5' fill='none' stroke-linecap='round' opacity='0.25'/%3E%3C/svg%3E") no-repeat center;
+        background-size: 100% 100%;
+        transform: scaleX(0);
+        transform-origin: left center;
+        opacity: 0;
+        pointer-events: none;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+      }
+
+      .afm-chalk-underline.animate::after {
+        animation: chalkDraw 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+      }
+
+      @keyframes chalkDraw {
+        0% {
+          transform: scaleX(0) rotate(-0.5deg);
+          opacity: 0;
+        }
+        15% {
+          opacity: 1;
+        }
+        40% {
+          transform: scaleX(0.55) rotate(0.3deg);
+        }
+        70% {
+          transform: scaleX(0.85) rotate(-0.2deg);
+        }
+        85% {
+          transform: scaleX(1.02) rotate(0.1deg);
+        }
+        100% {
+          transform: scaleX(1) rotate(0deg);
+          opacity: 1;
+        }
+      }
+
+      /* Subtle chalk dust particles */
+      .afm-chalk-underline::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -8px;
+        height: 30px;
+        background:
+          radial-gradient(circle at 15% 60%, rgba(255,255,255,0.6) 1px, transparent 1px),
+          radial-gradient(circle at 35% 40%, rgba(255,255,255,0.4) 1px, transparent 1px),
+          radial-gradient(circle at 55% 70%, rgba(255,255,255,0.5) 1px, transparent 1px),
+          radial-gradient(circle at 75% 45%, rgba(255,255,255,0.3) 1px, transparent 1px),
+          radial-gradient(circle at 90% 55%, rgba(255,255,255,0.4) 1px, transparent 1px);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .afm-chalk-underline.animate::before {
+        animation: chalkDust 0.8s ease-out 0.3s forwards;
+      }
+
+      @keyframes chalkDust {
+        0% {
+          opacity: 0;
+          transform: translateY(-5px);
+        }
+        50% {
+          opacity: 0.8;
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+      }
+
       .afm-hero-subtitle {
         font-size: clamp(18px, 2.5vw, 24px);
         opacity: 0.85;
         max-width: 480px;
-        margin: 0 0 48px 0;
         color: #fff;
+        margin: 0;
         line-height: 1.5;
         animation: subtitleIn 0.6s ease-out 0.5s both;
         text-align: left;
@@ -565,10 +483,10 @@
       }
 
       .afm-hero-cta:hover {
-        transform: translateY(-4px) scale(1.02);
-        box-shadow:
+        transform: translateY(-2px) scale(1.02);
+        /* box-shadow:
           0 12px 40px rgba(0, 0, 0, 0.3),
-          0 0 60px rgba(255, 255, 255, 0.3);
+          0 0 60px rgba(255, 255, 255, 0.3); */
       }
 
       .afm-hero-cta svg {
@@ -622,6 +540,195 @@
       .afm-hero-note svg {
         width: 16px;
         height: 16px;
+      }
+
+      /* ============================================
+         PORTAL CARD - Unified Activation CTA
+         ============================================ */
+      .afm-portal-card {
+        position: relative;
+        animation: portalCardIn 0.8s ease-out 0.6s both;
+        padding: 6px;
+        border-radius: 26px;
+        overflow: hidden;
+        margin-top: 80px;
+        /* Solid top rim highlight for raised effect */
+        box-shadow:
+          0 -2px 0 rgba(255, 255, 255, 0.15),
+          0 -4px 12px rgba(255, 255, 255, 0.1),
+          0 4px 20px rgba(0, 0, 0, 0.5),
+          0 12px 48px rgba(0, 0, 0, 0.4);
+      }
+
+      @keyframes portalCardIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px) scale(0.96);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      /* Rotating white border - single constant counter-clockwise flow */
+      .afm-portal-card::before {
+        content: '';
+        position: absolute;
+        inset: -50%;
+        background: conic-gradient(
+          from 0deg,
+          #0a0a0a 0deg,
+          #0a0a0a 240deg,
+          #333333 260deg,
+          #666666 270deg,
+          #999999 280deg,
+          #cccccc 290deg,
+          #ffffff 300deg,
+          #ffffff 330deg,
+          #cccccc 340deg,
+          #999999 345deg,
+          #666666 350deg,
+          #333333 355deg,
+          #0a0a0a 360deg
+        );
+        animation: portalVortex 4s linear infinite;
+        z-index: 0;
+      }
+
+      /* No secondary layer */
+      .afm-portal-card::after {
+        display: none;
+      }
+
+      @keyframes portalVortex {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(-360deg);
+        }
+      }
+
+      /* Outer glow element - removed, using box-shadow on parent instead */
+      .afm-portal-card-glow {
+        display: none;
+      }
+
+      .afm-portal-card-inner {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        background: linear-gradient(
+          180deg,
+          rgba(12, 12, 22, 0.98) 0%,
+          rgba(8, 8, 16, 1) 50%,
+          rgba(10, 10, 20, 0.99) 100%
+        );
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 28px 36px;
+        /* Inset effect - sunken inner card */
+        box-shadow:
+          inset 0 2px 4px rgba(0, 0, 0, 0.5),
+          inset 0 4px 8px rgba(0, 0, 0, 0.3),
+          inset 0 -1px 0 rgba(255, 255, 255, 0.03),
+          0 -1px 0 rgba(255, 255, 255, 0.05);
+      }
+
+      /* Left side - CTA content */
+      .afm-portal-cta-side {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        flex: 1;
+      }
+
+      .afm-portal-label {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+        margin: 0 0 12px 0;
+      }
+
+      .afm-portal-card .afm-hero-cta {
+        padding: 16px 28px;
+        font-size: 16px;
+      }
+
+      .afm-portal-note {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.45);
+        margin: 12px 0 0 0;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      /* Divider */
+      .afm-portal-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 100%;
+        position: relative;
+      }
+
+      .afm-portal-divider::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 1px;
+        background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.15), transparent);
+      }
+
+      .afm-portal-divider span {
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: rgba(255, 255, 255, 0.35);
+        background: rgba(0, 0, 0, 0.4);
+        padding: 6px 8px;
+        border-radius: 4px;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Right side - QR */
+      .afm-portal-qr-side {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+
+      .afm-portal-qr-box {
+        background: #fff;
+        border-radius: 12px;
+        padding: 10px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      }
+
+      .afm-portal-qr-box img {
+        width: 100px;
+        height: 100px;
+        display: block;
+      }
+
+      .afm-portal-qr-label {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.4);
+        margin: 10px 0 0 0;
+        text-align: center;
       }
 
       /* ============================================
@@ -743,16 +850,17 @@
         }
 
         .afm-badge-inner {
-          padding: 6px 14px;
-          gap: 10px;
+          padding: 10px 18px;
+          border-radius: 14px;
         }
 
-        .afm-badge-inner img:first-of-type {
+        .afm-badge-logo img {
           height: 28px;
         }
 
-        .afm-badge-inner img:last-of-type {
-          height: 70px;
+        .afm-badge-divider {
+          height: 22px;
+          margin: 0 14px;
         }
 
         .afm-orbit-icon {
@@ -762,6 +870,49 @@
         .afm-hero-cta {
           padding: 18px 36px;
           font-size: 16px;
+        }
+
+        /* Portal Card Mobile */
+        .afm-portal-card-inner {
+          flex-direction: column;
+          gap: 24px;
+          padding: 24px;
+          text-align: center;
+        }
+
+        .afm-portal-cta-side {
+          align-items: center;
+        }
+
+        .afm-portal-card .afm-hero-cta {
+          padding: 16px 24px;
+          font-size: 15px;
+        }
+
+        .afm-portal-divider {
+          width: 100%;
+          height: auto;
+          flex-direction: row;
+        }
+
+        .afm-portal-divider::before {
+          top: 50%;
+          bottom: auto;
+          left: 0;
+          right: 0;
+          width: 100%;
+          height: 1px;
+          background: linear-gradient(
+            to right,
+            transparent,
+            rgba(255, 255, 255, 0.15),
+            transparent
+          );
+        }
+
+        .afm-portal-qr-box img {
+          width: 90px;
+          height: 90px;
         }
       }
 
@@ -1557,56 +1708,80 @@
       .afm-welcome-mute {
         position: absolute;
         inset: 0;
-        background: rgba(245, 238, 224, 0.6);
+        background: rgba(245, 238, 224, 0.05);
         backdrop-filter: blur(1px);
       }
 
-      /* Welcome Badge - Collab Style (Vertical) */
+      /* Welcome Badge - Clean Collab Lock-up */
       .afm-welcome-badge {
         position: relative;
         z-index: 10;
         display: flex;
-        flex-direction: column;
         align-items: center;
-        gap: 20px;
-        background: rgba(255, 255, 255, 0.95);
-        padding: 32px 48px;
-        border-radius: 32px;
+        gap: 0;
+        background: rgba(255, 255, 255, 0.97);
+        padding: 24px 40px;
+        border-radius: 24px;
         box-shadow:
-          0 8px 40px rgba(0, 0, 0, 0.15),
-          0 0 0 1px rgba(255, 255, 255, 0.3),
-          inset 0 1px 0 rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(8px);
+          0 8px 40px rgba(0, 0, 0, 0.12),
+          0 0 0 1px rgba(0, 0, 0, 0.04);
+        animation: badgeReveal 0.6s ease-out both;
       }
 
-      .afm-welcome-badge img:first-of-type {
-        height: 96px;
+      @keyframes badgeReveal {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .afm-welcome-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .afm-welcome-logo img {
+        height: 64px;
         width: auto;
+        display: block;
       }
 
-      .afm-welcome-badge-x {
-        margin-top: -25px;
-        font-size: 24px;
-        font-weight: 700;
-        color: #ef3e36;
+      .afm-welcome-divider {
+        width: 1px;
+        height: 48px;
+        background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.12), transparent);
+        margin: 0 28px;
       }
 
       .afm-welcome-badge-heart {
-        height: 104px;
+        height: 56px;
         width: auto;
-        transform-origin: center;
-        animation: heartPulse 1.6s ease-in-out forwards;
+        display: block;
+        animation: heartBeat 1.8s ease-in-out forwards;
       }
 
-      @keyframes heartPulse {
-        0% {
+      @keyframes heartBeat {
+        0%,
+        20% {
           transform: scale(1);
         }
-        25% {
+        30% {
           transform: scale(0.85);
         }
+        40% {
+          transform: scale(0.95);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        60%,
         100% {
-          transform: scale(1.5);
+          transform: scale(1.25);
         }
       }
 
@@ -1619,20 +1794,21 @@
         }
 
         .afm-welcome-badge {
-          padding: 24px 36px;
-          gap: 16px;
+          padding: 20px 28px;
+          border-radius: 20px;
         }
 
-        .afm-welcome-badge img:first-of-type {
-          height: 72px;
+        .afm-welcome-logo img {
+          height: 48px;
+        }
+
+        .afm-welcome-divider {
+          height: 36px;
+          margin: 0 20px;
         }
 
         .afm-welcome-badge-heart {
-          height: 80px;
-        }
-
-        .afm-welcome-badge-x {
-          font-size: 20px;
+          height: 44px;
         }
       }
     </style>
@@ -1651,9 +1827,13 @@
 
       <!-- Collab Badge -->
       <div class="afm-welcome-badge">
-        <img src="./afm-logo.avif" alt="Action Figure Miles" />
-        <span class="afm-welcome-badge-x">×</span>
-        <img src="./swapnice_logo.png" alt="Swapnice" class="afm-welcome-badge-heart" />
+        <div class="afm-welcome-logo">
+          <img src="./afm-logo.avif" alt="Action Figure Miles" />
+        </div>
+        <div class="afm-welcome-divider"></div>
+        <div class="afm-welcome-logo">
+          <img src="./swapnice_logo.png" alt="Swapnice" class="afm-welcome-badge-heart" />
+        </div>
       </div>
     </div>
 
@@ -1690,58 +1870,67 @@
           <!-- Floating Activation Badge -->
           <div class="afm-floating-badge">
             <div class="afm-badge-inner">
-              <img src="./afm-logo.avif" alt="Action Figure Miles" />
-              <span class="afm-badge-x">×</span>
-              <img src="./swapnice_logo_2.png" alt="Swapnice" />
+              <div class="afm-badge-logo">
+                <img src="./afm-logo.avif" alt="Action Figure Miles" />
+              </div>
+              <div class="afm-badge-divider"></div>
+              <div class="afm-badge-logo">
+                <img src="./swapnice_logo_2.png" alt="Swapnice" />
+              </div>
             </div>
           </div>
 
-          <h1 class="afm-hero-title">Activate Your Superpowers</h1>
+          <h1 class="afm-hero-title">Activate Your <span class="afm-chalk-underline" id="superpowersUnderline">Superpowers</span></h1>
           <p class="afm-hero-subtitle">Your pair is waiting. Scan the tag. Unlock what's yours.</p>
 
-          <!-- Portal CTA -->
-          <div class="afm-cta-wrapper">
-            <div class="afm-cta-glow"></div>
-            <div class="afm-footer-cta-qr">
+          <!-- Activation Portal Card -->
+          <div class="afm-portal-card">
+            <div class="afm-portal-card-glow"></div>
+            <div class="afm-portal-card-inner">
+              <!-- Left: CTA Content -->
+              <div class="afm-portal-cta-side">
+                <!-- <p class="afm-portal-label">Activation starts here</p> -->
+                <button class="afm-hero-cta" onclick="openModal()">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                    />
+                  </svg>
+                  <span class="afm-cta-text">Download the Swapnice App</span>
+                </button>
+              </div>
+
+              <!-- Divider -->
+              <div class="afm-portal-divider">
+                <span>or</span>
+              </div>
+
+              <!-- Right: QR Code -->
               <div
-                class="afm-footer-cta-qr-box"
+                class="afm-portal-qr-side"
                 onclick="openModal()"
                 title="Scan to download the app"
               >
-                <!-- QR Code placeholder SVG -->
-                <img src="./download_app.png" />
+                <div class="afm-portal-qr-box">
+                  <img src="./download_app.png" alt="QR code to download app" />
+                </div>
               </div>
             </div>
-            <!-- <button class="afm-hero-cta" onclick="openModal()">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2.5"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M13 10V3L4 14h7v7l9-11h-7z"
-                />
-              </svg>
-              <span class="afm-cta-text">Enter Portal</span>
-            </button> -->
           </div>
-
-          <!-- <p class="afm-hero-note">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-            </svg>
-            Free via Swapnice app
-          </p> -->
         </div>
 
         <!-- Transition gradient to content -->
         <div class="afm-hero-transition">
           <div class="afm-scroll-hint">
-            <span>Discover</span>
+            <span>See what unlocks</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -2065,20 +2254,18 @@
         const grid = document.getElementById('welcomeGrid');
         if (!overlay || !grid) return;
 
-        // Product image to tile in the grid
-        const productSrc = './product_1.webp';
-
-        // Calculate how many grid items we need to fill the screen
-        const cols = Math.ceil(window.innerWidth / 172); // 140px + 32px gap
-        const rows = Math.ceil(window.innerHeight / 172);
-        const totalItems = cols * rows + 10; // Extra buffer
+        // Hardcoded product grid layout (1-7 repeated in a curated pattern)
+        const productLayout = [
+          1, 3, 5, 7, 2, 4, 6, 4, 6, 1, 3, 5, 7, 2, 7, 2, 4, 6, 1, 3, 5, 3, 5, 7, 2, 4, 6, 1, 6, 1,
+          3, 5, 7, 2, 4, 2, 4, 6, 1, 3, 5, 7, 5, 7, 2, 4, 6, 1, 3, 1, 3, 5, 7, 2, 4, 6,
+        ];
 
         // Populate grid with product images
-        for (let i = 0; i < totalItems; i++) {
+        for (let i = 0; i < productLayout.length; i++) {
           const item = document.createElement('div');
           item.className = 'afm-welcome-grid-item';
           const img = document.createElement('img');
-          img.src = productSrc;
+          img.src = `./product_${productLayout[i]}.webp`;
           img.alt = '';
           img.loading = 'eager';
           item.appendChild(img);
@@ -2088,12 +2275,18 @@
         // Fade out when heart reaches 2x size (end of 1.6s animation)
         setTimeout(() => {
           overlay.classList.add('fade-out');
-        }, 2200);
+
+          // Trigger chalk underline animation as overlay starts fading
+          const superpowersEl = document.getElementById('superpowersUnderline');
+          if (superpowersEl) {
+            superpowersEl.classList.add('animate');
+          }
+        }, 2000);
 
         // Remove from DOM after fade completes (1.6s animation + 0.4s fade)
         setTimeout(() => {
           overlay.remove();
-        }, 2400);
+        }, 2200);
       })();
 
       window.addEventListener('load', () => {
