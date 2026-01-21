@@ -1,0 +1,1977 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Action Figure Miles x Swapnice</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ============================================
+         BASE STYLES
+         ============================================ */
+      html,
+      body {
+        margin: 0;
+        overflow-x: hidden;
+      }
+
+      #afm-activate {
+        min-height: 100vh;
+        width: 100%;
+        background-color: #f5eee0;
+        font-family: 'Varela Round', sans-serif;
+        color: #1a1a1a;
+        line-height: 1.6;
+      }
+
+      #afm-activate * {
+        box-sizing: border-box;
+      }
+
+      /* ============================================
+         HERO - LAYERED CANVAS LAYOUT
+         ============================================ */
+      .afm-hero {
+        width: 100%;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #ef3e36 0%, #d93830 40%, #b22d27 70%, #8a1f1c 100%);
+        position: relative;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto;
+      }
+
+      /* Noise texture overlay */
+      .afm-hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        opacity: 0.06;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      /* ============================================
+         FLOATING ACTIVATION BADGE (Header replacement)
+         ============================================ */
+      .afm-floating-badge {
+        position: absolute;
+        top: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 100;
+        animation:
+          badgeFloat 4s ease-in-out infinite,
+          badgeFadeIn 0.8s ease-out both;
+      }
+
+      @keyframes badgeFloat {
+        0%,
+        100% {
+          transform: translateX(-50%) translateY(0) rotate(-1deg);
+        }
+        50% {
+          transform: translateX(-50%) translateY(-8px) rotate(1deg);
+        }
+      }
+
+      @keyframes badgeFadeIn {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(-20px) scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0) scale(1);
+        }
+      }
+
+      .afm-badge-inner {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 8px 20px;
+        border-radius: 100px;
+        box-shadow:
+          0 4px 24px rgba(0, 0, 0, 0.15),
+          0 0 0 1px rgba(255, 255, 255, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(8px);
+        position: relative;
+        height: 100px;
+      }
+
+      /* Pulsing glow ring around badge */
+      .afm-badge-inner::after {
+        content: '';
+        position: absolute;
+        inset: -3px;
+        border-radius: 100px;
+        /* background: linear-gradient(90deg, #ef3e36, #ff6b5b, #ef3e36); */
+        background-size: 200% 100%;
+        animation: badgeGlow 3s linear infinite;
+        z-index: -1;
+        opacity: 0.6;
+      }
+
+      @keyframes badgeGlow {
+        0% {
+          background-position: 0% 50%;
+        }
+        100% {
+          background-position: 200% 50%;
+        }
+      }
+
+      .afm-badge-inner img:first-of-type {
+        height: 44px;
+        width: auto;
+      }
+
+      .afm-badge-inner img:last-of-type {
+        height: 125px;
+        width: auto;
+      }
+
+      .afm-badge-x {
+        font-size: 16px;
+        font-weight: 700;
+        color: #ef3e36;
+        opacity: 1;
+        margin-right: -20px !important;
+      }
+
+      /* ============================================
+         MOTION LAYER - Background Energy
+         ============================================ */
+      .afm-motion-layer {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      /* Orbiting activation rings */
+      .afm-orbit-ring {
+        position: absolute;
+        border: 2px solid rgba(255, 255, 255, 0.08);
+        border-radius: 50%;
+        animation: orbitExpand 8s ease-in-out infinite;
+      }
+
+      .afm-orbit-ring:nth-child(1) {
+        width: 300px;
+        height: 300px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation-delay: 0s;
+      }
+
+      .afm-orbit-ring:nth-child(2) {
+        width: 500px;
+        height: 500px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation-delay: -2s;
+      }
+
+      .afm-orbit-ring:nth-child(3) {
+        width: 700px;
+        height: 700px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation-delay: -4s;
+      }
+
+      @keyframes orbitExpand {
+        0%,
+        100% {
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(0.8);
+        }
+        50% {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1);
+        }
+      }
+
+      /* Floating particles */
+      .afm-particle {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        animation: particleFloat 12s ease-in-out infinite;
+      }
+
+      .afm-particle:nth-child(4) {
+        left: 10%;
+        top: 20%;
+        animation-delay: 0s;
+      }
+      .afm-particle:nth-child(5) {
+        left: 85%;
+        top: 30%;
+        animation-delay: -2s;
+        width: 8px;
+        height: 8px;
+      }
+      .afm-particle:nth-child(6) {
+        left: 15%;
+        top: 70%;
+        animation-delay: -4s;
+      }
+      .afm-particle:nth-child(7) {
+        left: 90%;
+        top: 75%;
+        animation-delay: -6s;
+        width: 4px;
+        height: 4px;
+      }
+      .afm-particle:nth-child(8) {
+        left: 5%;
+        top: 50%;
+        animation-delay: -8s;
+      }
+      .afm-particle:nth-child(9) {
+        left: 70%;
+        top: 15%;
+        animation-delay: -3s;
+        width: 10px;
+        height: 10px;
+      }
+
+      @keyframes particleFloat {
+        0%,
+        100% {
+          transform: translateY(0) translateX(0) scale(1);
+          opacity: 0.3;
+        }
+        25% {
+          transform: translateY(-30px) translateX(15px) scale(1.2);
+          opacity: 0.7;
+        }
+        50% {
+          transform: translateY(-10px) translateX(-10px) scale(0.9);
+          opacity: 0.5;
+        }
+        75% {
+          transform: translateY(-40px) translateX(20px) scale(1.1);
+          opacity: 0.6;
+        }
+      }
+
+      /* Swapnice icon orbiting element */
+      .afm-orbit-icon {
+        position: absolute;
+        width: 48px;
+        height: 48px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: iconOrbit 20s linear infinite;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      }
+
+      .afm-orbit-icon svg {
+        width: 24px;
+        height: 24px;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      @keyframes iconOrbit {
+        0% {
+          transform: rotate(0deg) translateX(200px) rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg) translateX(200px) rotate(-360deg);
+        }
+      }
+
+      /* ============================================
+         HERO CONTENT - Asymmetric Layout
+         ============================================ */
+      .afm-hero-content {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 140px 48px 80px;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+        min-height: calc(100vh - 100px);
+      }
+
+      /* Status indicator - pulsing "LIVE" dot */
+      .afm-status-live {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 10px 20px;
+        border-radius: 100px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #fff;
+        margin-bottom: 32px;
+        animation: statusSlideIn 0.6s ease-out 0.2s both;
+      }
+
+      @keyframes statusSlideIn {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .afm-status-dot {
+        width: 8px;
+        height: 8px;
+        background: #4ade80;
+        border-radius: 50%;
+        animation: statusPulse 2s ease-in-out infinite;
+        box-shadow: 0 0 8px #4ade80;
+      }
+
+      @keyframes statusPulse {
+        0%,
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 8px #4ade80;
+        }
+        50% {
+          transform: scale(1.3);
+          box-shadow:
+            0 0 16px #4ade80,
+            0 0 32px rgba(74, 222, 128, 0.4);
+        }
+      }
+
+      .afm-hero-title {
+        font-size: clamp(48px, 10vw, 96px);
+        font-weight: 700;
+        line-height: 0.95;
+        margin: 0 0 24px 0;
+        color: #fff;
+        max-width: 700px;
+        animation: heroTitleIn 0.8s ease-out 0.3s both;
+        text-align: left;
+      }
+
+      @keyframes heroTitleIn {
+        from {
+          opacity: 0;
+          transform: translateY(40px) skewY(2deg);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) skewY(0);
+        }
+      }
+
+      .afm-hero-subtitle {
+        font-size: clamp(18px, 2.5vw, 24px);
+        opacity: 0.85;
+        max-width: 480px;
+        margin: 0 0 48px 0;
+        color: #fff;
+        line-height: 1.5;
+        animation: subtitleIn 0.6s ease-out 0.5s both;
+        text-align: left;
+      }
+
+      @keyframes subtitleIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 0.85;
+          transform: translateY(0);
+        }
+      }
+
+      /* ============================================
+         PORTAL CTA - High contrast, elevated
+         ============================================ */
+      .afm-cta-wrapper {
+        position: relative;
+        animation: ctaWrapperIn 0.6s ease-out 0.7s both;
+      }
+
+      @keyframes ctaWrapperIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .afm-hero-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        background: #fff;
+        color: #1a1a1a;
+        padding: 22px 44px;
+        border-radius: 100px;
+        font-size: 18px;
+        font-weight: 700;
+        text-decoration: none;
+        cursor: pointer;
+        border: none;
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        box-shadow:
+          0 4px 24px rgba(0, 0, 0, 0.2),
+          0 0 0 0 rgba(255, 255, 255, 0.4);
+        z-index: 1;
+      }
+
+      /* Animated glow behind CTA */
+      .afm-cta-glow {
+        position: absolute;
+        inset: -4px;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.6),
+          rgba(255, 255, 255, 0.2),
+          rgba(255, 255, 255, 0.6)
+        );
+        background-size: 200% 100%;
+        border-radius: 100px;
+        animation: ctaGlowPulse 3s ease-in-out infinite;
+        z-index: -1;
+        filter: blur(8px);
+      }
+
+      @keyframes ctaGlowPulse {
+        0%,
+        100% {
+          background-position: 0% 50%;
+          opacity: 0.5;
+        }
+        50% {
+          background-position: 100% 50%;
+          opacity: 0.8;
+        }
+      }
+
+      .afm-hero-cta::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(239, 62, 54, 0.1), transparent);
+        transition: left 0.5s ease;
+      }
+
+      .afm-hero-cta:hover::before {
+        left: 100%;
+      }
+
+      .afm-hero-cta:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow:
+          0 12px 40px rgba(0, 0, 0, 0.3),
+          0 0 60px rgba(255, 255, 255, 0.3);
+      }
+
+      .afm-hero-cta svg {
+        width: 22px;
+        height: 22px;
+        color: #ef3e36;
+        animation: boltCharge 2s ease-in-out infinite;
+        position: relative;
+        z-index: 2;
+      }
+
+      @keyframes boltCharge {
+        0%,
+        100% {
+          transform: scale(1) rotate(0deg);
+          filter: drop-shadow(0 0 0 transparent);
+        }
+        50% {
+          transform: scale(1.2) rotate(-5deg);
+          filter: drop-shadow(0 0 8px rgba(239, 62, 54, 0.6));
+        }
+      }
+
+      .afm-cta-text {
+        position: relative;
+        z-index: 2;
+      }
+
+      .afm-hero-note {
+        margin-top: 20px;
+        font-size: 13px;
+        opacity: 0.6;
+        color: #fff;
+        animation: noteIn 0.6s ease-out 0.9s both;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      @keyframes noteIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 0.6;
+          transform: translateY(0);
+        }
+      }
+
+      .afm-hero-note svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      /* ============================================
+         HERO TRANSITION TO CONTENT
+         ============================================ */
+      .afm-hero-transition {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 200px;
+        background: linear-gradient(to bottom, transparent 0%, #f5eee0 100%);
+        z-index: 20;
+        pointer-events: none;
+      }
+
+      /* Scroll indicator */
+      .afm-scroll-hint {
+        position: absolute;
+        bottom: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 25;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        opacity: 0.5;
+        animation: scrollHintBounce 2s ease-in-out infinite;
+      }
+
+      @keyframes scrollHintBounce {
+        0%,
+        100% {
+          transform: translateX(-50%) translateY(0);
+        }
+        50% {
+          transform: translateX(-50%) translateY(8px);
+        }
+      }
+
+      .afm-scroll-hint svg {
+        width: 20px;
+        height: 20px;
+        animation: scrollArrowPulse 2s ease-in-out infinite;
+      }
+
+      @keyframes scrollArrowPulse {
+        0%,
+        100% {
+          opacity: 0.5;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      /* ============================================
+         RESPONSIVE - Hero
+         ============================================ */
+      @media (max-width: 768px) {
+        .afm-hero-content {
+          padding: 120px 24px 100px;
+          align-items: center;
+        }
+
+        .afm-hero-title {
+          text-align: center;
+        }
+
+        .afm-hero-subtitle {
+          text-align: center;
+        }
+
+        .afm-status-live {
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .afm-floating-badge {
+          top: 16px;
+        }
+
+        .afm-badge-inner {
+          padding: 6px 14px;
+          gap: 10px;
+        }
+
+        .afm-badge-inner img:first-of-type {
+          height: 28px;
+        }
+
+        .afm-badge-inner img:last-of-type {
+          height: 70px;
+        }
+
+        .afm-orbit-icon {
+          display: none;
+        }
+
+        .afm-hero-cta {
+          padding: 18px 36px;
+          font-size: 16px;
+        }
+      }
+
+      /* ============================================
+         MAIN CONTENT - Max Width 896px (4xl)
+         ============================================ */
+      .afm-main,
+      .afm-faq {
+        max-width: 896px;
+        margin: 0 auto;
+        padding: 80px 40px;
+      }
+
+      @media (max-width: 768px) {
+        .afm-main {
+          padding: 64px 24px;
+        }
+      }
+
+      .afm-section-title {
+        font-size: clamp(28px, 5vw, 40px);
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 16px;
+        color: #1a1a1a;
+      }
+
+      .afm-section-desc {
+        text-align: center;
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 48px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* Feature Cards */
+      .afm-features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 24px;
+        margin-bottom: 64px;
+      }
+
+      .afm-feature-card {
+        background: #fff;
+        border-radius: 20px;
+        padding: 32px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .afm-feature-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      .afm-feature-icon {
+        width: 56px;
+        height: 56px;
+        background: #ef3e36;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      .afm-feature-icon svg {
+        width: 28px;
+        height: 28px;
+        color: #fff;
+      }
+
+      .afm-feature-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #1a1a1a;
+      }
+
+      .afm-feature-desc {
+        font-size: 15px;
+        color: #666;
+        line-height: 1.5;
+      }
+
+      /* ============================================
+         FOOTER CTA - Final Call to Action
+         ============================================ */
+      .afm-footer-area {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 40px 80px;
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+      }
+
+      @media (max-width: 768px) {
+        .afm-footer-area {
+          padding: 0 24px 64px;
+        }
+      }
+
+      .afm-footer-cta {
+        background: linear-gradient(135deg, #ef3e36 0%, #d93830 45%, #6f1512 100%);
+        background-size: 200% 200%;
+        border-radius: 32px;
+        padding: 56px 64px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 48px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(239, 62, 54, 0.3);
+      }
+
+      /* Texture overlay for subtle noise effect */
+      .afm-footer-cta::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        opacity: 0.08;
+        pointer-events: none;
+      }
+
+      .afm-footer-cta-content {
+        flex: 1;
+        position: relative;
+        z-index: 1;
+      }
+
+      .afm-footer-cta-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 8px;
+      }
+
+      .afm-footer-cta-logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .afm-footer-cta-logo svg {
+        width: 32px;
+        height: 32px;
+      }
+
+      .afm-footer-cta-tagline {
+        font-size: 18px;
+        opacity: 0.9;
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      .afm-footer-cta-form {
+        display: flex;
+        /* margin-top: 24px; */
+        max-width: 600px;
+      }
+
+      .afm-footer-cta-input {
+        flex: 1;
+        padding: 24px;
+        border: none;
+        border-radius: 16px 0 0 16px;
+        font-size: 18px;
+        font-weight: 600;
+        font-family: inherit;
+        background: rgba(255, 255, 255, 0.95);
+        color: #1a1a1a;
+        outline: none;
+      }
+
+      .afm-footer-cta-input::placeholder {
+        color: #888;
+      }
+
+      .afm-footer-cta-submit {
+        padding: 18px 32px;
+        background: #1a1a1a;
+        color: #fff;
+        border: none;
+        border-radius: 0 16px 16px 0;
+        font-size: 16px;
+        font-weight: 600;
+        font-family: inherit;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          transform 0.2s;
+      }
+
+      .afm-footer-cta-submit:hover {
+        background: #000;
+      }
+
+      .afm-footer-cta-social {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-top: 24px;
+      }
+
+      .afm-footer-cta-social a {
+        color: #1a1a1a;
+        transition:
+          transform 0.2s,
+          opacity 0.2s;
+      }
+
+      .afm-footer-cta-social a:hover {
+        transform: scale(1.1);
+        opacity: 0.8;
+      }
+
+      .afm-footer-cta-social svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .afm-footer-legal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        font-size: 14px;
+      }
+
+      .afm-footer-legal a {
+        color: #000;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .afm-footer-legal a:hover {
+        text-decoration: underline;
+      }
+
+      /* .afm-footer-legal span {
+        color: rgba(255, 255, 255, 0.4);
+      } */
+
+      /* QR Code section */
+      .afm-footer-cta-qr {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+      }
+
+      .afm-footer-cta-qr-box {
+        background: #fff;
+        border-radius: 16px;
+        padding: 16px;
+        cursor: pointer;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .afm-footer-cta-qr-box img {
+        width: 220px;
+        height: 220px;
+        display: block;
+      }
+
+      .afm-footer-cta-divider {
+        height: 200px;
+        width: 6px;
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      @media (max-width: 900px) {
+        .afm-footer-cta {
+          flex-direction: column;
+          padding: 48px 40px;
+          text-align: center;
+        }
+
+        .afm-footer-cta-header {
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .afm-footer-cta-form {
+          max-width: 100%;
+          width: 100%;
+        }
+
+        .afm-footer-cta-social {
+          justify-content: center;
+        }
+
+        .afm-footer-cta-legal {
+          justify-content: center;
+        }
+
+        .afm-footer-cta-qr {
+          padding-left: 0;
+          padding-top: 40px;
+          border-left: none;
+          border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .afm-footer-cta {
+          padding: 40px 24px;
+        }
+
+        .afm-footer-cta-form {
+          flex-direction: column;
+        }
+
+        .afm-footer-cta-input {
+          border-radius: 50px;
+          margin-bottom: 12px;
+        }
+
+        .afm-footer-cta-submit {
+          border-radius: 50px;
+          width: 100%;
+        }
+
+        .afm-footer-cta-qr-box svg {
+          width: 100px;
+          height: 100px;
+        }
+      }
+
+      /* FAQ Section */
+      .afm-faq {
+        background: #fff;
+        border-radius: 24px;
+        padding: 48px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      }
+
+      @media (max-width: 600px) {
+        .afm-faq {
+          padding: 32px 24px;
+        }
+      }
+
+      .afm-faq-title {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 32px;
+        color: #1a1a1a;
+      }
+
+      .afm-faq-item {
+        border-bottom: 1px solid #eee;
+      }
+
+      .afm-faq-item:last-child {
+        border-bottom: none;
+      }
+
+      .afm-faq-question {
+        width: 100%;
+        background: none;
+        border: none;
+        padding: 24px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        text-align: left;
+        font-family: inherit;
+        font-size: 16px;
+        font-weight: 600;
+        color: #1a1a1a;
+        transition: color 0.2s;
+      }
+
+      .afm-faq-question:hover {
+        color: #ef3e36;
+      }
+
+      .afm-faq-icon {
+        width: 24px;
+        height: 24px;
+        position: relative;
+        flex-shrink: 0;
+        margin-left: 16px;
+      }
+
+      .afm-faq-icon::before,
+      .afm-faq-icon::after {
+        content: '';
+        position: absolute;
+        background: currentColor;
+        transition: transform 0.3s;
+      }
+
+      .afm-faq-icon::before {
+        width: 2px;
+        height: 14px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .afm-faq-icon::after {
+        width: 14px;
+        height: 2px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .afm-faq-item.active .afm-faq-icon::before {
+        transform: translate(-50%, -50%) rotate(90deg);
+      }
+
+      .afm-faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition:
+          max-height 0.3s ease,
+          padding 0.3s ease;
+      }
+
+      .afm-faq-item.active .afm-faq-answer {
+        max-height: 200px;
+        padding-bottom: 24px;
+      }
+
+      .afm-faq-answer p {
+        font-size: 15px;
+        color: #666;
+        line-height: 1.7;
+      }
+
+      /* ============================================
+         MODAL - App Download Dialog
+         ============================================ */
+      .afm-modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(4px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.3s,
+          visibility 0.3s;
+      }
+
+      .afm-modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .afm-modal {
+        background: #fff;
+        border-radius: 24px;
+        padding: 48px;
+        max-width: 440px;
+        width: 100%;
+        text-align: center;
+        transform: scale(0.95);
+        transition: transform 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .afm-modal-overlay.active .afm-modal {
+        transform: scale(1);
+      }
+
+      .afm-modal-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 40px;
+        height: 40px;
+        background: #f5f5f5;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+        z-index: 10;
+      }
+
+      .afm-modal-close:hover {
+        background: #eee;
+      }
+
+      .afm-modal-close svg {
+        width: 20px;
+        height: 20px;
+        color: #666;
+      }
+
+      .afm-modal-title {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        color: #1a1a1a;
+      }
+
+      .afm-modal-desc {
+        font-size: 15px;
+        color: #666;
+        margin-bottom: 32px;
+      }
+
+      /* Modal Steps Container */
+      .afm-modal-steps {
+        position: relative;
+      }
+
+      .afm-modal-step {
+        transition:
+          opacity 0.3s ease,
+          transform 0.3s ease;
+      }
+
+      .afm-modal-step.hidden {
+        display: none;
+      }
+
+      .afm-modal-step.fade-out {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+
+      .afm-modal-step.fade-in {
+        animation: fadeSlideIn 0.4s ease forwards;
+      }
+
+      @keyframes fadeSlideIn {
+        from {
+          opacity: 0;
+          transform: translateX(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      /* Step 1: Form */
+      .afm-modal-form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .afm-modal-input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        text-align: left;
+      }
+
+      .afm-modal-label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #1a1a1a;
+      }
+
+      .afm-modal-label .optional {
+        font-weight: 400;
+        color: #999;
+      }
+
+      .afm-modal-input {
+        padding: 14px 16px;
+        border: 2px solid #eee;
+        border-radius: 12px;
+        font-size: 16px;
+        font-family: inherit;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+        outline: none;
+      }
+
+      .afm-modal-input:focus {
+        border-color: #ef3e36;
+        box-shadow: 0 0 0 3px rgba(239, 62, 54, 0.1);
+      }
+
+      .afm-modal-input::placeholder {
+        color: #aaa;
+      }
+
+      .afm-modal-input:disabled {
+        background: #f9f9f9;
+        color: #666;
+      }
+
+      .afm-modal-submit {
+        margin-top: 8px;
+        padding: 16px 24px;
+        background: #ef3e36;
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        font-family: inherit;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          transform 0.2s;
+      }
+
+      .afm-modal-submit:hover {
+        background: #d93830;
+        transform: translateY(-1px);
+      }
+
+      .afm-modal-submit:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      /* Step 2: Confirmation */
+      .afm-modal-check {
+        width: 64px;
+        height: 64px;
+        background: #ef3e36;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px;
+        animation: checkPop 0.4s ease;
+      }
+
+      @keyframes checkPop {
+        0% {
+          transform: scale(0);
+          opacity: 0;
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .afm-modal-check svg {
+        width: 32px;
+        height: 32px;
+        color: #fff;
+      }
+
+      .afm-modal-divider {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin: 32px 0;
+      }
+
+      .afm-modal-divider-line {
+        flex: 1;
+        height: 1px;
+        background: #eee;
+      }
+
+      .afm-modal-divider-text {
+        font-size: 12px;
+        font-weight: 600;
+        color: #999;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .afm-modal-app-desc {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 20px;
+      }
+
+      .afm-modal-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .afm-store-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 16px 24px;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        text-decoration: none;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .afm-store-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      }
+
+      .afm-store-btn.apple {
+        background: #1a1a1a;
+        color: #fff;
+      }
+
+      .afm-store-btn.google {
+        background: #fff;
+        color: #1a1a1a;
+        border: 2px solid #1a1a1a;
+      }
+
+      .afm-store-btn svg {
+        width: 24px;
+        height: 24px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- EVERYTHING must live inside this root -->
+    <div id="afm-activate">
+      <!-- ============================================
+           HERO - LAYERED ACTIVATION PORTAL
+           ============================================ -->
+      <header class="afm-hero">
+        <!-- Floating Activation Badge -->
+        <div class="afm-floating-badge">
+          <div class="afm-badge-inner">
+            <img src="./afm-logo.avif" alt="Action Figure Miles" />
+            <span class="afm-badge-x">×</span>
+            <img src="./swapnice_logo_2.png" alt="Swapnice" />
+          </div>
+        </div>
+
+        <!-- Motion Layer - Background Energy -->
+        <div class="afm-motion-layer">
+          <!-- Expanding orbit rings -->
+          <div class="afm-orbit-ring"></div>
+          <div class="afm-orbit-ring"></div>
+          <div class="afm-orbit-ring"></div>
+          <!-- Floating particles -->
+          <div class="afm-particle"></div>
+          <div class="afm-particle"></div>
+          <div class="afm-particle"></div>
+          <div class="afm-particle"></div>
+          <div class="afm-particle"></div>
+          <div class="afm-particle"></div>
+          <!-- Orbiting icon -->
+          <div class="afm-orbit-icon" style="top: 50%; left: 50%">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Hero Content - Asymmetric Layout -->
+        <div class="afm-hero-content">
+          <!-- Live status indicator -->
+          <!-- <div class="afm-status-live">
+            <span class="afm-status-dot"></span>
+            Activation Open
+          </div> -->
+
+          <h1 class="afm-hero-title">Activate Your Superpowers</h1>
+          <p class="afm-hero-subtitle">Your pair is waiting. Scan the tag. Unlock what's yours.</p>
+
+          <!-- Portal CTA -->
+          <div class="afm-cta-wrapper">
+            <div class="afm-cta-glow"></div>
+            <div class="afm-footer-cta-qr">
+              <div
+                class="afm-footer-cta-qr-box"
+                onclick="openModal()"
+                title="Scan to download the app"
+              >
+                <!-- QR Code placeholder SVG -->
+                <img src="./download_app.png" />
+              </div>
+            </div>
+            <!-- <button class="afm-hero-cta" onclick="openModal()">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                />
+              </svg>
+              <span class="afm-cta-text">Enter Portal</span>
+            </button> -->
+          </div>
+
+          <!-- <p class="afm-hero-note">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+            Free via Swapnice app
+          </p> -->
+        </div>
+
+        <!-- Transition gradient to content -->
+        <div class="afm-hero-transition">
+          <div class="afm-scroll-hint">
+            <span>Discover</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </div>
+        </div>
+      </header>
+
+      <!-- ============================================
+           MAIN CONTENT - Max Width 896px
+           ============================================ -->
+      <main class="afm-main">
+        <h2 class="afm-section-title">What You Unlock</h2>
+        <p class="afm-section-desc">This is what activation gives you.</p>
+
+        <div class="afm-features">
+          <div class="afm-feature-card">
+            <div class="afm-feature-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                />
+              </svg>
+            </div>
+            <h3 class="afm-feature-title">Proof It's Real</h3>
+            <p class="afm-feature-desc">
+              Your pair comes with permanent proof of authenticity. Show anyone, anytime.
+            </p>
+          </div>
+
+          <div class="afm-feature-card">
+            <div class="afm-feature-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                />
+              </svg>
+            </div>
+            <h3 class="afm-feature-title">Early Access</h3>
+            <p class="afm-feature-desc">
+              Get first look at drops, hidden content, and experiences before anyone else.
+            </p>
+          </div>
+
+          <div class="afm-feature-card">
+            <div class="afm-feature-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
+                />
+              </svg>
+            </div>
+            <h3 class="afm-feature-title">Ownership That Evolves</h3>
+            <p class="afm-feature-desc">
+              Your connection grows over time. New rewards unlock as you stay activated.
+            </p>
+          </div>
+        </div>
+      </main>
+
+      <!-- ============================================
+           FOOTER + FAQ - Max Width 1152px
+           ============================================ -->
+      <section class="afm-footer-area">
+        <!-- Footer CTA -->
+        <footer class="afm-footer-cta">
+          <div class="afm-footer-cta-content">
+            <!-- <div class="afm-footer-cta-header"></div> -->
+
+            <p class="afm-footer-cta-tagline">Join the founding circle. Be first to know.</p>
+            <form
+              class="afm-footer-cta-form"
+              id="emailCaptureForm"
+              onsubmit="handleEmailSubmit(event)"
+            >
+              <input
+                type="email"
+                class="afm-footer-cta-input"
+                id="emailInput"
+                name="email"
+                required
+                placeholder="Your email..."
+                aria-label="Email address"
+              />
+              <button type="submit" class="afm-footer-cta-submit">Get Early Access</button>
+            </form>
+
+            <!-- <div class="afm-footer-cta-social">
+              <a href="#" aria-label="Facebook">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                  />
+                </svg>
+              </a>
+              <a href="#" aria-label="Twitter/X">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                  />
+                </svg>
+              </a>
+              <a href="#" aria-label="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                  />
+                </svg>
+              </a>
+            </div> -->
+          </div>
+
+          <div class="afm-footer-cta-divider"></div>
+
+          <div class="afm-footer-cta-qr">
+            <div
+              class="afm-footer-cta-qr-box"
+              onclick="openModal()"
+              title="Scan to download the app"
+            >
+              <!-- QR Code placeholder SVG -->
+              <img src="./download_app.png" />
+            </div>
+          </div>
+        </footer>
+
+        <!-- FAQ Section -->
+        <div class="afm-faq">
+          <h2 class="afm-faq-title">Quick Answers</h2>
+
+          <div class="afm-faq-item">
+            <button class="afm-faq-question">
+              Is this free?
+              <span class="afm-faq-icon"></span>
+            </button>
+            <div class="afm-faq-answer">
+              <p>Yes. The Swapnice app is free to download and use.</p>
+            </div>
+          </div>
+
+          <div class="afm-faq-item">
+            <button class="afm-faq-question">
+              Is my info safe?
+              <span class="afm-faq-icon"></span>
+            </button>
+            <div class="afm-faq-answer">
+              <p>Absolutely. We never sell your data or share it with third parties.</p>
+            </div>
+          </div>
+
+          <div class="afm-faq-item">
+            <button class="afm-faq-question">
+              What is Swapnice?
+              <span class="afm-faq-icon"></span>
+            </button>
+            <div class="afm-faq-answer">
+              <p>
+                Swapnice powers the activation experience for this collab. Download the app to
+                unlock your pair.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="afm-footer-legal">
+          <a href="#">Privacy Policy</a>
+          <span>|</span>
+          <a href="#">Terms of Service</a>
+        </div>
+      </section>
+
+      <!-- ============================================
+           MODAL - App Download Dialog
+           ============================================ -->
+      <div class="afm-modal-overlay" id="afmModal">
+        <div class="afm-modal">
+          <button class="afm-modal-close" onclick="closeModal()" aria-label="Close modal">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          <div class="afm-modal-steps">
+            <!-- Step 1: Sign Up Form -->
+            <div class="afm-modal-step" id="modalStep1">
+              <h3 class="afm-modal-title">You're Early</h3>
+              <p class="afm-modal-desc">
+                Join the founding circle for first access to drops and exclusives.
+              </p>
+              <form class="afm-modal-form" id="modalSignupForm" onsubmit="handleModalSubmit(event)">
+                <div class="afm-modal-input-group">
+                  <label class="afm-modal-label" for="modalEmail">Email</label>
+                  <input
+                    type="email"
+                    class="afm-modal-input"
+                    id="modalEmail"
+                    name="email"
+                    required
+                    placeholder="you@example.com"
+                  />
+                </div>
+                <div class="afm-modal-input-group">
+                  <label class="afm-modal-label" for="modalName">Name</label>
+                  <input
+                    type="text"
+                    class="afm-modal-input"
+                    id="modalName"
+                    name="name"
+                    required
+                    placeholder="Your name"
+                  />
+                </div>
+                <div class="afm-modal-input-group">
+                  <label class="afm-modal-label" for="modalPhone"
+                    >Phone <span class="optional">(optional)</span></label
+                  >
+                  <input
+                    type="tel"
+                    class="afm-modal-input"
+                    id="modalPhone"
+                    name="phone"
+                    placeholder="(555) 123-4567"
+                  />
+                </div>
+                <button type="submit" class="afm-modal-submit" id="modalSubmitBtn">
+                  Unlock Access
+                </button>
+              </form>
+            </div>
+
+            <!-- Step 2: Confirmation -->
+            <div class="afm-modal-step hidden" id="modalStep2">
+              <div class="afm-modal-check">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="3"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 class="afm-modal-title">You're In</h3>
+              <p class="afm-modal-desc">Welcome to the founding circle. We'll be in touch.</p>
+
+              <div class="afm-modal-divider">
+                <div class="afm-modal-divider-line"></div>
+                <span class="afm-modal-divider-text">Complete Activation</span>
+                <div class="afm-modal-divider-line"></div>
+              </div>
+
+              <p class="afm-modal-app-desc">
+                Get the Swapnice app to activate your pair and unlock everything.
+              </p>
+
+              <div class="afm-modal-buttons">
+                <a href="#" class="afm-store-btn apple">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+                    />
+                  </svg>
+                  Get for iOS
+                </a>
+                <a href="#" class="afm-store-btn google">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 010 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"
+                    />
+                  </svg>
+                  Get for Android
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+      // FAQ Accordion
+      document.querySelectorAll('.afm-faq-question').forEach((button) => {
+        button.addEventListener('click', () => {
+          const item = button.parentElement;
+          const isActive = item.classList.contains('active');
+
+          // Close all items
+          document.querySelectorAll('.afm-faq-item').forEach((faq) => {
+            faq.classList.remove('active');
+          });
+
+          // Open clicked item if it wasn't active
+          if (!isActive) {
+            item.classList.add('active');
+          }
+        });
+      });
+
+      function handleEmailSubmit(event) {
+        event.preventDefault();
+
+        const input = document.getElementById('emailInput');
+        if (!input) return;
+
+        // native email validation (works with type="email" + required)
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          return;
+        }
+
+        // Pre-fill modal email field with footer input
+        const modalEmail = document.getElementById('modalEmail');
+        if (modalEmail && input.value) {
+          modalEmail.value = input.value.trim();
+        }
+
+        openModal();
+      }
+
+      // Modal Functions
+      function openModal() {
+        document.getElementById('afmModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        document.getElementById('afmModal').classList.remove('active');
+        document.body.style.overflow = '';
+        // Reset modal to step 1 after close animation
+        setTimeout(resetModal, 300);
+      }
+
+      function resetModal() {
+        const step1 = document.getElementById('modalStep1');
+        const step2 = document.getElementById('modalStep2');
+        const form = document.getElementById('modalSignupForm');
+        const submitBtn = document.getElementById('modalSubmitBtn');
+
+        step1.classList.remove('hidden', 'fade-out', 'fade-in');
+        step2.classList.add('hidden');
+        step2.classList.remove('fade-in');
+
+        if (form) form.reset();
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Join Now';
+        }
+      }
+
+      async function handleModalSubmit(event) {
+        event.preventDefault();
+
+        const form = event.target;
+        const submitBtn = document.getElementById('modalSubmitBtn');
+        const emailInput = document.getElementById('modalEmail');
+        const nameInput = document.getElementById('modalName');
+        const phoneInput = document.getElementById('modalPhone');
+
+        // Validate form
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        // Disable button and show loading state
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Joining...';
+
+        const formData = {
+          email: emailInput.value.trim(),
+          name: nameInput.value.trim(),
+          phone: phoneInput.value.trim() || null,
+        };
+
+        try {
+          // POST to newsletter API endpoint
+          const response = await fetch('/api/newsletter', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+          });
+
+          // Transition to step 2 regardless of response for now (placeholder API)
+          transitionToStep2();
+        } catch (error) {
+          console.error('Newsletter submission error:', error);
+          // Still transition for demo/placeholder purposes
+          transitionToStep2();
+        }
+      }
+
+      function transitionToStep2() {
+        const step1 = document.getElementById('modalStep1');
+        const step2 = document.getElementById('modalStep2');
+
+        // Fade out step 1
+        step1.classList.add('fade-out');
+
+        // After fade out, switch to step 2
+        setTimeout(() => {
+          step1.classList.add('hidden');
+          step2.classList.remove('hidden');
+          step2.classList.add('fade-in');
+        }, 300);
+      }
+
+      // Close modal when clicking overlay
+      document.getElementById('afmModal').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) {
+          closeModal();
+        }
+      });
+
+      // Close modal with Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeModal();
+        }
+      });
+    </script>
+  </body>
+</html>

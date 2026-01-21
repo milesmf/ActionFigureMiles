@@ -1,0 +1,89 @@
+AFM User Journey / Onboarding
+
+Notes: 
+Onboarding isn’t just about showing off your product and its features—it’s about getting them to the result they care about.
+Who are they?
+What do they care about? 
+What’s our strategy to get them to a result? 
+Show people the outcome of the digital content that they’re getting - making it easy enough to get to the product activation 
+“Retrieve it” 
+Make this one page seem like you’re unlocking a super power 
+
+
+Phrases: 
+Scan to activate your shoe’s super powers
+Your product has super powers… download the app in order to access them
+Keep a digital inventory of your greatest treasures
+Find others in your community
+Truly own your collectibles
+
+Swapnice Menu Items: 
+Inventory
+Personas
+Profile
+Listings
+Transactions
+Swap Wallet
+Products
+Swapp Store
+Documents
+Account Sign Out
+Theme 
+
+Goals: 
+User to authenticate the shoes 
+User to access pilot video 
+
+Users who own the shoes: 
+Scan onboarding QR code 
+Go to AFM & Swapnice landing page for more info
+Steps: 
+Download App
+Two buttons
+Create profile
+Scan product to authenticate
+Click on the Swapnice heart (show logo here) in the middle
+Tap your product 
+Item will automatically be saved to your Inventory
+Enter the AFM portal to access exclusive content 
+On the Switem, click Swapps at the top and then click on AFM
+(Update steps after Conrad has completed app design)
+
+Users who don’t own the shoes: 
+Goals: 
+Collect their emails 
+Steps: 
+Scan onboarding QR code 
+Go to AFM & Swapnice landing page to get people excited to sign up for list serv so they can get access to the next product drop 
+“If you want products with super powers in the future… be the first to know. Sign up here.” 
+“You’re not quite eligible to join the our community yet, but sign up here and we’ll let you know your next opportunity to be a part of this”
+Form Page - render in a dialog pop up 
+Name
+Email 
+Phone Number (optional)
+Social Media Handle? 
+
+Landing Page: 
+ART 
+EXCITEMENT 
+VIBES
+Teaser - Video/Animation (doesn’t need to click play to start showing video) - show AFM pilot clips 
+Two phone screens: 
+Switem Authentication
+Swapp - Video Clip
+Top of page: Animation / Noisy / Excitement / Art 
+“Activate your shoe’s super powers… download Swapnice app to gain access to it”
+Middle - Download app buttons with flying AFM or bouncing AFM
+Bottom - Instructions - include button for download the app 
+Vibes - “Make people feel like they’re accessing an ultra secret portal” 
+
+
+
+Action Items: 
+Create 2 separate landing pages 
+Create 2 different QR codes
+Founders Club: 
+Be a part of the founder’s club
+Give them a badge for being one of the founding members for AFM x Swapnice 
+
+

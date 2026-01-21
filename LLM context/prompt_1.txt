@@ -1,0 +1,41 @@
+Additional notes taken by myself in addition to requirement documents and transcripts:
+
+Tone:
+Art, Excitement, Vibes
+
+Styling colors:
+50% Swapnice branding and 50% Action Figure Miles branding
+
+Must create two distinct landing pages (refer to landing page requirements)
+
+Visitor capture fields to be rendered within a dialog popup. Centered, small form factor, width and height constrained to content.
+
+--
+
+TASK UPON US!
+We're to create a strategic outline and summary of requirenemets. We context segregated into two documents plus the information contained within this prompt from my own memory plus my notes. We need to create an exciting landing page plan which PERFECTLY and absolutely wonderfully captures client needs and desires.
+
+PROJECT CONTEXT
+
+Alright, this is a very important client project. We need to create a wonderfully beautiful landing page taking into consideration notes, transcripts, summaries, from our discovery conversations.
+
+The page layout is to truly be a single page with  the following  vertical layout (generally):
+Huge header hero area containing initial hook, interest, excitement, CTA
+Instructions area below, body area
+Footer CTA area
+
+While this page  is a single page, it needs to pack a punch. It serves a purpose: To get website visitors informed and excited about the AFM x Swapnice collab launch. It needs to be lean, really pack a punch- WOW the visitors, excitement, superpowers vibes,
+
+The company: Swapnice, specializes in creating "Smart products" through their Swapbadge NFC badge chips which you can add to any product and make it smart, ditigitally syncing it to your Swapnice account so it's accessable within your mobile application on your app profile for you to track and for others to explore. "Giving  your favorite collectables superpowers" essentially.
+
+They're collaborating with a fashion company: Action Figure Miles as part of a collab launch and this landing page will serve attendees of an event who recieve physical cards with a QR code which will direct them to this website. This website is a funnal, providing context about Swapnice to event attendees and acting as a lean, strategic funnel to peak interest, provide excitement- be LEAN and funnal them towards the Swapnice mobile app (QR code scan) with a backup link they can click.
+
+Again, this landing page is tailored the overlap of event attendees who have context about the specific brand event (Action Figure Miles some sort of event party) who have a cursory understanding of Swapnice but have been placed in the category of need additional funneling towards the mobile app through an educational nudge where the come  to the landing page, see collab context with Swapnice app context and are funneled towards the app and additionally to provide basic information: name, email, phone captured  through a lean, elegant, branded dialog popup.
+
+Branding manager tagline
+“Activate your shoe’s super powers… download Swapnice app to gain access to it”
+
+Branding, assets, colors:
+We will be going 50/50 with brand assets, this is a collab between both companies: Action Figure Miles x Swapnice where the actually company who owns the landing page is Swapnice and they're supporting and working with the brand  Action Figure Miles during their product launch. 
+
+I will be providing website context and screenshots as well in a later conversation to give you further details and "vibes" for both companies.

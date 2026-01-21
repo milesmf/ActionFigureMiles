@@ -1,0 +1,73 @@
+Landing Pages Strategy: Two focused landing pages will enhance user engagement, one for shoe owners, one for non-owners.
+Shoe Owners Page: Features three steps for product activation, strong visuals, and aims for 250 successful scans as a metric.
+Community-Building Page: Targets 750 new user sign-ups, fostering community without granting access to exclusive content for non-owners.
+Trading Card Production: 1,000 holographic trading cards with QR codes will promote landing pages, enhancing brand exposure at events.
+User Experience Improvement: Simplified onboarding will ease navigation and clarify product authentication, minimizing potential user drop-off.
+Technical Feasibility: Fast deployment of landing pages on Webflow/Framer, ensuring ready integration for the event launch by Friday.
+
+Notes
+Landing Page and User Onboarding Strategy
+The team agreed on creating two distinct, highly focused landing pages to bridge the QR code scan to app download and product activation, prioritizing clarity and engagement (00:46).
+
+A primary landing page for shoe owners will highlight a simple three-step path: download the Swap Nice app, scan the product to authenticate, and access exclusive AFM content like a pilot video (12:23).
+The page will feature a strong call to action emphasizing unlocking "shoe superpowers" and use engaging visuals like animations or teaser screenshots to show what users receive.
+The Swap Nice app will automatically save scanned products to users’ inventories, simplifying the process and reducing friction, as explained by D’Angelo and Brittany (14:05).
+The landing page will balance excitement and functional instructions, with download buttons repeated to ensure conversion and reduce user confusion (27:53).
+Implementation will leverage tools like Webflow or Framer, targeting a complete build and review by Wednesday with a Friday delivery deadline for the client (56:24).
+This approach aims to drive at least 250 successful product scans as a success metric, representing a meaningful user engagement milestone (08:00).
+A secondary landing page for non-shoe owners will focus on community-building by encouraging sign-ups to join the AFM and Swap Nice club without product activation (35:43).
+This page will collect user emails and basic info (name, email, phone) for marketing outreach, expanding the brand’s contact list by potentially 750 new users at the event (41:40).
+The approach intentionally excludes access to exclusive pilot content but offers community features and future updates to maintain engagement.
+The two landing pages will be physically linked to different QR codes on holographic trading cards, ensuring clean segmentation between user groups (48:02).
+This strategy captures additional email leads while maintaining the core gated experience for product owners.
+Trading Card Design and Distribution
+The team committed to producing 1,000 holographic trading cards—250 for shoe owners and 750 for general attendees—to act as physical touchpoints directing users to the appropriate landing pages (46:34).
+
+The front of the card will feature activation instructions and branding, while the back will showcase Action Figure Miles artwork to build excitement and collectability, positioning cards as exclusive memorabilia (33:53).
+The shoe-owner cards will include a QR code linking to the primary landing page with activation steps, while the general cards will link to the community sign-up page (34:02).
+Distribution will occur at a large-scale NBA launch party event, aiming to maximize brand exposure and lead capture (48:37).
+The team plans to finalize card designs and QR codes quickly to meet delivery timelines, with hang tags expected to arrive by Wednesday and potential same-day shipping to the event by D’Angelo (58:53).
+The cards serve as a key conversion tool linking physical product interaction to digital engagement, supporting both activation and community growth goals.
+User Experience Challenges and Simplification
+Brittany highlighted significant UX frustrations with the current Swap Nice app navigation, especially around product authentication and inventory management, which risk user drop-off without clearer guidance (05:18).
+
+The team decided to simplify the onboarding by limiting user options initially to a single guided experience focused on authentication and content access, reducing cognitive overload (06:18).
+The product scanning saves inventory items automatically, eliminating manual steps and easing user flow (14:05).
+Instructions will be layered: a simple overview on the landing page with optional deep-dive step-by-step guides accessible for confused users, balancing simplicity with support (10:05).
+The Swap Nice app browsing experience was acknowledged as improved and engaging, which may help non-product owners stay connected and explore the platform (43:57).
+This streamlined approach aims to minimize frustration, increase activation rates, and improve overall stickiness.
+Branding and Engagement Vision
+The team emphasized using strong brand storytelling and immersive visuals to motivate users, positioning Action Figure Miles as a “superhero” that unlocks product “superpowers” through the Swap Nice platform (03:07).
+
+The landing pages will feature animated elements like the AFM logo bouncing or Action Figure Miles flying across the screen to build excitement and curiosity (24:08).
+The top of the landing page will be visually noisy and engaging to hook users, followed by a clear call to action, and finally detailed instructions, layering information to guide users effectively (27:53).
+The branding will combine AFM and Swap Nice elements, reflecting a joint identity that feels like an “ultra secret portal” to exclusive content and community (30:48).
+The event and digital campaign aim to evoke exclusivity akin to early invite-only platforms like Clubhouse, increasing perceived value and urgency (52:28).
+Future product features discussed include profile badges tied to ownership and event participation, enhancing long-term engagement and gamification, though these won’t launch this cycle (53:18).
+Technical and Implementation Planning
+Miles confirmed that developing the landing pages and integrating them with existing assets is feasible within the desired timeline, endorsing a lean and focused approach (30:27).
+
+The landing pages will be hosted on Webflow or Framer, leveraging existing Swap Nice website infrastructure for quick deployment (19:32).
+Two separate URLs will be maintained for segmentation, each linked to its respective QR code on the trading cards for precise user routing (47:30).
+The app’s backend will automatically save scanned products to user inventories, handled by Conrad, removing friction points in product activation (14:05).
+Email capture forms will request minimal user data (name, email, phone) to maximize sign-up rates, with potential for dialog pop-up implementation to reduce page abandonment (45:41).
+The team set a hard internal review for Wednesday and a delivery deadline by Friday to ensure readiness for the event launch (56:24).
+
+Action items
+D'Angelo Oberto-Besso Pando
+Send brand assets and card design files to Miles Falk and Brittany Dao (31:28)
+Meet with Miles Falk to implement and set up the landing pages on Webflow (56:18)
+Finalize QR codes used on cards for event distribution (57:22)
+Personally deliver hang tags to Case West if DHL delivery delays persist (58:57)
+Brittany Dao
+Lead creation and refinement of layered onboarding instructions and landing page content (11:01)
+Manage design coordination for holographic trading cards tailored for shoe owners and general attendees (32:29)
+Coordinate with Conrad on app swap design details and update user steps accordingly (18:11)
+Prepare content and concept for teaser animation and landing page excitement/vibes (21:26)
+Ensure signup form collects necessary info (name, email, phone) for non-shoe owners joining community (45:41)
+Plan to ship cards early possibly by Wednesday for event distribution (57:15)
+Miles Falk
+Develop and implement the separate landing pages with distinct QR codes, ensuring lean, clear user journeys for shoe owners and non-shoe owners (30:27)
+Provide input on landing page design emphasizing call to action while limiting cognitive overload (20:37)
+Review and coordinate badge/achievement feature feasibility for future engagement (53:09)
+Sync with D'Angelo for technical implementation and deadline adherence (56:20)
