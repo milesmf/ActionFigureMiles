@@ -18,10 +18,40 @@
       /* ============================================
          BASE STYLES
          ============================================ */
+
+      /* Custom Cursor */
+      :root {
+        --cursor-default: url('./cursor_2.png') 0 0, auto;
+        --cursor-pointer: url('./cursor_2.png') 0 0, pointer;
+      }
+
       html,
       body {
         margin: 0;
         overflow-x: hidden;
+        cursor: var(--cursor-default);
+      }
+
+      /* Apply custom pointer cursor to all interactive elements */
+      a,
+      button,
+      [role='button'],
+      input[type='submit'],
+      input[type='button'],
+      label,
+      select,
+      summary,
+      [onclick],
+      .afm-btn,
+      [class*='btn'] {
+        cursor: var(--cursor-pointer) !important;
+      }
+
+      /* Preserve not-allowed cursor for disabled states */
+      :disabled,
+      [disabled],
+      .disabled {
+        cursor: not-allowed !important;
       }
 
       #afm-activate {
@@ -380,7 +410,6 @@
         max-width: 480px;
         color: #fff;
         margin: 0;
-        margin-top: 24px;
         line-height: 1.5;
         animation: subtitleIn 0.6s ease-out 0.5s both;
         text-align: left;
@@ -941,6 +970,7 @@
           opacity 0.8s ease-out,
           transform 0.8s ease-out;
         margin-bottom: 120px;
+        position: relative;
       }
 
       .afm-beat:last-child {
@@ -952,9 +982,154 @@
         transform: translateY(0);
       }
 
+      /* Beat 1 (Transformation): Gentle fade and rise */
+      .afm-beat--transform {
+        transform: translateY(50px);
+        transition:
+          opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+          transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      /* Beat 2 (Ownership): Sharper, more static reveal for permanence */
+      .afm-beat--verify {
+        transform: translateY(20px);
+        transition:
+          opacity 0.5s ease-out,
+          transform 0.4s ease-out;
+      }
+
+      /* Beat 3 (Access): Delayed reveal for anticipation */
+      .afm-beat--access {
+        transform: translateY(60px);
+        transition:
+          opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        transition-delay: 0.15s;
+      }
+
       @media (max-width: 768px) {
         .afm-beat {
           margin-bottom: 80px;
+        }
+      }
+
+      /* ============================================
+         ACTIVATION DIVIDERS - Between narrative beats
+         ============================================ */
+      .afm-activation-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 80px auto;
+        max-width: 400px;
+        position: relative;
+        opacity: 0;
+        transform: scaleX(0.3);
+        transition:
+          opacity 0.8s ease-out,
+          transform 0.8s ease-out;
+      }
+
+      .afm-activation-divider.afm-visible {
+        opacity: 1;
+        transform: scaleX(1);
+      }
+
+      /* Thin gradient line fading from Swapnice red */
+      .afm-activation-divider::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(239, 62, 54, 0.08) 15%,
+          rgba(239, 62, 54, 0.35) 50%,
+          rgba(239, 62, 54, 0.08) 85%,
+          transparent 100%
+        );
+      }
+
+      /* Subtle pulsing heart motif at center */
+      .afm-activation-divider-heart {
+        position: relative;
+        z-index: 1;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f5eee0;
+        padding: 0 12px;
+      }
+
+      .afm-activation-divider-heart svg {
+        width: 14px;
+        height: 14px;
+        color: #ef3e36;
+        opacity: 0.5;
+        animation: heartPulseSubtle 3s ease-in-out infinite;
+      }
+
+      @keyframes heartPulseSubtle {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.4;
+        }
+        50% {
+          transform: scale(1.1);
+          opacity: 0.6;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .afm-activation-divider-heart svg {
+          animation: none;
+          opacity: 0.5;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .afm-activation-divider {
+          margin: 56px auto;
+          max-width: 280px;
+        }
+      }
+
+      /* ============================================
+         AFM WATERMARK - Understated visual cue
+         ============================================ */
+      .afm-beat--transform::before {
+        content: '';
+        position: absolute;
+        top: -40px;
+        left: -80px;
+        width: 300px;
+        height: 300px;
+        background-image: url('./afm-logo.avif');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        pointer-events: none;
+        z-index: -1;
+        transition: opacity 1.5s ease-out 0.3s;
+        opacity: 1;
+        filter: grayscale(100%);
+      }
+
+      .afm-beat--transform.afm-visible::before {
+        opacity: 0.025;
+      }
+
+      @media (max-width: 768px) {
+        .afm-beat--transform::before {
+          width: 200px;
+          height: 200px;
+          left: -40px;
+          top: -20px;
         }
       }
 
@@ -1126,6 +1301,14 @@
         }
       }
 
+      @media (prefers-reduced-motion: reduce) {
+        .afm-beat-teaser-frame::before {
+          animation: none;
+          opacity: 0.7;
+          transform: none;
+        }
+      }
+
       .afm-beat-teaser-inner {
         position: absolute;
         inset: 0;
@@ -1161,56 +1344,366 @@
         font-weight: 500;
       }
 
-      .afm-beat--center .afm-beat-teaser {
-        margin-left: auto;
-        margin-right: auto;
-        display: block;
-        text-align: center;
+      /* ============================================
+         HOW-TO STEPS - Clear Instructional Spine
+         ============================================ */
+      .afm-howto {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 80px 40px 100px;
       }
 
-      .afm-beat--center .afm-beat-teaser-frame {
+      .afm-howto-header {
+        text-align: center;
+        margin-bottom: 64px;
+      }
+
+      .afm-howto-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #ef3e36;
+        margin-bottom: 16px;
+      }
+
+      .afm-howto-label::before,
+      .afm-howto-label::after {
+        content: '';
+        width: 24px;
+        height: 2px;
+        background: #ef3e36;
+        opacity: 0.4;
+      }
+
+      .afm-howto-title {
+        font-size: clamp(32px, 5vw, 48px);
+        font-weight: 700;
+        line-height: 1.15;
+        margin: 0 0 16px 0;
+        color: #1a1a1a;
+      }
+
+      .afm-howto-subtitle {
+        font-size: clamp(16px, 2.5vw, 19px);
+        color: #666;
+        max-width: 500px;
         margin: 0 auto;
+        line-height: 1.5;
+      }
+
+      /* Steps Container */
+      .afm-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        position: relative;
+      }
+
+      /* Vertical connector line */
+      .afm-steps::before {
+        content: '';
+        position: absolute;
+        left: 32px;
+        top: 48px;
+        bottom: 48px;
+        width: 2px;
+        background: linear-gradient(
+          to bottom,
+          transparent 0%,
+          rgba(239, 62, 54, 0.15) 10%,
+          rgba(239, 62, 54, 0.15) 90%,
+          transparent 100%
+        );
+      }
+
+      .afm-step {
+        display: grid;
+        grid-template-columns: 64px 1fr;
+        gap: 32px;
+        padding: 32px 0;
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 0.6s ease-out,
+          transform 0.6s ease-out;
+      }
+
+      .afm-step.afm-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .afm-step-number {
+        width: 64px;
+        height: 64px;
+        background: #fff;
+        border: 3px solid #ef3e36;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: 700;
+        color: #ef3e36;
+        position: relative;
+        z-index: 2;
+        box-shadow: 0 4px 16px rgba(239, 62, 54, 0.15);
+      }
+
+      .afm-step-content {
+        padding-top: 8px;
+      }
+
+      .afm-step-title {
+        font-size: clamp(20px, 3vw, 26px);
+        font-weight: 700;
+        color: #1a1a1a;
+        margin: 0 0 8px 0;
+        line-height: 1.2;
+      }
+
+      .afm-step-desc {
+        font-size: clamp(15px, 2vw, 17px);
+        color: #555;
+        margin: 0;
+        line-height: 1.6;
+        max-width: 480px;
+      }
+
+      .afm-step-desc em {
+        font-style: normal;
+        color: #ef3e36;
+        font-weight: 600;
+      }
+
+      /* Step visual hint */
+      .afm-step-hint {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 12px;
+        padding: 8px 16px;
+        background: rgba(239, 62, 54, 0.1);
+        border-radius: 100px;
+        font-size: 15px;
+        color: #ef3e36;
+      }
+
+      .afm-step-hint svg {
+        width: 16px;
+        height: 16px;
+        color: #ef3e36;
+        opacity: 0.8;
       }
 
       @media (max-width: 768px) {
-        .afm-beat-teaser-frame {
-          width: 100%;
-          max-width: 280px;
+        .afm-howto {
+          padding: 64px 24px 80px;
+        }
+
+        .afm-steps::before {
+          left: 24px;
+        }
+
+        .afm-step {
+          grid-template-columns: 48px 1fr;
+          gap: 20px;
+          padding: 24px 0;
+        }
+
+        .afm-step-number {
+          width: 48px;
+          height: 48px;
+          font-size: 18px;
         }
       }
 
-      /* Collab badge - AFM x Swapnice */
-      .afm-collab-mark {
+      /* ============================================
+         TUTORIAL VIDEO SECTION
+         ============================================ */
+      .afm-tutorial {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 40px 100px;
+      }
+
+      .afm-tutorial-wrapper {
+        background: linear-gradient(145deg, #1a1a1a 0%, #0a0a0a 100%);
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow:
+          0 12px 48px rgba(0, 0, 0, 0.2),
+          0 4px 16px rgba(0, 0, 0, 0.1);
+      }
+
+      .afm-tutorial-video {
+        position: relative;
+        aspect-ratio: 16 / 9;
+        background: #000;
+        overflow: hidden;
+      }
+
+      .afm-tutorial-video video,
+      .afm-tutorial-video iframe {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* Video placeholder with play button */
+      .afm-tutorial-placeholder {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+      }
+
+      .afm-tutorial-placeholder.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* Product silhouette background */
+      .afm-tutorial-placeholder::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: url('./product_1.webp');
+        background-size: 80%;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity: 0.06;
+        filter: grayscale(100%) contrast(1.2);
+        pointer-events: none;
+      }
+
+      .afm-tutorial-play {
+        width: 80px;
+        height: 80px;
+        background: #ef3e36;
+        border-radius: 50%;
         display: flex;
         align-items: center;
-        gap: 16px;
-        margin-top: 32px;
-        opacity: 0.6;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+        box-shadow: 0 8px 32px rgba(239, 62, 54, 0.4);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
       }
 
-      .afm-collab-mark::before,
-      .afm-collab-mark::after {
-        content: '';
-        height: 1px;
-        flex: 1;
-        background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1), transparent);
+      .afm-tutorial-placeholder:hover .afm-tutorial-play {
+        transform: scale(1.08);
+        box-shadow: 0 12px 40px rgba(239, 62, 54, 0.5);
       }
 
-      .afm-collab-mark span {
-        font-size: 10px;
-        letter-spacing: 0.2em;
+      .afm-tutorial-play svg {
+        width: 32px;
+        height: 32px;
+        color: #fff;
+        margin-left: 4px;
+      }
+
+      .afm-tutorial-play-label {
+        position: relative;
+        z-index: 1;
+        margin-top: 20px;
+        font-size: 14px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 0.5px;
+      }
+
+      .afm-tutorial-info {
+        padding: 24px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .afm-tutorial-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .afm-tutorial-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #fff;
+        margin: 0;
+      }
+
+      .afm-tutorial-duration {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.5);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .afm-tutorial-duration svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      .afm-tutorial-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        background: rgba(239, 62, 54, 0.15);
+        border-radius: 100px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #ef3e36;
         text-transform: uppercase;
-        color: #888;
-        white-space: nowrap;
+        letter-spacing: 0.5px;
       }
 
-      .afm-beat--left .afm-collab-mark,
-      .afm-beat--right .afm-collab-mark {
-        max-width: 360px;
+      .afm-tutorial-badge svg {
+        width: 14px;
+        height: 14px;
       }
 
-      .afm-beat--right .afm-collab-mark {
-        margin-left: auto;
+      @media (max-width: 768px) {
+        .afm-tutorial {
+          padding: 0 24px 80px;
+        }
+
+        .afm-tutorial-wrapper {
+          border-radius: 20px;
+        }
+
+        .afm-tutorial-play {
+          width: 64px;
+          height: 64px;
+        }
+
+        .afm-tutorial-play svg {
+          width: 26px;
+          height: 26px;
+        }
+
+        .afm-tutorial-info {
+          padding: 20px 24px;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 16px;
+        }
       }
 
       /* ============================================
@@ -1381,7 +1874,7 @@
         color: #666;
         line-height: 1.5;
         margin-bottom: 28px;
-        max-width: 280px;
+        max-width: 300px;
       }
 
       /* Download Path - Primary Activation */
@@ -1497,10 +1990,27 @@
         margin-bottom: 2px;
       }
 
-      /* Email Path - Founders Circle */
+      /* Email Path - Founders Circle - Enhanced */
       .afm-footer-email-form {
         width: 100%;
         max-width: 320px;
+      }
+
+      /* Earned access messaging */
+      .afm-footer-earned-label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 20px;
+        font-size: 12px;
+        color: #888;
+      }
+
+      .afm-footer-earned-label svg {
+        width: 16px;
+        height: 16px;
+        color: #ef3e36;
       }
 
       .afm-footer-input-wrapper {
@@ -1537,24 +2047,49 @@
       .afm-footer-email-submit {
         width: 100%;
         padding: 16px 28px;
-        background: transparent;
-        color: #1a1a1a;
-        border: 2px solid #1a1a1a;
+        background: #ef3e36;
+        color: #fff;
+        border: none;
         border-radius: 100px;
         font-size: 15px;
-        font-weight: 600;
+        font-weight: 700;
         font-family: inherit;
         cursor: pointer;
         transition:
           background 0.2s ease,
-          color 0.2s ease,
-          transform 0.2s ease;
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+        box-shadow: 0 4px 16px rgba(239, 62, 54, 0.2);
       }
 
       .afm-footer-email-submit:hover {
-        background: #1a1a1a;
-        color: #fff;
-        transform: translateY(-1px);
+        background: #d93830;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(239, 62, 54, 0.3);
+      }
+
+      /* Founder perks list */
+      .afm-footer-perks {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+        text-align: left;
+      }
+
+      .afm-footer-perk {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+        color: #666;
+      }
+
+      .afm-footer-perk svg {
+        width: 16px;
+        height: 16px;
+        color: #ef3e36;
+        flex-shrink: 0;
       }
 
       .afm-footer-privacy-note {
@@ -1946,6 +2481,17 @@
         gap: 12px;
       }
 
+      .afm-modal-logo {
+        margin-top: 24px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .afm-modal-logo img {
+        height: 48px;
+        width: auto;
+      }
+
       .afm-store-btn {
         display: flex;
         align-items: center;
@@ -2207,11 +2753,11 @@
           </div>
 
           <h1 class="afm-hero-title">
-            Activate Your
-            <span class="afm-chalk-underline" id="superpowersUnderline">Superpowers</span>
+            Activate Your Superpowers
+            <!-- <span class="afm-chalk-underline" id="superpowersUnderline">Superpowers</span> -->
           </h1>
           <p class="afm-hero-subtitle">
-            Your pair is waiting. Download the app to unlock what’s yours.
+            Your upgrades shoes are waiting. Download the app to unlock what’s yours.
           </p>
 
           <!-- Activation Portal Card -->
@@ -2261,7 +2807,7 @@
         <!-- Transition gradient to content -->
         <div class="afm-hero-transition">
           <div class="afm-scroll-hint">
-            <span>What changed</span>
+            <span>Explore</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -2276,48 +2822,55 @@
       </header>
 
       <!-- ============================================
-           NARRATIVE BODY - Story-Driven Initiation
+           BODY CONTENT - Instructional Spine
            ============================================ -->
-      <main class="afm-narrative">
-        <!-- Beat 1: Transformation - What just changed? -->
-        <section class="afm-beat afm-beat--left">
-          <h2 class="afm-beat-headline">
-            This isn't merch.<br />
-            <em>It's activated.</em>
-          </h2>
-          <p class="afm-beat-body">
-            The object you're holding now carries a living digital identity. It knows you. It
-            responds to you. What was static is now something more.
-          </p>
-        </section>
+      <main>
+        <!-- HOW-TO SECTION: Clear Steps -->
+        <section class="afm-howto">
+          <header class="afm-howto-header">
+            <p class="afm-howto-label">How to Activate</p>
+            <h2 class="afm-howto-title">Three steps to unlock everything</h2>
+            <p class="afm-howto-subtitle">
+              You scanned the code. Now complete your activation and discover what your product can
+              really do.
+            </p>
+          </header>
 
-        <!-- Beat 2: Trust - Why does it matter? -->
-        <section class="afm-beat afm-beat--right">
-          <h2 class="afm-beat-headline">
-            Verified.<br />
-            <em>Permanent.</em><br />
-            Yours.
-          </h2>
-          <p class="afm-beat-body">
-            Your ownership is authenticated and recorded. Not a receipt that fades — a connection
-            that travels with you, provable anywhere, anytime.
-          </p>
-        </section>
+          <div class="afm-steps">
+            <!-- Step 1 -->
+            <article class="afm-step">
+              <div class="afm-step-number">1</div>
+              <div class="afm-step-content">
+                <h3 class="afm-step-title">Download the Swapnice app</h3>
+                <p class="afm-step-desc">
+                  This is your portal to <em>everything</em> — ownership verification, exclusive
+                  content, and founder access.
+                </p>
+              </div>
+            </article>
 
-        <!-- Beat 3: Access - What do I do now? -->
-        <section class="afm-beat afm-beat--center">
-          <h2 class="afm-beat-headline">
-            What comes next<br />
-            <em>only opens inside.</em>
-          </h2>
-          <p class="afm-beat-body">
-            Early drops. Hidden content. Founder-level access to experiences that don't exist yet.
-            The app isn't a store — it's where your activation lives.
-          </p>
-          <div class="afm-beat-teaser">
-            <div class="afm-beat-teaser-frame">
-              <div class="afm-beat-teaser-inner">
-                <div class="afm-beat-teaser-icon">
+            <!-- Step 2 -->
+            <article class="afm-step">
+              <div class="afm-step-number">2</div>
+              <div class="afm-step-content">
+                <h3 class="afm-step-title">Scan your shoe's tag</h3>
+                <p class="afm-step-desc">
+                  Hold your phone near the tag inside your product. The app reads the chip and
+                  <em>links it to you</em> — permanently.
+                </p>
+              </div>
+            </article>
+
+            <!-- Step 3 -->
+            <article class="afm-step">
+              <div class="afm-step-number">3</div>
+              <div class="afm-step-content">
+                <h3 class="afm-step-title">Activation complete</h3>
+                <p class="afm-step-desc">
+                  Access <em>verified ownership</em>, hidden videos, early drops, and founder-only
+                  experiences that live inside your shoes.
+                </p>
+                <div class="afm-step-hint">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -2328,17 +2881,52 @@
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                    />
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z"
+                      d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"
                     />
                   </svg>
+                  <span>You're officially in</span>
                 </div>
-                <span class="afm-beat-teaser-label">AFM Pilot Preview</span>
               </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- TUTORIAL VIDEO SECTION -->
+        <section class="afm-tutorial">
+          <div class="afm-tutorial-wrapper">
+            <div class="afm-tutorial-video">
+              <div class="afm-tutorial-placeholder" id="tutorialPlaceholder">
+                <div class="afm-tutorial-play">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5.14v14l11-7-11-7z" />
+                  </svg>
+                </div>
+                <span class="afm-tutorial-play-label">Watch how it works</span>
+              </div>
+              <!-- Video will be injected here when played -->
+            </div>
+            <div class="afm-tutorial-info">
+              <span class="afm-tutorial-badge">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"
+                  />
+                </svg>
+                45 second guide
+              </span>
             </div>
           </div>
         </section>
@@ -2353,11 +2941,11 @@
           <div class="afm-footer-portal-inner">
             <!-- Dual Activation Paths -->
             <div class="afm-footer-paths">
-              <!-- Path 1: Download the App -->
+              <!-- Path 1: Download the App (Owners) -->
               <div class="afm-footer-path">
                 <h3 class="afm-footer-path-title">Get the App</h3>
                 <p class="afm-footer-path-desc">
-                  Unlock your superpowers. Download now and begin your transformation.
+                  Download now and start bringing your products to life.
                 </p>
 
                 <button class="afm-footer-download-cta" onclick="openModal()">
@@ -2365,16 +2953,16 @@
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="2.5"
                     stroke="currentColor"
+                    stroke-width="2.5"
                   >
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z"
+                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
                     />
                   </svg>
-                  <span>Download the App</span>
+                  <span>Download the Swapnice App</span>
                 </button>
 
                 <!-- QR Code Section -->
@@ -2383,8 +2971,8 @@
                     <img src="./download_app.png" alt="Download QR Code" />
                   </div>
                   <div class="afm-footer-qr-hint">
-                    <strong>Scan to activate</strong>
-                    Point your camera here
+                    <strong>Viewing on web?</strong>
+                    <span>Scan to download</span>
                   </div>
                 </div>
               </div>
@@ -2392,11 +2980,11 @@
               <!-- Divider -->
               <div class="afm-footer-divider"></div>
 
-              <!-- Path 2: Join Founders Circle -->
+              <!-- Path 2: Join Founders Circle (Non-owners) -->
               <div class="afm-footer-path">
                 <h3 class="afm-footer-path-title">Founders Circle</h3>
                 <p class="afm-footer-path-desc">
-                  Not ready yet? Join the inner circle and be first to know when new powers unlock.
+                  Join the inner circle for first access to new drops and collaborations.
                 </p>
 
                 <form
@@ -2411,11 +2999,63 @@
                       id="emailInput"
                       name="email"
                       required
-                      placeholder="Enter your email"
+                      placeholder="Your email address"
                       aria-label="Email address"
                     />
                   </div>
-                  <button type="submit" class="afm-footer-email-submit">Join the Circle</button>
+                  <button type="submit" class="afm-footer-email-submit">Claim Your Spot</button>
+
+                  <!-- Perks list -->
+                  <div class="afm-footer-perks">
+                    <div class="afm-footer-perk">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="2.5"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M4.5 12.75l6 6 9-13.5"
+                        />
+                      </svg>
+                      <span>First access to new drops</span>
+                    </div>
+                    <div class="afm-footer-perk">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="2.5"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M4.5 12.75l6 6 9-13.5"
+                        />
+                      </svg>
+                      <span>Early-access to future collabs</span>
+                    </div>
+                    <div class="afm-footer-perk">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="2.5"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M4.5 12.75l6 6 9-13.5"
+                        />
+                      </svg>
+                      <span>No spam, just access</span>
+                    </div>
+                  </div>
                 </form>
               </div>
             </div>
@@ -2496,47 +3136,37 @@
 
             <!-- Step 2: Confirmation -->
             <div class="afm-modal-step hidden" id="modalStep2">
-              <div class="afm-modal-check">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="3"
-                >
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
+              <div class="afm-modal-logo">
+                <img src="./swapnice_logo.png" alt="Swapnice" />
               </div>
               <h3 class="afm-modal-title">You're In</h3>
               <p class="afm-modal-desc">Welcome to the founding circle. We'll be in touch.</p>
 
               <div class="afm-modal-divider">
                 <div class="afm-modal-divider-line"></div>
-                <span class="afm-modal-divider-text">Complete Activation</span>
-                <div class="afm-modal-divider-line"></div>
               </div>
 
               <p class="afm-modal-app-desc">
-                Get the Swapnice app to activate your pair and unlock everything.
+                Get the Swapnice app to activate your shoes and unlock <em>everything</em>.
               </p>
 
               <div class="afm-modal-buttons">
-                <a href="#" class="afm-store-btn apple">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                <button class="afm-footer-download-cta" onclick="openModal()">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                  >
                     <path
-                      d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
                     />
                   </svg>
-                  Get for iOS
-                </a>
-                <a href="#" class="afm-store-btn google">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                    <path
-                      d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 010 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"
-                    />
-                  </svg>
-                  Get for Android
-                </a>
+                  <span>Download the Swapnice App</span>
+                </button>
               </div>
             </div>
           </div>
@@ -2602,38 +3232,49 @@
         if (p && typeof p.catch === 'function') p.catch(fail);
       });
 
-      // Narrative Beats - Scroll-triggered reveal animation
-      (function initNarrativeBeats() {
-        const beats = document.querySelectorAll('.afm-beat');
-        if (!beats.length) return;
+      // Scroll-triggered reveal animations for all sections
+      (function initScrollAnimations() {
+        // Select all animatable elements
+        const steps = document.querySelectorAll('.afm-step');
+        const segmentCards = document.querySelectorAll('.afm-segment-card');
+        const unlockItems = document.querySelectorAll('.afm-unlock-item');
+
+        // Combine all elements
+        const allElements = [...steps, ...segmentCards, ...unlockItems];
+
+        if (!allElements.length) return;
 
         // Respect reduced motion preference
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (prefersReducedMotion) {
-          beats.forEach((beat) => beat.classList.add('afm-visible'));
+          allElements.forEach((el) => el.classList.add('afm-visible'));
           return;
         }
 
         const observerOptions = {
           root: null,
-          rootMargin: '0px 0px -80px 0px',
+          rootMargin: '0px 0px -60px 0px',
           threshold: 0.15,
         };
 
-        const revealBeat = (entries, observer) => {
+        const revealElement = (entries, observer) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
+              // Stagger delay for steps
+              if (entry.target.classList.contains('afm-step')) {
+                const stepIndex = [...steps].indexOf(entry.target);
+                entry.target.style.transitionDelay = `${stepIndex * 0.15}s`;
+              }
               entry.target.classList.add('afm-visible');
               observer.unobserve(entry.target);
             }
           });
         };
 
-        const observer = new IntersectionObserver(revealBeat, observerOptions);
-        beats.forEach((beat, index) => {
-          // Stagger the animation delay slightly for each beat
-          beat.style.transitionDelay = `${index * 0.1}s`;
-          observer.observe(beat);
+        const observer = new IntersectionObserver(revealElement, observerOptions);
+
+        allElements.forEach((el) => {
+          observer.observe(el);
         });
       })();
 
