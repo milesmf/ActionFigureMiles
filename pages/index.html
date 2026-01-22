@@ -73,6 +73,7 @@
       .afm-hero {
         width: 100%;
         min-height: 100vh;
+        /* background-color: #ef3e36; */
         background: linear-gradient(135deg, #ef3e36 0%, #d93830 40%, #b22d27 70%, #8a1f1c 100%);
         position: relative;
         overflow: hidden;
@@ -770,7 +771,7 @@
         bottom: 0;
         left: 0;
         right: 0;
-        height: 120px;
+        height: 78px;
         background: linear-gradient(to bottom, transparent 0%, #f5eee0 100%);
         z-index: 20;
         pointer-events: none;
@@ -779,20 +780,21 @@
       /* Scroll indicator */
       .afm-scroll-hint {
         position: absolute;
-        bottom: 80px;
+        bottom: 52px;
         left: 50%;
         transform: translateX(-50%);
         z-index: 25;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 8px;
+        gap: 10px;
         color: #fff;
-        font-size: 16px;
-        font-weight: 600;
-        letter-spacing: 1px;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: 2px;
         text-transform: uppercase;
-        opacity: 0.5;
+        opacity: 0.9;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
         animation: scrollHintBounce 2s ease-in-out infinite;
       }
 
@@ -807,15 +809,16 @@
       }
 
       .afm-scroll-hint svg {
-        width: 20px;
-        height: 20px;
+        width: 26px;
+        height: 26px;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
         animation: scrollArrowPulse 2s ease-in-out infinite;
       }
 
       @keyframes scrollArrowPulse {
         0%,
         100% {
-          opacity: 0.5;
+          opacity: 0.7;
         }
         50% {
           opacity: 1;
@@ -1100,261 +1103,22 @@
       }
 
       /* ============================================
-         AFM WATERMARK - Understated visual cue
-         ============================================ */
-      .afm-beat--transform::before {
-        content: '';
-        position: absolute;
-        top: -40px;
-        left: -80px;
-        width: 300px;
-        height: 300px;
-        background-image: url('./afm-logo.avif');
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-        pointer-events: none;
-        z-index: -1;
-        transition: opacity 1.5s ease-out 0.3s;
-        opacity: 1;
-        filter: grayscale(100%);
-      }
-
-      .afm-beat--transform.afm-visible::before {
-        opacity: 0.025;
-      }
-
-      @media (max-width: 768px) {
-        .afm-beat--transform::before {
-          width: 200px;
-          height: 200px;
-          left: -40px;
-          top: -20px;
-        }
-      }
-
-      /* Beat alignment variations for asymmetry */
-      .afm-beat--left {
-        text-align: left;
-        padding-right: 15%;
-      }
-
-      .afm-beat--center {
-        text-align: center;
-        max-width: 640px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .afm-beat--right {
-        text-align: right;
-        padding-left: 15%;
-      }
-
-      @media (max-width: 768px) {
-        .afm-beat--left,
-        .afm-beat--right {
-          padding-left: 0;
-          padding-right: 0;
-          text-align: left;
-        }
-      }
-
-      /* Beat marker - subtle accent */
-      .afm-beat-marker {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 24px;
-        opacity: 0.7;
-      }
-
-      .afm-beat-marker::before {
-        content: '';
-        width: 24px;
-        height: 2px;
-        background: #ef3e36;
-        border-radius: 1px;
-      }
-
-      .afm-beat-marker span {
-        font-size: 11px;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: #ef3e36;
-        font-weight: 600;
-      }
-
-      .afm-beat--right .afm-beat-marker {
-        flex-direction: row-reverse;
-      }
-
-      .afm-beat--center .afm-beat-marker {
-        justify-content: center;
-      }
-
-      .afm-beat--center .afm-beat-marker::before {
-        display: none;
-      }
-
-      /* Beat headline - typography leads */
-      .afm-beat-headline {
-        font-size: clamp(28px, 5vw, 44px);
-        font-weight: 700;
-        line-height: 1.15;
-        margin: 0 0 20px 0;
-        color: #1a1a1a;
-      }
-
-      .afm-beat-headline em {
-        font-style: normal;
-        color: #ef3e36;
-      }
-
-      /* Beat body copy */
-      .afm-beat-body {
-        font-size: clamp(16px, 2.5vw, 19px);
-        line-height: 1.65;
-        color: #444;
-        margin: 0;
-        max-width: 520px;
-      }
-
-      .afm-beat--center .afm-beat-body {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .afm-beat--right .afm-beat-body {
-        margin-left: auto;
-      }
-
-      /* Beat visual accent - optional icon/symbol */
-      .afm-beat-accent {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 48px;
-        height: 48px;
-        background: rgba(239, 62, 54, 0.08);
-        border-radius: 14px;
-        margin-bottom: 20px;
-      }
-
-      .afm-beat-accent svg {
-        width: 24px;
-        height: 24px;
-        color: #ef3e36;
-        opacity: 0.9;
-      }
-
-      .afm-beat--right .afm-beat-accent {
-        margin-left: auto;
-      }
-
-      .afm-beat--center .afm-beat-accent {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      /* Teaser frame - for Beat 3 visual tease */
-      .afm-beat-teaser {
-        margin-top: 40px;
-        position: relative;
-        display: inline-block;
-      }
-
-      .afm-beat-teaser-frame {
-        width: 280px;
-        height: 180px;
-        background: linear-gradient(135deg, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.08) 100%);
-        border-radius: 16px;
-        overflow: hidden;
-        position: relative;
-        box-shadow:
-          0 4px 20px rgba(0, 0, 0, 0.06),
-          inset 0 0 0 1px rgba(0, 0, 0, 0.04);
-      }
-
-      .afm-beat-teaser-frame::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          135deg,
-          transparent 40%,
-          rgba(239, 62, 54, 0.05) 60%,
-          transparent 80%
-        );
-        animation: teaserShimmer 4s ease-in-out infinite;
-      }
-
-      @keyframes teaserShimmer {
-        0%,
-        100% {
-          opacity: 0.5;
-          transform: translateX(-20%);
-        }
-        50% {
-          opacity: 1;
-          transform: translateX(20%);
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .afm-beat-teaser-frame::before {
-          animation: none;
-          opacity: 0.7;
-          transform: none;
-        }
-      }
-
-      .afm-beat-teaser-inner {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-      }
-
-      .afm-beat-teaser-icon {
-        width: 40px;
-        height: 40px;
-        background: rgba(239, 62, 54, 0.1);
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .afm-beat-teaser-icon svg {
-        width: 20px;
-        height: 20px;
-        color: #ef3e36;
-        opacity: 0.8;
-      }
-
-      .afm-beat-teaser-label {
-        font-size: 12px;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: #888;
-        font-weight: 500;
-      }
-
-      /* ============================================
          HOW-TO STEPS - Clear Instructional Spine
          ============================================ */
       .afm-howto {
-        max-width: 900px;
+        max-width: 1100px;
         margin: 0 auto;
-        padding: 80px 40px 100px;
+        padding: 60px 40px 100px;
+      }
+
+      .afm-howto-layout {
+        display: grid;
+        grid-template-columns: 1fr 320px;
+        gap: 64px;
+        align-items: start;
       }
 
       .afm-howto-header {
-        text-align: center;
         margin-bottom: 64px;
       }
 
@@ -1387,14 +1151,6 @@
         color: #1a1a1a;
       }
 
-      .afm-howto-subtitle {
-        font-size: clamp(16px, 2.5vw, 19px);
-        color: #666;
-        max-width: 500px;
-        margin: 0 auto;
-        line-height: 1.5;
-      }
-
       /* Steps Container */
       .afm-steps {
         display: flex;
@@ -1425,16 +1181,6 @@
         grid-template-columns: 64px 1fr;
         gap: 32px;
         padding: 32px 0;
-        opacity: 0;
-        transform: translateY(30px);
-        transition:
-          opacity 0.6s ease-out,
-          transform 0.6s ease-out;
-      }
-
-      .afm-step.afm-visible {
-        opacity: 1;
-        transform: translateY(0);
       }
 
       .afm-step-number {
@@ -1498,6 +1244,78 @@
         height: 16px;
         color: #ef3e36;
         opacity: 0.8;
+      }
+
+      /* Demo GIF Container */
+      .afm-howto-demo {
+        position: sticky;
+        top: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .afm-howto-demo-phone {
+        width: 100%;
+        max-width: 280px;
+        aspect-ratio: 9 / 18;
+        background: #1a1a1a;
+        border-radius: 32px;
+        padding: 12px;
+        box-shadow:
+          0 24px 48px rgba(0, 0, 0, 0.15),
+          0 8px 16px rgba(0, 0, 0, 0.1),
+          inset 0 0 0 2px rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+      }
+
+      .afm-howto-demo-screen {
+        width: 100%;
+        height: 100%;
+        background: #f5eee0;
+        border-radius: 22px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .afm-howto-demo-screen img,
+      .afm-howto-demo-screen video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .afm-howto-demo-placeholder {
+        text-align: center;
+        color: #999;
+        font-size: 13px;
+        padding: 24px;
+      }
+
+      .afm-howto-demo-placeholder svg {
+        width: 32px;
+        height: 32px;
+        margin-bottom: 8px;
+        opacity: 0.4;
+      }
+
+      @media (max-width: 900px) {
+        .afm-howto-layout {
+          grid-template-columns: 1fr;
+          gap: 48px;
+        }
+
+        .afm-howto-demo {
+          position: relative;
+          top: 0;
+          order: -1;
+        }
+
+        .afm-howto-demo-phone {
+          max-width: 220px;
+        }
       }
 
       @media (max-width: 768px) {
@@ -2827,107 +2645,82 @@
       <main>
         <!-- HOW-TO SECTION: Clear Steps -->
         <section class="afm-howto">
-          <header class="afm-howto-header">
-            <p class="afm-howto-label">How to Activate</p>
-            <h2 class="afm-howto-title">Three steps to unlock everything</h2>
-            <p class="afm-howto-subtitle">
-              You scanned the code. Now complete your activation and discover what your product can
-              really do.
-            </p>
-          </header>
+          <div class="afm-howto-layout">
+            <div class="afm-howto-main">
+              <header class="afm-howto-header">
+                <h2 class="afm-howto-title">Activate your shoes in three steps</h2>
+              </header>
 
-          <div class="afm-steps">
-            <!-- Step 1 -->
-            <article class="afm-step">
-              <div class="afm-step-number">1</div>
-              <div class="afm-step-content">
-                <h3 class="afm-step-title">Download the Swapnice app</h3>
-                <p class="afm-step-desc">
-                  This is your portal to <em>everything</em> — ownership verification, exclusive
-                  content, and founder access.
-                </p>
+              <div class="afm-steps">
+                <!-- Step 1 -->
+                <article class="afm-step">
+                  <div class="afm-step-number">1</div>
+                  <div class="afm-step-content">
+                    <h3 class="afm-step-title">Download the Swapnice app</h3>
+                    <p class="afm-step-desc">
+                      This is your portal to <em>everything</em> — ownership verification, exclusive
+                      content, and founder access.
+                    </p>
+                  </div>
+                </article>
+
+                <!-- Step 2 -->
+                <article class="afm-step">
+                  <div class="afm-step-number">2</div>
+                  <div class="afm-step-content">
+                    <h3 class="afm-step-title">Scan your shoe's tag</h3>
+                    <p class="afm-step-desc">
+                      Hold your phone near the tag inside your product. The app reads the chip and
+                      <em>links it to you</em> — permanently.
+                    </p>
+                  </div>
+                </article>
+
+                <!-- Step 3 -->
+                <article class="afm-step">
+                  <div class="afm-step-number">3</div>
+                  <div class="afm-step-content">
+                    <h3 class="afm-step-title">Activation complete</h3>
+                    <p class="afm-step-desc">
+                      Access <em>verified ownership</em>, hidden videos, early drops, and
+                      founder-only experiences that live inside your shoes.
+                    </p>
+                    <div class="afm-step-hint">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"
+                        />
+                      </svg>
+                      <span>You're officially in</span>
+                    </div>
+                  </div>
+                </article>
               </div>
-            </article>
+            </div>
 
-            <!-- Step 2 -->
-            <article class="afm-step">
-              <div class="afm-step-number">2</div>
-              <div class="afm-step-content">
-                <h3 class="afm-step-title">Scan your shoe's tag</h3>
-                <p class="afm-step-desc">
-                  Hold your phone near the tag inside your product. The app reads the chip and
-                  <em>links it to you</em> — permanently.
-                </p>
-              </div>
-            </article>
-
-            <!-- Step 3 -->
-            <article class="afm-step">
-              <div class="afm-step-number">3</div>
-              <div class="afm-step-content">
-                <h3 class="afm-step-title">Activation complete</h3>
-                <p class="afm-step-desc">
-                  Access <em>verified ownership</em>, hidden videos, early drops, and founder-only
-                  experiences that live inside your shoes.
-                </p>
-                <div class="afm-step-hint">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="2"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"
-                    />
-                  </svg>
-                  <span>You're officially in</span>
+            <!-- Demo GIF -->
+            <aside class="afm-howto-demo">
+              <div class="afm-howto-demo-phone">
+                <div class="afm-howto-demo-screen">
+                  <img
+                    src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/swapnice_intro_video.gif"
+                    alt="Swapnice app demo"
+                    width="360"
+                    height="640"
+                    decoding="async"
+                    loading="lazy"
+                  />
                 </div>
               </div>
-            </article>
-          </div>
-        </section>
-
-        <!-- TUTORIAL VIDEO SECTION -->
-        <section class="afm-tutorial">
-          <div class="afm-tutorial-wrapper">
-            <div class="afm-tutorial-video">
-              <div class="afm-tutorial-placeholder" id="tutorialPlaceholder">
-                <div class="afm-tutorial-play">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5.14v14l11-7-11-7z" />
-                  </svg>
-                </div>
-                <span class="afm-tutorial-play-label">Watch how it works</span>
-              </div>
-              <!-- Video will be injected here when played -->
-            </div>
-            <div class="afm-tutorial-info">
-              <span class="afm-tutorial-badge">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"
-                  />
-                </svg>
-                45 second guide
-              </span>
-            </div>
+            </aside>
           </div>
         </section>
       </main>
@@ -2982,9 +2775,9 @@
 
               <!-- Path 2: Join Founders Circle (Non-owners) -->
               <div class="afm-footer-path">
-                <h3 class="afm-footer-path-title">Founders Circle</h3>
+                <h3 class="afm-footer-path-title">Stay Informed</h3>
                 <p class="afm-footer-path-desc">
-                  Join the inner circle for first access to new drops and collaborations.
+                  Be first to know when new products and collaborations go live.
                 </p>
 
                 <form
@@ -3003,7 +2796,7 @@
                       aria-label="Email address"
                     />
                   </div>
-                  <button type="submit" class="afm-footer-email-submit">Claim Your Spot</button>
+                  <button type="submit" class="afm-footer-email-submit">Submit</button>
 
                   <!-- Perks list -->
                   <div class="afm-footer-perks">
@@ -3234,13 +3027,12 @@
 
       // Scroll-triggered reveal animations for all sections
       (function initScrollAnimations() {
-        // Select all animatable elements
-        const steps = document.querySelectorAll('.afm-step');
+        // Select all animatable elements (excluding .afm-step which displays immediately)
         const segmentCards = document.querySelectorAll('.afm-segment-card');
         const unlockItems = document.querySelectorAll('.afm-unlock-item');
 
         // Combine all elements
-        const allElements = [...steps, ...segmentCards, ...unlockItems];
+        const allElements = [...segmentCards, ...unlockItems];
 
         if (!allElements.length) return;
 
@@ -3260,11 +3052,6 @@
         const revealElement = (entries, observer) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              // Stagger delay for steps
-              if (entry.target.classList.contains('afm-step')) {
-                const stepIndex = [...steps].indexOf(entry.target);
-                entry.target.style.transitionDelay = `${stepIndex * 0.15}s`;
-              }
               entry.target.classList.add('afm-visible');
               observer.unobserve(entry.target);
             }
