@@ -61,3 +61,5 @@ Claude MUST NOT read, scan, summarize, or load these paths unless explicitly ins
 All language should feel like an invitation into a secret portal rather than onboarding or marketing. Avoid technical jargon and feature lists. Focus on outcomes: ownership, identity, access, and exclusivity. Use verbs like activate, unlock, access, and discover. The copy should make users feel early, special, and excited — as if scanning the QR code led them somewhere not everyone gets to go.
 
 ALWAYS IGNORE 'repomix' files.
+
+Done.
