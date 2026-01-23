@@ -144,6 +144,22 @@
         display: none;
       }
 
+      /* iOS touch-capture overlay - receives first touch to unlock video */
+      .afm-video-touch-target {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: auto;
+        background: transparent;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        cursor: default;
+      }
+      /* Once video is playing, disable the overlay */
+      .afm-video-layer.afm-video-playing .afm-video-touch-target {
+        pointer-events: none;
+      }
+
       /* Noise texture overlay - sits above video */
       .afm-hero::before {
         content: '';
@@ -2770,6 +2786,8 @@
           </video>
           <!-- Static fallback for reduced-motion or failed video load -->
           <img class="afm-video-fallback" src="./afm-video-poster.jpg" alt="" aria-hidden="true" />
+          <!-- iOS touch-capture: receives first tap to unlock autoplay -->
+          <div class="afm-video-touch-target" aria-hidden="true"></div>
         </div>
 
         <!-- Hero Content - Asymmetric Layout -->
@@ -3433,22 +3451,33 @@
       });
     </script>
 
-    <!-- iOS Video Autoplay Fallback -->
+    <!-- iOS Video Autoplay Fix -->
     <script>
       (function () {
-        const video = document.querySelector('.afm-video-layer video');
-        if (!video) return;
+        const layer = document.querySelector('.afm-video-layer');
+        const video = layer?.querySelector('video');
+        const touchTarget = layer?.querySelector('.afm-video-touch-target');
+        if (!video || !layer) return;
 
-        // Attempt immediate autoplay (desktop + some iOS cases)
-        video.play().catch(() => {});
-
-        // iOS fallback: first user interaction unlocks playback
-        const kick = () => {
-          video.play().catch(() => {});
+        // Mark as playing and disable touch overlay
+        const onPlaying = () => {
+          layer.classList.add('afm-video-playing');
         };
+        video.addEventListener('playing', onPlaying, { once: true });
 
-        window.addEventListener('touchstart', kick, { once: true, passive: true });
-        window.addEventListener('pointerdown', kick, { once: true, passive: true });
+        // Attempt immediate autoplay (works on desktop + Android)
+        video.play().then(onPlaying).catch(() => {});
+
+        // iOS requires gesture from an interaction-eligible element.
+        // The touch-target overlay has pointer-events: auto, so iOS
+        // recognizes taps on it as a valid user gesture for video.play()
+        if (touchTarget) {
+          const unlock = () => {
+            video.play().then(onPlaying).catch(() => {});
+          };
+          touchTarget.addEventListener('touchstart', unlock, { once: true, passive: true });
+          touchTarget.addEventListener('click', unlock, { once: true });
+        }
       })();
     </script>
   </body>
