@@ -104,6 +104,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        display: block;
         opacity: 1;
         filter: saturate(1.1) contrast(1.05);
         /* Mask fades the video itself to transparent on the left */
@@ -2757,7 +2758,7 @@
             muted
             playsinline
             webkit-playsinline
-            preload="auto"
+            preload="metadata"
             disablepictureinpicture
             aria-hidden="true"
             poster="./afm-video-poster.jpg"
@@ -3430,6 +3431,25 @@
           closeModal();
         }
       });
+    </script>
+
+    <!-- iOS Video Autoplay Fallback -->
+    <script>
+      (function () {
+        const video = document.querySelector('.afm-video-layer video');
+        if (!video) return;
+
+        // Attempt immediate autoplay (desktop + some iOS cases)
+        video.play().catch(() => {});
+
+        // iOS fallback: first user interaction unlocks playback
+        const kick = () => {
+          video.play().catch(() => {});
+        };
+
+        window.addEventListener('touchstart', kick, { once: true, passive: true });
+        window.addEventListener('pointerdown', kick, { once: true, passive: true });
+      })();
     </script>
   </body>
 </html>
