@@ -2931,8 +2931,8 @@
                   <div class="afm-step-content">
                     <h3 class="afm-step-title">Download the Swapnice app</h3>
                     <p class="afm-step-desc">
-                      This is your scanned products live — You’ll use the app to authenticate your
-                      shoes and access exclusive content.
+                      This is where your scanned products live — You’ll use the app to authenticate
+                      your shoes and access exclusive content.
                     </p>
                   </div>
                 </article>
@@ -2956,7 +2956,7 @@
                     <h3 class="afm-step-title">Activation complete</h3>
                     <p class="afm-step-desc">
                       Your shoes are now authenticated! View <em>exclusive</em> ActionFigureMiles
-                      content and your item inside your inventory.
+                      content and your item inside your Swapnice inventory.
                     </p>
                     <div class="afm-step-hint">
                       <svg
@@ -3473,15 +3473,15 @@
 
         // Elements with infinite animations to observe
         const animatedSelectors = [
-          '.afm-floating-badge',      // badgeFloat
-          '.afm-portal-card',         // portalVortex (::before)
-          '.afm-status-dot',          // statusPulse
-          '.afm-hero-cta',            // boltCharge (svg), ctaGlowPulse
-          '.afm-explore-guide',       // guideFloat, arrowBounce
-          '.afm-footer-peek',         // peekFloat
-          '.afm-activation-divider',  // heartPulseSubtle
-          '.afm-steps-runner',        // runnerPath, runnerWobble
-          '.afm-footer-portal',       // footerPortalVortex (::before)
+          '.afm-floating-badge', // badgeFloat
+          '.afm-portal-card', // portalVortex (::before)
+          '.afm-status-dot', // statusPulse
+          '.afm-hero-cta', // boltCharge (svg), ctaGlowPulse
+          '.afm-explore-guide', // guideFloat, arrowBounce
+          '.afm-footer-peek', // peekFloat
+          '.afm-activation-divider', // heartPulseSubtle
+          '.afm-steps-runner', // runnerPath, runnerWobble
+          '.afm-footer-portal', // footerPortalVortex (::before)
           '.afm-footer-download-cta', // footerBoltPulse
         ];
 
@@ -3520,10 +3520,7 @@
         // Helper to check if element is initially in viewport
         function isElementInViewport(el) {
           const rect = el.getBoundingClientRect();
-          return (
-            rect.top < window.innerHeight + 100 &&
-            rect.bottom > -100
-          );
+          return rect.top < window.innerHeight + 100 && rect.bottom > -100;
         }
       })();
     </script>
@@ -3543,14 +3540,20 @@
         video.addEventListener('playing', onPlaying, { once: true });
 
         // Attempt immediate autoplay (works on desktop + Android)
-        video.play().then(onPlaying).catch(() => {});
+        video
+          .play()
+          .then(onPlaying)
+          .catch(() => {});
 
         // iOS requires gesture from an interaction-eligible element.
         // The touch-target overlay has pointer-events: auto, so iOS
         // recognizes taps on it as a valid user gesture for video.play()
         if (touchTarget) {
           const unlock = () => {
-            video.play().then(onPlaying).catch(() => {});
+            video
+              .play()
+              .then(onPlaying)
+              .catch(() => {});
           };
           touchTarget.addEventListener('touchstart', unlock, { once: true, passive: true });
           touchTarget.addEventListener('click', unlock, { once: true });
