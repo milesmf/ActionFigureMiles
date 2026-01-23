@@ -643,6 +643,10 @@
         );
         animation: portalVortex 4s linear infinite;
         z-index: 0;
+        /* GPU optimization: promote to compositor layer */
+        will-change: transform;
+        transform: translateZ(0);
+        backface-visibility: hidden;
       }
 
       /* No secondary layer */
@@ -1811,6 +1815,10 @@
         );
         animation: footerPortalVortex 8s linear infinite;
         z-index: 0;
+        /* GPU optimization: promote to compositor layer */
+        will-change: transform;
+        transform: translateZ(0);
+        backface-visibility: hidden;
       }
 
       @keyframes footerPortalVortex {
@@ -2734,6 +2742,18 @@
           height: 44px;
         }
       }
+
+      /* ============================================
+         PERFORMANCE: Pause off-screen animations
+         ============================================ */
+      .afm-animation-paused,
+      .afm-animation-paused::before,
+      .afm-animation-paused::after,
+      .afm-animation-paused *,
+      .afm-animation-paused *::before,
+      .afm-animation-paused *::after {
+        animation-play-state: paused !important;
+      }
     </style>
   </head>
 
@@ -3449,6 +3469,67 @@
           closeModal();
         }
       });
+
+      // Performance: Pause off-screen infinite animations
+      (function initAnimationPauseObserver() {
+        // Skip if user prefers reduced motion (animations already handled)
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        // Elements with infinite animations to observe
+        const animatedSelectors = [
+          '.afm-floating-badge',      // badgeFloat
+          '.afm-portal-card',         // portalVortex (::before)
+          '.afm-status-dot',          // statusPulse
+          '.afm-hero-cta',            // boltCharge (svg), ctaGlowPulse
+          '.afm-explore-guide',       // guideFloat, arrowBounce
+          '.afm-footer-peek',         // peekFloat
+          '.afm-activation-divider',  // heartPulseSubtle
+          '.afm-steps-runner',        // runnerPath, runnerWobble
+          '.afm-footer-portal',       // footerPortalVortex (::before)
+          '.afm-footer-download-cta', // footerBoltPulse
+        ];
+
+        const animatedElements = document.querySelectorAll(animatedSelectors.join(', '));
+        if (!animatedElements.length) return;
+
+        const observerOptions = {
+          root: null,
+          // Generous margin to start animations before fully visible
+          rootMargin: '100px 0px 100px 0px',
+          threshold: 0,
+        };
+
+        const toggleAnimation = (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // Element entering viewport - resume animations
+              entry.target.classList.remove('afm-animation-paused');
+            } else {
+              // Element leaving viewport - pause animations
+              entry.target.classList.add('afm-animation-paused');
+            }
+          });
+        };
+
+        const animationObserver = new IntersectionObserver(toggleAnimation, observerOptions);
+
+        animatedElements.forEach((el) => {
+          // Start with animations paused for off-screen elements
+          if (!isElementInViewport(el)) {
+            el.classList.add('afm-animation-paused');
+          }
+          animationObserver.observe(el);
+        });
+
+        // Helper to check if element is initially in viewport
+        function isElementInViewport(el) {
+          const rect = el.getBoundingClientRect();
+          return (
+            rect.top < window.innerHeight + 100 &&
+            rect.bottom > -100
+          );
+        }
+      })();
     </script>
 
     <!-- iOS Video Autoplay Fix -->
