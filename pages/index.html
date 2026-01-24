@@ -2837,7 +2837,7 @@
               <!-- Left: CTA Content -->
               <div class="afm-portal-cta-side">
                 <!-- <p class="afm-portal-label">Activation starts here</p> -->
-                <button class="afm-hero-cta" onclick="openModal()">
+                <button class="afm-hero-cta" onclick="redirectToAppStore()">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -2863,7 +2863,7 @@
               <!-- Right: QR Code -->
               <div
                 class="afm-portal-qr-side"
-                onclick="openModal()"
+                onclick="redirectToAppStore()"
                 title="Scan to download the app"
               >
                 <div class="afm-portal-qr-box">
@@ -3019,7 +3019,7 @@
                   Download now and start bringing your products to life.
                 </p>
 
-                <button class="afm-footer-download-cta" onclick="openModal()">
+                <button class="afm-footer-download-cta" onclick="redirectToAppStore()">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -3038,7 +3038,7 @@
 
                 <!-- QR Code Section -->
                 <div class="afm-footer-qr-section">
-                  <div class="afm-footer-qr-box" onclick="openModal()" title="Scan to download">
+                  <div class="afm-footer-qr-box" onclick="redirectToAppStore()" title="Scan to download">
                     <img src="./download_app.png" alt="Download QR Code" />
                   </div>
                   <div class="afm-footer-qr-hint">
@@ -3221,7 +3221,7 @@
               </p>
 
               <div class="afm-modal-buttons">
-                <button class="afm-footer-download-cta" onclick="openModal()">
+                <button class="afm-footer-download-cta" onclick="redirectToAppStore()">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -3246,6 +3246,31 @@
 
     <!-- JavaScript -->
     <script>
+      // App Store URLs
+      const IOS_APP_STORE_URL = 'https://apps.apple.com/us/app/swapnice/id1441921586';
+      const ANDROID_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=io.corber.swapnice';
+
+      // Device detection and app store redirect
+      function redirectToAppStore() {
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+        // Detect iOS devices (iPhone, iPad, iPod, or iPadOS via MacIntel with touch)
+        const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+        const isIPadOS = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+
+        // Detect Android devices
+        const isAndroid = /android/i.test(userAgent);
+
+        if (isIOS || isIPadOS) {
+          window.location.href = IOS_APP_STORE_URL;
+        } else if (isAndroid) {
+          window.location.href = ANDROID_PLAY_STORE_URL;
+        } else {
+          // Fallback for desktop/other devices - redirect to iOS App Store web page
+          window.location.href = IOS_APP_STORE_URL;
+        }
+      }
+
       // Welcome Overlay - Populate grid and animate
       (function initWelcomeOverlay() {
         const overlay = document.getElementById('welcomeOverlay');
