@@ -2794,15 +2794,12 @@
             preload="metadata"
             disablepictureinpicture
             aria-hidden="true"
-            poster="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/afm-video-poster.jpg"
           >
             <source
               src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/afm-teaser.mp4"
               type="video/mp4"
             />
           </video>
-          <!-- Static fallback for reduced-motion or failed video load -->
-          <img class="afm-video-fallback" src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/afm-video-poster.jpg" alt="" aria-hidden="true" />
           <!-- iOS touch-capture: receives first tap to unlock autoplay -->
           <div class="afm-video-touch-target" aria-hidden="true"></div>
         </div>
@@ -2979,18 +2976,24 @@
               </div>
             </div>
 
-            <!-- Demo GIF -->
+            <!-- Demo Video -->
             <aside class="afm-howto-demo">
               <div class="afm-howto-demo-phone">
                 <div class="afm-howto-demo-screen">
-                  <img
-                    src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/swapnice_intro_video.gif"
-                    alt="Swapnice app demo"
-                    width="360"
-                    height="640"
-                    decoding="async"
-                    loading="lazy"
-                  />
+                  <video
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+                    webkit-playsinline
+                    disablepictureinpicture
+                    aria-label="Swapnice app demo"
+                  >
+                    <source
+                      src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/swapnice_intro_video.mp4"
+                      type="video/mp4"
+                    />
+                  </video>
                 </div>
               </div>
             </aside>
