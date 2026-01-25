@@ -5,14 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Action Figure Miles x Swapnice</title>
+    <meta name="description" content="Activate your Action Figure Miles shoes with Swapnice. Download the app, scan your shoe's NFC tag, and unlock exclusive content and authenticated ownership." />
 
-    <!-- Fonts -->
+    <!-- Fonts - Non-render-blocking load -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet" />
+    </noscript>
 
     <style>
       /* ============================================
@@ -1048,6 +1054,7 @@
         }
 
         .afm-badge-logo img {
+          width: auto;
           height: 28px;
         }
 
@@ -2167,7 +2174,7 @@
       }
 
       .afm-footer-legal a {
-        color: #888;
+        color: #5c5651;
         text-decoration: none;
         transition: color 0.2s;
       }
@@ -2768,11 +2775,11 @@
       <!-- Collab Badge -->
       <div class="afm-welcome-badge">
         <div class="afm-welcome-logo">
-          <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/afm-logo.avif" alt="Action Figure Miles" />
+          <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/afm-logo.avif" alt="Action Figure Miles" width="64" height="64" />
         </div>
         <div class="afm-welcome-divider"></div>
         <div class="afm-welcome-logo">
-          <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/swapnice_logo.png" alt="Swapnice" class="afm-welcome-badge-heart" />
+          <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/swapnice_logo.png" alt="Swapnice" class="afm-welcome-badge-heart" width="56" height="56" />
         </div>
       </div>
     </div>
@@ -2783,22 +2790,19 @@
            HERO - LAYERED ACTIVATION PORTAL
            ============================================ -->
       <header class="afm-hero">
-        <!-- Ambient Video Background Layer -->
+        <!-- Ambient Video Background Layer - Deferred loading for performance -->
         <div class="afm-video-layer">
           <video
-            autoplay
             loop
             muted
             playsinline
             webkit-playsinline
-            preload="metadata"
+            preload="none"
             disablepictureinpicture
             aria-hidden="true"
+            data-src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/afm-teaser-v2.mp4"
           >
-            <source
-              src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/afm-teaser-v2.mp4"
-              type="video/mp4"
-            />
+            <track kind="descriptions" label="Video description" default />
           </video>
           <!-- iOS touch-capture: receives first tap to unlock autoplay -->
           <div class="afm-video-touch-target" aria-hidden="true"></div>
@@ -2810,11 +2814,11 @@
           <div class="afm-floating-badge">
             <div class="afm-badge-inner">
               <div class="afm-badge-logo">
-                <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/afm-logo.avif" alt="Action Figure Miles" />
+                <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/afm-logo.avif" alt="Action Figure Miles" width="125" height="56" loading="eager" />
               </div>
               <div class="afm-badge-divider"></div>
               <div class="afm-badge-logo">
-                <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/swapnice_logo_2.png" alt="Swapnice" />
+                <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/swapnice_logo_2.png" alt="Swapnice" width="125" height="56" loading="eager" />
               </div>
             </div>
           </div>
@@ -2864,7 +2868,7 @@
                 title="Scan to download the app"
               >
                 <div class="afm-portal-qr-box">
-                  <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/download_app.png" alt="QR code to download app" />
+                  <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/download_app.png" alt="QR code to download app" width="100" height="100" loading="lazy" decoding="async" />
                 </div>
               </div>
             </div>
@@ -2880,6 +2884,10 @@
               alt=""
               aria-hidden="true"
               class="afm-explore-guide-character"
+              loading="lazy"
+              decoding="async"
+              width="115"
+              height="115"
             />
             <div class="afm-explore-guide-sign">
               <span class="afm-explore-guide-sign-text">Keep scrolling</span>
@@ -2919,7 +2927,7 @@
               <div class="afm-steps">
                 <!-- Running Character -->
                 <div class="afm-steps-runner" id="stepsRunner">
-                  <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/product_12.png" alt="" aria-hidden="true" />
+                  <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/product_12.png" alt="" aria-hidden="true" loading="lazy" decoding="async" width="175" height="175" />
                 </div>
 
                 <!-- Step 1 -->
@@ -2976,23 +2984,22 @@
               </div>
             </div>
 
-            <!-- Demo Video -->
+            <!-- Demo Video - Deferred loading for performance -->
             <aside class="afm-howto-demo">
               <div class="afm-howto-demo-phone">
                 <div class="afm-howto-demo-screen">
                   <video
-                    autoplay
                     loop
                     muted
                     playsinline
                     webkit-playsinline
+                    preload="none"
                     disablepictureinpicture
                     aria-label="Swapnice app demo"
+                    class="afm-lazy-video"
+                    data-src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/about_swapnice_gif.mp4"
                   >
-                    <source
-                      src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/about_swapnice_gif.mp4"
-                      type="video/mp4"
-                    />
+                    <track kind="descriptions" label="Video description" default />
                   </video>
                 </div>
               </div>
@@ -3007,8 +3014,8 @@
       <section class="afm-footer-area">
         <!-- Peeking Character -->
         <div class="afm-footer-peek">
-          <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/product_15.png" alt="" aria-hidden="true" class="afm-footer-peek-character" />
-          <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/swapnice_logo.png" alt="" aria-hidden="true" class="afm-footer-peek-logo" />
+          <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/product_15.png" alt="" aria-hidden="true" class="afm-footer-peek-character" loading="lazy" decoding="async" width="150" height="150" />
+          <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/swapnice_logo.png" alt="" aria-hidden="true" class="afm-footer-peek-logo" loading="lazy" decoding="async" width="85" height="85" />
         </div>
         <!-- Footer Portal - Activation Continuation -->
         <footer class="afm-footer-portal">
@@ -3042,7 +3049,7 @@
                 <!-- QR Code Section -->
                 <div class="afm-footer-qr-section">
                   <div class="afm-footer-qr-box" onclick="redirectToAppStore()" title="Scan to download">
-                    <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/download_app.png" alt="Download QR Code" />
+                    <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/download_app.png" alt="Download QR Code" width="80" height="80" loading="lazy" />
                   </div>
                   <div class="afm-footer-qr-hint">
                     <strong>Viewing on web?</strong>
@@ -3136,9 +3143,9 @@
         </footer>
 
         <div class="afm-footer-legal">
-          <a href="#">Privacy Policy</a>
+          <a href="https://swapnice.com/document/privacy-policy">Privacy Policy</a>
           <span class="afm-footer-legal-divider"></span>
-          <a href="#">Terms of Service</a>
+          <a href="https://swapnice.com/document/user-agreement">Terms of Service</a>
         </div>
       </section>
 
@@ -3210,7 +3217,7 @@
             <!-- Step 2: Confirmation -->
             <div class="afm-modal-step hidden" id="modalStep2">
               <div class="afm-modal-logo">
-                <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/swapnice_logo.png" alt="Swapnice" />
+                <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/swapnice_logo.png" alt="Swapnice" width="80" height="80" loading="lazy" decoding="async" />
               </div>
               <h3 class="afm-modal-title">You're In</h3>
               <p class="afm-modal-desc">We'll be in touch.</p>
@@ -3286,14 +3293,33 @@
           3, 5, 7, 2, 4, 2, 4, 6, 1, 3, 5, 7, 5, 7, 2, 4, 6, 1, 3, 1, 3, 5, 7, 2, 4, 6,
         ];
 
+        // Reduce eager-load count: 1 high-priority, few eager based on viewport
+        const isMobile = window.innerWidth <= 768;
+        const EAGER_COUNT = isMobile ? 3 : 6;
+
         // Populate grid with product images
         for (let i = 0; i < productLayout.length; i++) {
           const item = document.createElement('div');
           item.className = 'afm-welcome-grid-item';
           const img = document.createElement('img');
-          img.src = `https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/product_${productLayout[i]}.webp`;
           img.alt = '';
-          img.loading = 'eager';
+          // Provide intrinsic size to prevent layout shift
+          img.width = 140;
+          img.height = 140;
+          // First image high-priority, next few eager, rest lazy with async decode
+          if (i === 0) {
+            img.loading = 'eager';
+            img.fetchPriority = 'high';
+            img.src = `https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/product_${productLayout[i]}.webp`;
+          } else if (i < EAGER_COUNT) {
+            img.loading = 'eager';
+            img.decoding = 'async';
+            img.src = `https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/product_${productLayout[i]}.webp`;
+          } else {
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            img.src = `https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/product_${productLayout[i]}.webp`;
+          }
           item.appendChild(img);
           grid.appendChild(item);
         }
@@ -3315,20 +3341,61 @@
         }, 2200);
       })();
 
-      window.addEventListener('load', () => {
+      // Deferred hero video loading - starts after welcome overlay fades
+      (function initDeferredHeroVideo() {
         const layer = document.querySelector('.afm-video-layer');
         const v = layer?.querySelector('video');
         if (!layer || !v) return;
 
-        v.muted = true;
-        v.playsInline = true;
+        const loadAndPlay = () => {
+          const src = v.dataset.src;
+          if (!src || v.querySelector('source')) return; // Already loaded
 
-        const fail = () => layer.classList.add('afm-video-failed');
-        v.addEventListener('error', fail, { once: true });
+          const source = document.createElement('source');
+          source.src = src;
+          source.type = 'video/mp4';
+          v.appendChild(source);
+          v.load();
 
-        const p = v.play();
-        if (p && typeof p.catch === 'function') p.catch(fail);
-      });
+          v.muted = true;
+          v.playsInline = true;
+
+          const fail = () => layer.classList.add('afm-video-failed');
+          v.addEventListener('error', fail, { once: true });
+
+          const p = v.play();
+          if (p && typeof p.catch === 'function') p.catch(fail);
+        };
+
+        // Start loading after welcome overlay fades (2000ms delay)
+        setTimeout(loadAndPlay, 2100);
+      })();
+
+      // Lazy-load videos when they enter viewport (for tutorial video)
+      (function initLazyVideos() {
+        const lazyVideos = document.querySelectorAll('.afm-lazy-video');
+        if (!lazyVideos.length) return;
+
+        const videoObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const video = entry.target;
+              const src = video.dataset.src;
+              if (src && !video.querySelector('source')) {
+                const source = document.createElement('source');
+                source.src = src;
+                source.type = 'video/mp4';
+                video.appendChild(source);
+                video.load();
+                video.play().catch(() => {});
+              }
+              observer.unobserve(video);
+            }
+          });
+        }, { rootMargin: '100px 0px', threshold: 0.1 });
+
+        lazyVideos.forEach(video => videoObserver.observe(video));
+      })();
 
       // Scroll-triggered reveal animations for all sections
       (function initScrollAnimations() {
@@ -3553,7 +3620,7 @@
       })();
     </script>
 
-    <!-- iOS Video Autoplay Fix -->
+    <!-- iOS Video Autoplay Fix - Works with deferred loading -->
     <script>
       (function () {
         const layer = document.querySelector('.afm-video-layer');
@@ -3565,26 +3632,20 @@
         const onPlaying = () => {
           layer.classList.add('afm-video-playing');
         };
-        video.addEventListener('playing', onPlaying, { once: true });
-
-        // Attempt immediate autoplay (works on desktop + Android)
-        video
-          .play()
-          .then(onPlaying)
-          .catch(() => {});
+        video.addEventListener('playing', onPlaying);
 
         // iOS requires gesture from an interaction-eligible element.
         // The touch-target overlay has pointer-events: auto, so iOS
         // recognizes taps on it as a valid user gesture for video.play()
         if (touchTarget) {
           const unlock = () => {
-            video
-              .play()
-              .then(onPlaying)
-              .catch(() => {});
+            // Only try to play if video has been loaded (has source)
+            if (video.querySelector('source')) {
+              video.play().then(onPlaying).catch(() => {});
+            }
           };
-          touchTarget.addEventListener('touchstart', unlock, { once: true, passive: true });
-          touchTarget.addEventListener('click', unlock, { once: true });
+          touchTarget.addEventListener('touchstart', unlock, { passive: true });
+          touchTarget.addEventListener('click', unlock);
         }
       })();
     </script>
