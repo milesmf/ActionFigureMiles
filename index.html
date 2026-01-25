@@ -2830,6 +2830,33 @@
         }
       }
 
+      @media (max-width: 768px) {
+        /* more breathing room so the step text isn't cramped */
+        .afm-howto {
+          padding-left: 32px; /* was 24px */
+          padding-right: 20px;
+        }
+
+        /* push the whole steps column right (numbers + text) */
+        .afm-step {
+          grid-template-columns: 56px 1fr; /* was 48px */
+          gap: 22px;                      /* was 20px */
+        }
+
+        /* move the vertical line to match the new left geometry */
+        .afm-steps::before {
+          left: 28px; /* was 24px */
+        }
+
+        /* make the balloon runner actually visible */
+        .afm-steps-runner {
+          width: 100px;   /* was 32px */
+          height: 100px;  /* was 32px */
+          left: -16px;    /* keep aligned with the connector line */
+          top: 18px;
+        }
+      }
+
     </style>
   </head>
 
