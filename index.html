@@ -113,6 +113,8 @@
         display: block;
         opacity: 1;
         filter: saturate(1.1) contrast(1.05);
+        /* Warm background while poster/video loads */
+        background-color: #b8845a;
         /* Mask fades the video itself to transparent on the left */
         -webkit-mask-image: linear-gradient(
           to right,
@@ -142,6 +144,15 @@
 
       .afm-video-layer .afm-video-fallback {
         display: none;
+        /* Warm ambient gradient matching video feel */
+        background: linear-gradient(
+          135deg,
+          #d4a574 0%,
+          #c9956a 25%,
+          #b8845a 50%,
+          #a07050 75%,
+          #8a5f45 100%
+        );
       }
       .afm-video-layer.afm-video-failed .afm-video-fallback {
         display: block;
@@ -2800,10 +2811,13 @@
             preload="none"
             disablepictureinpicture
             aria-hidden="true"
+            poster="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/afm-teaser-poster.jpg"
             data-src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/afm-teaser-v2.mp4"
           >
             <track kind="descriptions" label="Video description" default />
           </video>
+          <!-- Fallback for when video fails to load/play -->
+          <div class="afm-video-fallback" aria-hidden="true"></div>
           <!-- iOS touch-capture: receives first tap to unlock autoplay -->
           <div class="afm-video-touch-target" aria-hidden="true"></div>
         </div>
@@ -3143,9 +3157,9 @@
         </footer>
 
         <div class="afm-footer-legal">
-          <a href="https://swapnice.com/document/privacy-policy">Privacy Policy</a>
+          <a href="https://swapnice.com/document/privacy-policy" target="_blank">Privacy Policy</a>
           <span class="afm-footer-legal-divider"></span>
-          <a href="https://swapnice.com/document/user-agreement">Terms of Service</a>
+          <a href="https://swapnice.com/document/user-agreement" target="_blank">Terms of Service</a>
         </div>
       </section>
 
@@ -3347,6 +3361,11 @@
         const v = layer?.querySelector('video');
         if (!layer || !v) return;
 
+        const PLAYBACK_TIMEOUT = 5000; // 5 seconds to detect playback failure
+
+        const showFallback = () => layer.classList.add('afm-video-failed');
+        const onPlaying = () => layer.classList.add('afm-video-playing');
+
         const loadAndPlay = () => {
           const src = v.dataset.src;
           if (!src || v.querySelector('source')) return; // Already loaded
@@ -3360,11 +3379,25 @@
           v.muted = true;
           v.playsInline = true;
 
-          const fail = () => layer.classList.add('afm-video-failed');
-          v.addEventListener('error', fail, { once: true });
+          v.addEventListener('error', showFallback, { once: true });
+
+          // Timeout-based failure detection for autoplay
+          const playbackTimeout = setTimeout(() => {
+            if (!layer.classList.contains('afm-video-playing') && v.paused) {
+              showFallback();
+            }
+          }, PLAYBACK_TIMEOUT);
 
           const p = v.play();
-          if (p && typeof p.catch === 'function') p.catch(fail);
+          if (p && typeof p.then === 'function') {
+            p.then(() => {
+              clearTimeout(playbackTimeout);
+              onPlaying();
+            }).catch(() => {
+              clearTimeout(playbackTimeout);
+              showFallback();
+            });
+          }
         };
 
         // Start loading after welcome overlay fades (2000ms delay)
@@ -3628,21 +3661,85 @@
         const touchTarget = layer?.querySelector('.afm-video-touch-target');
         if (!video || !layer) return;
 
+        let loadAttempted = false;
+        const PLAYBACK_TIMEOUT = 5000; // 5 seconds to detect playback failure
+
         // Mark as playing and disable touch overlay
         const onPlaying = () => {
           layer.classList.add('afm-video-playing');
         };
         video.addEventListener('playing', onPlaying);
 
+        // Show fallback on failure
+        const showFallback = () => {
+          layer.classList.add('afm-video-failed');
+        };
+
+        // Idempotent load function - loads video source if not already loaded
+        const ensureLoaded = () => {
+          if (loadAttempted) return;
+          loadAttempted = true;
+
+          const src = video.dataset.src;
+          if (!src) {
+            showFallback();
+            return;
+          }
+
+          // Skip if source already exists
+          if (video.querySelector('source')) return;
+
+          const source = document.createElement('source');
+          source.src = src;
+          source.type = 'video/mp4';
+          video.appendChild(source);
+          video.load();
+
+          video.muted = true;
+          video.playsInline = true;
+
+          // Handle load errors
+          video.addEventListener('error', showFallback, { once: true });
+        };
+
+        // Attempt playback with timeout-based failure detection
+        const attemptPlay = () => {
+          // Start timeout for playback detection
+          const playbackTimeout = setTimeout(() => {
+            // If video hasn't started playing after timeout, show fallback
+            if (!layer.classList.contains('afm-video-playing') && video.paused) {
+              showFallback();
+            }
+          }, PLAYBACK_TIMEOUT);
+
+          const p = video.play();
+          if (p && typeof p.then === 'function') {
+            p.then(() => {
+              clearTimeout(playbackTimeout);
+              onPlaying();
+            }).catch(() => {
+              clearTimeout(playbackTimeout);
+              showFallback();
+            });
+          }
+        };
+
         // iOS requires gesture from an interaction-eligible element.
         // The touch-target overlay has pointer-events: auto, so iOS
         // recognizes taps on it as a valid user gesture for video.play()
         if (touchTarget) {
           const unlock = () => {
-            // Only try to play if video has been loaded (has source)
-            if (video.querySelector('source')) {
-              video.play().then(onPlaying).catch(() => {});
-            }
+            // Load video source if not loaded yet (user gesture path)
+            ensureLoaded();
+
+            // Wait a tick for source to be appended, then play
+            requestAnimationFrame(() => {
+              if (video.querySelector('source')) {
+                attemptPlay();
+              } else {
+                showFallback();
+              }
+            });
           };
           touchTarget.addEventListener('touchstart', unlock, { passive: true });
           touchTarget.addEventListener('click', unlock);
