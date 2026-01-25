@@ -1064,11 +1064,6 @@
           margin-bottom: 16px;
         }
 
-        .afm-badge-inner {
-          padding: 10px 18px;
-          border-radius: 14px;
-        }
-
         .afm-badge-logo img {
           width: auto;
           height: 28px;
@@ -1409,10 +1404,10 @@
 
       @media (max-width: 768px) {
         .afm-steps-runner {
-          left: 24px;
-          width: 32px;
-          height: 32px;
-          top: 24px;
+          width: 100px;   /* was 32px */
+          height: 100px;  /* was 32px */
+          left: -16px;    /* keep aligned with the connector line */
+          top: 18px;
         }
 
         @keyframes runnerPath {
@@ -1577,20 +1572,6 @@
       }
 
       @media (max-width: 768px) {
-        .afm-howto {
-          padding: 64px 24px 80px;
-        }
-
-        .afm-steps::before {
-          left: 24px;
-        }
-
-        .afm-step {
-          grid-template-columns: 48px 1fr;
-          gap: 20px;
-          padding: 24px 0;
-        }
-
         .afm-step-number {
           width: 48px;
           height: 48px;
@@ -2765,8 +2746,10 @@
           max-height: none;           /* remove the squeeze ceiling */
           padding: 10px 14px;
           gap: 12px;
+          border-radius: 14px;
         }
 
+        
         /* override the desktop width locks (must match specificity) */
         .afm-badge-logo:first-of-type img{
           width: auto !important;
@@ -2846,14 +2829,6 @@
         /* move the vertical line to match the new left geometry */
         .afm-steps::before {
           left: 28px; /* was 24px */
-        }
-
-        /* make the balloon runner actually visible */
-        .afm-steps-runner {
-          width: 100px;   /* was 32px */
-          height: 100px;  /* was 32px */
-          left: -16px;    /* keep aligned with the connector line */
-          top: 18px;
         }
       }
 
