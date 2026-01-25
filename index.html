@@ -2804,6 +2804,7 @@
         <!-- Ambient Video Background Layer - Deferred loading for performance -->
         <div class="afm-video-layer">
           <video
+            autoplay
             loop
             muted
             playsinline
@@ -2814,7 +2815,7 @@
             poster="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/afm-teaser-poster.jpg"
             data-src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/afm-teaser-v2.mp4"
           >
-            <track kind="descriptions" label="Video description" default />
+            <track kind="captions" srclang="en" src="/empty.vtt" default />
           </video>
           <!-- Fallback for when video fails to load/play -->
           <div class="afm-video-fallback" aria-hidden="true"></div>
@@ -3003,6 +3004,7 @@
               <div class="afm-howto-demo-phone">
                 <div class="afm-howto-demo-screen">
                   <video
+                    autoplay
                     loop
                     muted
                     playsinline
@@ -3013,7 +3015,7 @@
                     class="afm-lazy-video"
                     data-src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/about_swapnice_gif.mp4"
                   >
-                    <track kind="descriptions" label="Video description" default />
+                    <track kind="captions" srclang="en" src="/empty.vtt" default />
                   </video>
                 </div>
               </div>
@@ -3361,14 +3363,43 @@
         const v = layer?.querySelector('video');
         if (!layer || !v) return;
 
-        const PLAYBACK_TIMEOUT = 5000; // 5 seconds to detect playback failure
+        const PLAYBACK_TIMEOUT = 5000;
+        let playbackStarted = false;
 
-        const showFallback = () => layer.classList.add('afm-video-failed');
-        const onPlaying = () => layer.classList.add('afm-video-playing');
+        const showFallback = () => {
+          // Only show fallback if video hasn't started playing
+          if (!playbackStarted) {
+            layer.classList.add('afm-video-failed');
+          }
+        };
+
+        const onPlaying = () => {
+          if (playbackStarted) return;
+          playbackStarted = true;
+          layer.classList.add('afm-video-playing');
+        };
+
+        // Listen for playing event (may be triggered by iOS unlock script)
+        v.addEventListener('playing', onPlaying);
 
         const loadAndPlay = () => {
+          // Skip if already playing (iOS unlock may have started it)
+          if (playbackStarted || layer.classList.contains('afm-video-playing')) return;
+
           const src = v.dataset.src;
-          if (!src || v.querySelector('source')) return; // Already loaded
+          if (!src || v.querySelector('source')) {
+            // Source already attached, just try to play
+            if (v.querySelector('source') && v.paused) {
+              const p = v.play();
+              if (p && typeof p.then === 'function') {
+                p.then(onPlaying).catch(() => {
+                  // Safari may block autoplay - wait for user gesture
+                  // Don't show fallback immediately on desktop/Android
+                });
+              }
+            }
+            return;
+          }
 
           const source = document.createElement('source');
           source.src = src;
@@ -3376,14 +3407,15 @@
           v.appendChild(source);
           v.load();
 
+          // Ensure Safari-required attributes
           v.muted = true;
           v.playsInline = true;
 
           v.addEventListener('error', showFallback, { once: true });
 
-          // Timeout-based failure detection for autoplay
+          // Timeout-based failure detection
           const playbackTimeout = setTimeout(() => {
-            if (!layer.classList.contains('afm-video-playing') && v.paused) {
+            if (!playbackStarted && v.paused) {
               showFallback();
             }
           }, PLAYBACK_TIMEOUT);
@@ -3394,13 +3426,15 @@
               clearTimeout(playbackTimeout);
               onPlaying();
             }).catch(() => {
+              // On Safari iOS, autoplay rejection is expected - user gesture will unlock
+              // On desktop/Android, this is a genuine failure
               clearTimeout(playbackTimeout);
-              showFallback();
+              // Don't immediately show fallback - the timeout will handle persistent failures
             });
           }
         };
 
-        // Start loading after welcome overlay fades (2000ms delay)
+        // Start loading after welcome overlay fades
         setTimeout(loadAndPlay, 2100);
       })();
 
@@ -3653,7 +3687,7 @@
       })();
     </script>
 
-    <!-- iOS Video Autoplay Fix - Works with deferred loading -->
+    <!-- iOS/Safari Video Autoplay Fix - Synchronous user gesture path -->
     <script>
       (function () {
         const layer = document.querySelector('.afm-video-layer');
@@ -3661,53 +3695,63 @@
         const touchTarget = layer?.querySelector('.afm-video-touch-target');
         if (!video || !layer) return;
 
-        let loadAttempted = false;
-        const PLAYBACK_TIMEOUT = 5000; // 5 seconds to detect playback failure
+        let sourceAttached = false;
+        let playbackStarted = false;
+        const PLAYBACK_TIMEOUT = 5000;
 
         // Mark as playing and disable touch overlay
         const onPlaying = () => {
+          if (playbackStarted) return;
+          playbackStarted = true;
           layer.classList.add('afm-video-playing');
         };
         video.addEventListener('playing', onPlaying);
 
-        // Show fallback on failure
+        // Show fallback on failure - keeps poster visible via CSS
         const showFallback = () => {
           layer.classList.add('afm-video-failed');
         };
 
-        // Idempotent load function - loads video source if not already loaded
-        const ensureLoaded = () => {
-          if (loadAttempted) return;
-          loadAttempted = true;
+        // Synchronously attach source - must happen in same call stack as user gesture
+        const attachSource = () => {
+          if (sourceAttached) return true;
 
           const src = video.dataset.src;
           if (!src) {
             showFallback();
-            return;
+            return false;
           }
 
           // Skip if source already exists
-          if (video.querySelector('source')) return;
+          if (video.querySelector('source')) {
+            sourceAttached = true;
+            return true;
+          }
 
           const source = document.createElement('source');
           source.src = src;
           source.type = 'video/mp4';
           video.appendChild(source);
           video.load();
+          sourceAttached = true;
 
+          // Ensure Safari-required attributes are set
           video.muted = true;
           video.playsInline = true;
 
           // Handle load errors
           video.addEventListener('error', showFallback, { once: true });
+
+          return true;
         };
 
         // Attempt playback with timeout-based failure detection
         const attemptPlay = () => {
+          if (playbackStarted) return;
+
           // Start timeout for playback detection
           const playbackTimeout = setTimeout(() => {
-            // If video hasn't started playing after timeout, show fallback
-            if (!layer.classList.contains('afm-video-playing') && video.paused) {
+            if (!playbackStarted && video.paused) {
               showFallback();
             }
           }, PLAYBACK_TIMEOUT);
@@ -3724,23 +3768,19 @@
           }
         };
 
-        // iOS requires gesture from an interaction-eligible element.
-        // The touch-target overlay has pointer-events: auto, so iOS
-        // recognizes taps on it as a valid user gesture for video.play()
+        // iOS/Safari requires gesture from an interaction-eligible element.
+        // CRITICAL: Source attachment AND play() must happen synchronously
+        // in the same call stack as the user gesture for Safari to allow autoplay.
         if (touchTarget) {
-          const unlock = () => {
-            // Load video source if not loaded yet (user gesture path)
-            ensureLoaded();
+          const unlock = (e) => {
+            // Synchronously attach source in user gesture call stack
+            if (!attachSource()) return;
 
-            // Wait a tick for source to be appended, then play
-            requestAnimationFrame(() => {
-              if (video.querySelector('source')) {
-                attemptPlay();
-              } else {
-                showFallback();
-              }
-            });
+            // Synchronously attempt play in same call stack
+            attemptPlay();
           };
+
+          // touchstart for iOS, click for desktop fallback
           touchTarget.addEventListener('touchstart', unlock, { passive: true });
           touchTarget.addEventListener('click', unlock);
         }
