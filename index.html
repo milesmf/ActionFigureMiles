@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Action Figure Miles x Swapnice</title>
-    <meta name="description" content="Activate your Action Figure Miles shoes with Swapnice. Download the app, scan your shoe's NFC tag, and unlock exclusive content and authenticated ownership." />
+    <meta
+      name="description"
+      content="Activate your Action Figure Miles shoes with Swapnice. Download the app, scan your shoe's NFC tag, and unlock exclusive content and authenticated ownership."
+    />
 
     <!-- Fonts - Non-render-blocking load -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,10 +17,13 @@
       href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap"
       rel="stylesheet"
       media="print"
-      onload="this.media='all'"
+      onload="this.media = 'all'"
     />
     <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet" />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap"
+        rel="stylesheet"
+      />
     </noscript>
 
     <style>
@@ -27,8 +33,14 @@
 
       /* Custom Cursor */
       :root {
-        --cursor-default: url('https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/cursor_2.png') 0 0, auto;
-        --cursor-pointer: url('https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/cursor_2.png') 0 0, pointer;
+        --cursor-default:
+          url("https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/cursor_2.png")
+            0 0,
+          auto;
+        --cursor-pointer:
+          url("https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/cursor_2.png")
+            0 0,
+          pointer;
       }
 
       html,
@@ -41,15 +53,15 @@
       /* Apply custom pointer cursor to all interactive elements */
       a,
       button,
-      [role='button'],
-      input[type='submit'],
-      input[type='button'],
+      [role="button"],
+      input[type="submit"],
+      input[type="button"],
       label,
       select,
       summary,
       [onclick],
       .afm-btn,
-      [class*='btn'] {
+      [class*="btn"] {
         cursor: var(--cursor-pointer) !important;
       }
 
@@ -64,7 +76,7 @@
         min-height: 100vh;
         width: 100%;
         background-color: #f5eee0;
-        font-family: 'Varela Round', sans-serif;
+        font-family: "Varela Round", sans-serif;
         color: #1a1a1a;
         line-height: 1.6;
       }
@@ -80,7 +92,13 @@
         width: 100%;
         min-height: 100vh;
         /* background-color: #ef3e36; */
-        background: linear-gradient(135deg, #ef3e36 0%, #d93830 40%, #b22d27 70%, #8a1f1c 100%);
+        background: linear-gradient(
+          135deg,
+          #ef3e36 0%,
+          #d93830 40%,
+          #b22d27 70%,
+          #8a1f1c 100%
+        );
         position: relative;
         overflow: hidden;
         display: grid;
@@ -179,7 +197,7 @@
 
       /* Noise texture overlay - sits above video */
       .afm-hero::before {
-        content: '';
+        content: "";
         position: absolute;
         inset: 0;
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
@@ -249,7 +267,12 @@
       .afm-badge-divider {
         width: 2px;
         height: 44px;
-        background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.15), transparent);
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(0, 0, 0, 0.15),
+          transparent
+        );
         margin-left: 18px;
       }
 
@@ -352,7 +375,7 @@
       }
 
       .afm-chalk-underline::after {
-        content: '';
+        content: "";
         position: absolute;
         left: 0;
         right: 0;
@@ -397,18 +420,38 @@
 
       /* Subtle chalk dust particles */
       .afm-chalk-underline::before {
-        content: '';
+        content: "";
         position: absolute;
         left: 0;
         right: 0;
         bottom: -8px;
         height: 30px;
         background:
-          radial-gradient(circle at 15% 60%, rgba(255, 255, 255, 0.6) 1px, transparent 1px),
-          radial-gradient(circle at 35% 40%, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
-          radial-gradient(circle at 55% 70%, rgba(255, 255, 255, 0.5) 1px, transparent 1px),
-          radial-gradient(circle at 75% 45%, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
-          radial-gradient(circle at 90% 55%, rgba(255, 255, 255, 0.4) 1px, transparent 1px);
+          radial-gradient(
+            circle at 15% 60%,
+            rgba(255, 255, 255, 0.6) 1px,
+            transparent 1px
+          ),
+          radial-gradient(
+            circle at 35% 40%,
+            rgba(255, 255, 255, 0.4) 1px,
+            transparent 1px
+          ),
+          radial-gradient(
+            circle at 55% 70%,
+            rgba(255, 255, 255, 0.5) 1px,
+            transparent 1px
+          ),
+          radial-gradient(
+            circle at 75% 45%,
+            rgba(255, 255, 255, 0.3) 1px,
+            transparent 1px
+          ),
+          radial-gradient(
+            circle at 90% 55%,
+            rgba(255, 255, 255, 0.4) 1px,
+            transparent 1px
+          );
         opacity: 0;
         pointer-events: none;
       }
@@ -526,13 +569,18 @@
       }
 
       .afm-hero-cta::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(239, 62, 54, 0.1), transparent);
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(239, 62, 54, 0.1),
+          transparent
+        );
         transition: left 0.5s ease;
       }
 
@@ -579,7 +627,7 @@
         color: rgba(255, 255, 255, 0.7);
         text-align: center;
         width: 100%;
-        font-family: 'Varela Round', sans-serif;
+        font-family: "Varela Round", sans-serif;
       }
 
       .afm-platform-hint.dark {
@@ -644,7 +692,7 @@
 
       /* Rotating white border - single constant counter-clockwise flow */
       .afm-portal-card::before {
-        content: '';
+        content: "";
         position: absolute;
         inset: -50%;
         background: conic-gradient(
@@ -755,13 +803,18 @@
       }
 
       .afm-portal-divider::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         bottom: 0;
         left: 50%;
         width: 1px;
-        background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.15), transparent);
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(255, 255, 255, 0.15),
+          transparent
+        );
       }
 
       .afm-portal-divider span {
@@ -1038,7 +1091,12 @@
             rgba(0, 0, 0, 0.5) 20%,
             black 40%
           );
-          mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.5) 20%, black 40%);
+          mask-image: linear-gradient(
+            to bottom,
+            transparent 0%,
+            rgba(0, 0, 0, 0.5) 20%,
+            black 40%
+          );
         }
 
         .afm-hero-content {
@@ -1217,7 +1275,7 @@
 
       /* Thin gradient line fading from Swapnice red */
       .afm-activation-divider::before {
-        content: '';
+        content: "";
         position: absolute;
         left: 0;
         right: 0;
@@ -1313,7 +1371,7 @@
 
       .afm-howto-label::before,
       .afm-howto-label::after {
-        content: '';
+        content: "";
         width: 24px;
         height: 2px;
         background: #ef3e36;
@@ -1338,7 +1396,7 @@
 
       /* Vertical connector line */
       .afm-steps::before {
-        content: '';
+        content: "";
         position: absolute;
         left: 32px;
         top: 48px;
@@ -1404,9 +1462,9 @@
 
       @media (max-width: 768px) {
         .afm-steps-runner {
-          width: 100px;   /* was 32px */
-          height: 100px;  /* was 32px */
-          left: -16px;    /* keep aligned with the connector line */
+          width: 100px; /* was 32px */
+          height: 100px; /* was 32px */
+          left: -16px; /* keep aligned with the connector line */
           top: 18px;
         }
 
@@ -1632,10 +1690,10 @@
 
       /* Product silhouette background */
       .afm-tutorial-placeholder::before {
-        content: '';
+        content: "";
         position: absolute;
         inset: 0;
-        background-image: url('https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/product_1.webp');
+        background-image: url("https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/product_1.webp");
         background-size: 80%;
         background-position: center;
         background-repeat: no-repeat;
@@ -1799,7 +1857,7 @@
 
       /* Rotating gradient border - matches header portal vortex style */
       .afm-footer-portal::before {
-        content: '';
+        content: "";
         position: absolute;
         inset: -50%;
         background: conic-gradient(
@@ -1853,7 +1911,7 @@
 
       /* Subtle texture overlay on inner */
       .afm-footer-portal-inner::before {
-        content: '';
+        content: "";
         position: absolute;
         inset: 0;
         border-radius: 32px;
@@ -1876,7 +1934,12 @@
       .afm-footer-badge-line {
         flex: 1;
         height: 1px;
-        background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1), transparent);
+        background: linear-gradient(
+          to right,
+          transparent,
+          rgba(0, 0, 0, 0.1),
+          transparent
+        );
       }
 
       .afm-footer-badge-text {
@@ -1899,7 +1962,12 @@
 
       .afm-footer-divider {
         width: 1px;
-        background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1), transparent);
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(0, 0, 0, 0.1),
+          transparent
+        );
       }
 
       /* Path Section Base */
@@ -1961,13 +2029,18 @@
       }
 
       .afm-footer-download-cta::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent
+        );
         transition: left 0.5s ease;
       }
 
@@ -2199,7 +2272,12 @@
           width: 100%;
           height: 1px;
           margin: 40px 0;
-          background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1), transparent);
+          background: linear-gradient(
+            to right,
+            transparent,
+            rgba(0, 0, 0, 0.1),
+            transparent
+          );
         }
 
         .afm-footer-path {
@@ -2683,7 +2761,12 @@
       .afm-welcome-divider {
         width: 1px;
         height: 48px;
-        background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.12), transparent);
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(0, 0, 0, 0.12),
+          transparent
+        );
         margin: 0 28px;
       }
 
@@ -2743,15 +2826,14 @@
 
       @media (max-width: 768px) {
         .afm-badge-inner {
-          max-height: none;           /* remove the squeeze ceiling */
+          max-height: none; /* remove the squeeze ceiling */
           padding: 10px 14px;
           gap: 12px;
           border-radius: 14px;
         }
 
-        
         /* override the desktop width locks (must match specificity) */
-        .afm-badge-logo:first-of-type img{
+        .afm-badge-logo:first-of-type img {
           width: auto !important;
           height: 55px;
         }
@@ -2785,8 +2867,8 @@
       .phone-frame,
       .video-phone {
         position: relative;
-        overflow: hidden;          /* critical: clip overflow */
-        border-radius: 28px;       /* match your frame radius */
+        overflow: hidden; /* critical: clip overflow */
+        border-radius: 28px; /* match your frame radius */
       }
 
       /* the media inside the phone */
@@ -2799,7 +2881,7 @@
         display: block;
         width: 100%;
         height: 100%;
-        object-fit: cover;         /* use contain if you want no crop */
+        object-fit: cover; /* use contain if you want no crop */
       }
 
       /* mobile: force a sane aspect ratio so it doesn't spill */
@@ -2808,7 +2890,7 @@
         .phone-frame,
         .video-phone {
           width: min(82vw, 360px);
-          aspect-ratio: 9 / 16;    /* locks height */
+          aspect-ratio: 9 / 16; /* locks height */
           height: auto;
         }
       }
@@ -2823,7 +2905,7 @@
         /* push the whole steps column right (numbers + text) */
         .afm-step {
           grid-template-columns: 56px 1fr; /* was 48px */
-          gap: 22px;                      /* was 20px */
+          gap: 22px; /* was 20px */
         }
 
         /* move the vertical line to match the new left geometry */
@@ -2831,7 +2913,6 @@
           left: 28px; /* was 24px */
         }
       }
-
     </style>
   </head>
 
@@ -2849,11 +2930,22 @@
       <!-- Collab Badge -->
       <div class="afm-welcome-badge">
         <div class="afm-welcome-logo">
-          <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/afm-logo.avif" alt="Action Figure Miles" width="64" height="64" />
+          <img
+            src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/afm-logo.avif"
+            alt="Action Figure Miles"
+            width="64"
+            height="64"
+          />
         </div>
         <div class="afm-welcome-divider"></div>
         <div class="afm-welcome-logo">
-          <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/swapnice_logo.png" alt="Swapnice" class="afm-welcome-badge-heart" width="56" height="56" />
+          <img
+            src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/swapnice_logo.png"
+            alt="Swapnice"
+            class="afm-welcome-badge-heart"
+            width="56"
+            height="56"
+          />
         </div>
       </div>
     </div>
@@ -2892,11 +2984,23 @@
           <div class="afm-floating-badge">
             <div class="afm-badge-inner">
               <div class="afm-badge-logo">
-                <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/afm-logo.avif" alt="Action Figure Miles" width="125" height="56" loading="eager" />
+                <img
+                  src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/afm-logo.avif"
+                  alt="Action Figure Miles"
+                  width="125"
+                  height="56"
+                  loading="eager"
+                />
               </div>
               <div class="afm-badge-divider"></div>
               <div class="afm-badge-logo">
-                <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/swapnice_logo_2.png" alt="Swapnice" width="125" height="56" loading="eager" />
+                <img
+                  src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/swapnice_logo_2.png"
+                  alt="Swapnice"
+                  width="125"
+                  height="56"
+                  loading="eager"
+                />
               </div>
             </div>
           </div>
@@ -2906,7 +3010,8 @@
             <!-- <span class="afm-chalk-underline" id="superpowersUnderline">Superpowers</span> -->
           </h1>
           <p class="afm-hero-subtitle">
-            Your upgraded shoes are waiting. Download the app to unlock what’s yours.
+            Your upgraded shoes are waiting. Download the app to unlock what’s
+            yours.
           </p>
 
           <!-- Activation Portal Card -->
@@ -2947,7 +3052,14 @@
                 title="Scan to download the app"
               >
                 <div class="afm-portal-qr-box">
-                  <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/download_app.png" alt="QR code to download app" width="100" height="100" loading="lazy" decoding="async" />
+                  <img
+                    src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/download_app.png"
+                    alt="QR code to download app"
+                    width="100"
+                    height="100"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
               </div>
             </div>
@@ -3000,13 +3112,23 @@
           <div class="afm-howto-layout">
             <div class="afm-howto-main">
               <header class="afm-howto-header">
-                <h2 class="afm-howto-title">Activate your shoes in three steps</h2>
+                <h2 class="afm-howto-title">
+                  Activate your shoes in three steps
+                </h2>
               </header>
 
               <div class="afm-steps">
                 <!-- Running Character -->
                 <div class="afm-steps-runner" id="stepsRunner">
-                  <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/product_12.png" alt="" aria-hidden="true" loading="lazy" decoding="async" width="175" height="175" />
+                  <img
+                    src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/product_12.png"
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    decoding="async"
+                    width="175"
+                    height="175"
+                  />
                 </div>
 
                 <!-- Step 1 -->
@@ -3015,8 +3137,9 @@
                   <div class="afm-step-content">
                     <h3 class="afm-step-title">Download the Swapnice app</h3>
                     <p class="afm-step-desc">
-                      This is where your scanned products live — You’ll use the app to authenticate
-                      your shoes and access exclusive content.
+                      This is where your scanned products live — You’ll use the
+                      app to authenticate your shoes and access exclusive
+                      content.
                     </p>
                   </div>
                 </article>
@@ -3027,7 +3150,8 @@
                   <div class="afm-step-content">
                     <h3 class="afm-step-title">Scan your shoe’s tag</h3>
                     <p class="afm-step-desc">
-                      Hold your phone near the tag inside your product. The app reads the chip and
+                      Hold your phone near the tag inside your product. The app
+                      reads the chip and
                       <em>links it to you</em> — permanently.
                     </p>
                   </div>
@@ -3039,8 +3163,9 @@
                   <div class="afm-step-content">
                     <h3 class="afm-step-title">Activation complete</h3>
                     <p class="afm-step-desc">
-                      Your shoes are now authenticated! View <em>exclusive</em> ActionFigureMiles
-                      content and your item inside your Swapnice inventory.
+                      Your shoes are now authenticated! View
+                      <em>exclusive</em> ActionFigureMiles content and your item
+                      inside your Swapnice inventory.
                     </p>
                     <div class="afm-step-hint">
                       <svg
@@ -3079,7 +3204,12 @@
                     class="afm-lazy-video"
                     data-src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/about_swapnice_gif.mp4"
                   >
-                    <track kind="captions" srclang="en" src="/empty.vtt" default />
+                    <track
+                      kind="captions"
+                      srclang="en"
+                      src="/empty.vtt"
+                      default
+                    />
                   </video>
                 </div>
               </div>
@@ -3094,8 +3224,26 @@
       <section class="afm-footer-area">
         <!-- Peeking Character -->
         <div class="afm-footer-peek">
-          <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/product_15.png" alt="" aria-hidden="true" class="afm-footer-peek-character" loading="lazy" decoding="async" width="150" height="150" />
-          <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/swapnice_logo.png" alt="" aria-hidden="true" class="afm-footer-peek-logo" loading="lazy" decoding="async" width="85" height="85" />
+          <img
+            src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/product_15.png"
+            alt=""
+            aria-hidden="true"
+            class="afm-footer-peek-character"
+            loading="lazy"
+            decoding="async"
+            width="150"
+            height="150"
+          />
+          <img
+            src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/swapnice_logo.png"
+            alt=""
+            aria-hidden="true"
+            class="afm-footer-peek-logo"
+            loading="lazy"
+            decoding="async"
+            width="85"
+            height="85"
+          />
         </div>
         <!-- Footer Portal - Activation Continuation -->
         <footer class="afm-footer-portal">
@@ -3109,7 +3257,10 @@
                   Download now and start bringing your products to life.
                 </p>
 
-                <button class="afm-footer-download-cta" onclick="redirectToAppStore()">
+                <button
+                  class="afm-footer-download-cta"
+                  onclick="redirectToAppStore()"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -3125,12 +3276,24 @@
                   </svg>
                   <span>Download the Swapnice App</span>
                 </button>
-                <p class="afm-platform-hint dark">Available for iOS and Android</p>
+                <p class="afm-platform-hint dark">
+                  Available for iOS and Android
+                </p>
 
                 <!-- QR Code Section -->
                 <div class="afm-footer-qr-section">
-                  <div class="afm-footer-qr-box" onclick="redirectToAppStore()" title="Scan to download">
-                    <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/download_app.png" alt="Download QR Code" width="80" height="80" loading="lazy" />
+                  <div
+                    class="afm-footer-qr-box"
+                    onclick="redirectToAppStore()"
+                    title="Scan to download"
+                  >
+                    <img
+                      src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/download_app.png"
+                      alt="Download QR Code"
+                      width="80"
+                      height="80"
+                      loading="lazy"
+                    />
                   </div>
                   <div class="afm-footer-qr-hint">
                     <strong>Viewing on web?</strong>
@@ -3164,7 +3327,9 @@
                       aria-label="Email address"
                     />
                   </div>
-                  <button type="submit" class="afm-footer-email-submit">Submit</button>
+                  <button type="submit" class="afm-footer-email-submit">
+                    Submit
+                  </button>
 
                   <!-- Perks list -->
                   <div class="afm-footer-perks">
@@ -3224,9 +3389,13 @@
         </footer>
 
         <div class="afm-footer-legal">
-          <a href="https://swapnice.com/document/privacy-policy" target="_blank">Privacy Policy</a>
+          <a href="https://swapnice.com/document/privacy-policy" target="_blank"
+            >Privacy Policy</a
+          >
           <span class="afm-footer-legal-divider"></span>
-          <a href="https://swapnice.com/document/user-agreement" target="_blank">Terms of Service</a>
+          <a href="https://swapnice.com/document/user-agreement" target="_blank"
+            >Terms of Service</a
+          >
         </div>
       </section>
 
@@ -3235,7 +3404,11 @@
            ============================================ -->
       <div class="afm-modal-overlay" id="afmModal">
         <div class="afm-modal">
-          <button class="afm-modal-close" onclick="closeModal()" aria-label="Close modal">
+          <button
+            class="afm-modal-close"
+            onclick="closeModal()"
+            aria-label="Close modal"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -3243,7 +3416,11 @@
               stroke="currentColor"
               stroke-width="2"
             >
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
 
@@ -3254,7 +3431,11 @@
               <p class="afm-modal-desc">
                 Join the waitlist for first access to drops and exclusives.
               </p>
-              <form class="afm-modal-form" id="modalSignupForm" onsubmit="handleModalSubmit(event)">
+              <form
+                class="afm-modal-form"
+                id="modalSignupForm"
+                onsubmit="handleModalSubmit(event)"
+              >
                 <div class="afm-modal-input-group">
                   <label class="afm-modal-label" for="modalEmail">Email</label>
                   <input
@@ -3289,7 +3470,11 @@
                     placeholder="(555) 123-4567"
                   />
                 </div>
-                <button type="submit" class="afm-modal-submit" id="modalSubmitBtn">
+                <button
+                  type="submit"
+                  class="afm-modal-submit"
+                  id="modalSubmitBtn"
+                >
                   Unlock Access
                 </button>
               </form>
@@ -3298,7 +3483,14 @@
             <!-- Step 2: Confirmation -->
             <div class="afm-modal-step hidden" id="modalStep2">
               <div class="afm-modal-logo">
-                <img src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/swapnice_logo.png" alt="Swapnice" width="80" height="80" loading="lazy" decoding="async" />
+                <img
+                  src="https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/swapnice_logo.png"
+                  alt="Swapnice"
+                  width="80"
+                  height="80"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <h3 class="afm-modal-title">You're In</h3>
               <p class="afm-modal-desc">We'll be in touch.</p>
@@ -3308,11 +3500,15 @@
               </div>
 
               <p class="afm-modal-app-desc">
-                Get the Swapnice app to activate your shoes and unlock <em>exclusive content</em>.
+                Get the Swapnice app to activate your shoes and unlock
+                <em>exclusive content</em>.
               </p>
 
               <div class="afm-modal-buttons">
-                <button class="afm-footer-download-cta" onclick="redirectToAppStore()">
+                <button
+                  class="afm-footer-download-cta"
+                  onclick="redirectToAppStore()"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -3328,7 +3524,9 @@
                   </svg>
                   <span>Download the Swapnice App</span>
                 </button>
-                <p class="afm-platform-hint dark">Available for iOS and Android</p>
+                <p class="afm-platform-hint dark">
+                  Available for iOS and Android
+                </p>
               </div>
             </div>
           </div>
@@ -3339,40 +3537,58 @@
     <!-- JavaScript -->
     <script>
       // App Store URLs
-      const IOS_APP_STORE_URL = 'https://apps.apple.com/us/app/swapnice/id1441921586';
-      const ANDROID_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=io.corber.swapnice';
+      const IOS_APP_STORE_URL =
+        "https://apps.apple.com/us/app/swapnice/id1441921586";
+      const ANDROID_PLAY_STORE_URL =
+        "https://play.google.com/store/apps/details?id=io.corber.swapnice";
 
-      // Device detection and app store redirect
       function redirectToAppStore() {
-        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        const ua = navigator.userAgent || navigator.vendor || window.opera;
 
-        // Detect iOS devices (iPhone, iPad, iPod, or iPadOS via MacIntel with touch)
-        const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-        const isIPadOS = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+        const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+        const isIPadOS =
+          navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1;
+        const isAndroid = /android/i.test(ua);
 
-        // Detect Android devices
-        const isAndroid = /android/i.test(userAgent);
+        const url =
+          isIOS || isIPadOS
+            ? IOS_APP_STORE_URL
+            : isAndroid
+              ? ANDROID_PLAY_STORE_URL
+              : IOS_APP_STORE_URL;
 
-        if (isIOS || isIPadOS) {
-          window.location.href = IOS_APP_STORE_URL;
-        } else if (isAndroid) {
-          window.location.href = ANDROID_PLAY_STORE_URL;
-        } else {
-          // Fallback for desktop/other devices - redirect to iOS App Store web page
-          window.location.href = IOS_APP_STORE_URL;
+        // 1) Try top-level navigation (fixes iframe/embed contexts)
+        try {
+          if (window.top && window.top !== window.self) {
+            window.top.location.href = url;
+            return;
+          }
+        } catch (e) {
+          // cross-origin iframe: top access may throw
         }
+
+        // 2) Normal same-window navigation
+        window.location.assign(url);
+
+        // 3) Fallback: new tab (still user-gesture safe via onclick)
+        setTimeout(() => {
+          try {
+            window.open(url, "_blank", "noopener");
+          } catch (e) {}
+        }, 150);
       }
 
       // Welcome Overlay - Populate grid and animate
       (function initWelcomeOverlay() {
-        const overlay = document.getElementById('welcomeOverlay');
-        const grid = document.getElementById('welcomeGrid');
+        const overlay = document.getElementById("welcomeOverlay");
+        const grid = document.getElementById("welcomeGrid");
         if (!overlay || !grid) return;
 
         // Hardcoded product grid layout (1-7 repeated in a curated pattern)
         const productLayout = [
-          1, 3, 5, 7, 2, 4, 6, 4, 6, 1, 3, 5, 7, 2, 7, 2, 4, 6, 1, 3, 5, 3, 5, 7, 2, 4, 6, 1, 6, 1,
-          3, 5, 7, 2, 4, 2, 4, 6, 1, 3, 5, 7, 5, 7, 2, 4, 6, 1, 3, 1, 3, 5, 7, 2, 4, 6,
+          1, 3, 5, 7, 2, 4, 6, 4, 6, 1, 3, 5, 7, 2, 7, 2, 4, 6, 1, 3, 5, 3, 5,
+          7, 2, 4, 6, 1, 6, 1, 3, 5, 7, 2, 4, 2, 4, 6, 1, 3, 5, 7, 5, 7, 2, 4,
+          6, 1, 3, 1, 3, 5, 7, 2, 4, 6,
         ];
 
         // Reduce eager-load count: 1 high-priority, few eager based on viewport
@@ -3381,25 +3597,25 @@
 
         // Populate grid with product images
         for (let i = 0; i < productLayout.length; i++) {
-          const item = document.createElement('div');
-          item.className = 'afm-welcome-grid-item';
-          const img = document.createElement('img');
-          img.alt = '';
+          const item = document.createElement("div");
+          item.className = "afm-welcome-grid-item";
+          const img = document.createElement("img");
+          img.alt = "";
           // Provide intrinsic size to prevent layout shift
           img.width = 140;
           img.height = 140;
           // First image high-priority, next few eager, rest lazy with async decode
           if (i === 0) {
-            img.loading = 'eager';
-            img.fetchPriority = 'high';
+            img.loading = "eager";
+            img.fetchPriority = "high";
             img.src = `https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/product_${productLayout[i]}.webp`;
           } else if (i < EAGER_COUNT) {
-            img.loading = 'eager';
-            img.decoding = 'async';
+            img.loading = "eager";
+            img.decoding = "async";
             img.src = `https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/product_${productLayout[i]}.webp`;
           } else {
-            img.loading = 'lazy';
-            img.decoding = 'async';
+            img.loading = "lazy";
+            img.decoding = "async";
             img.src = `https://gzpohfmle7zzdwfb.public.blob.vercel-storage.com/Swapnice/product_${productLayout[i]}.webp`;
           }
           item.appendChild(img);
@@ -3408,12 +3624,12 @@
 
         // Fade out when heart reaches 2x size (end of 1.6s animation)
         setTimeout(() => {
-          overlay.classList.add('fade-out');
+          overlay.classList.add("fade-out");
 
           // Trigger chalk underline animation as overlay starts fading
-          const superpowersEl = document.getElementById('superpowersUnderline');
+          const superpowersEl = document.getElementById("superpowersUnderline");
           if (superpowersEl) {
-            superpowersEl.classList.add('animate');
+            superpowersEl.classList.add("animate");
           }
         }, 2000);
 
@@ -3425,8 +3641,8 @@
 
       // Deferred hero video loading - starts after welcome overlay fades
       (function initDeferredHeroVideo() {
-        const layer = document.querySelector('.afm-video-layer');
-        const v = layer?.querySelector('video');
+        const layer = document.querySelector(".afm-video-layer");
+        const v = layer?.querySelector("video");
         if (!layer || !v) return;
 
         const PLAYBACK_TIMEOUT = 5000;
@@ -3435,29 +3651,30 @@
         const showFallback = () => {
           // Only show fallback if video hasn't started playing
           if (!playbackStarted) {
-            layer.classList.add('afm-video-failed');
+            layer.classList.add("afm-video-failed");
           }
         };
 
         const onPlaying = () => {
           if (playbackStarted) return;
           playbackStarted = true;
-          layer.classList.add('afm-video-playing');
+          layer.classList.add("afm-video-playing");
         };
 
         // Listen for playing event (may be triggered by iOS unlock script)
-        v.addEventListener('playing', onPlaying);
+        v.addEventListener("playing", onPlaying);
 
         const loadAndPlay = () => {
           // Skip if already playing (iOS unlock may have started it)
-          if (playbackStarted || layer.classList.contains('afm-video-playing')) return;
+          if (playbackStarted || layer.classList.contains("afm-video-playing"))
+            return;
 
           const src = v.dataset.src;
-          if (!src || v.querySelector('source')) {
+          if (!src || v.querySelector("source")) {
             // Source already attached, just try to play
-            if (v.querySelector('source') && v.paused) {
+            if (v.querySelector("source") && v.paused) {
               const p = v.play();
-              if (p && typeof p.then === 'function') {
+              if (p && typeof p.then === "function") {
                 p.then(onPlaying).catch(() => {
                   // Safari may block autoplay - wait for user gesture
                   // Don't show fallback immediately on desktop/Android
@@ -3467,9 +3684,9 @@
             return;
           }
 
-          const source = document.createElement('source');
+          const source = document.createElement("source");
           source.src = src;
-          source.type = 'video/mp4';
+          source.type = "video/mp4";
           v.appendChild(source);
           v.load();
 
@@ -3477,7 +3694,7 @@
           v.muted = true;
           v.playsInline = true;
 
-          v.addEventListener('error', showFallback, { once: true });
+          v.addEventListener("error", showFallback, { once: true });
 
           // Timeout-based failure detection
           const playbackTimeout = setTimeout(() => {
@@ -3487,7 +3704,7 @@
           }, PLAYBACK_TIMEOUT);
 
           const p = v.play();
-          if (p && typeof p.then === 'function') {
+          if (p && typeof p.then === "function") {
             p.then(() => {
               clearTimeout(playbackTimeout);
               onPlaying();
@@ -3506,35 +3723,38 @@
 
       // Lazy-load videos when they enter viewport (for tutorial video)
       (function initLazyVideos() {
-        const lazyVideos = document.querySelectorAll('.afm-lazy-video');
+        const lazyVideos = document.querySelectorAll(".afm-lazy-video");
         if (!lazyVideos.length) return;
 
-        const videoObserver = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const video = entry.target;
-              const src = video.dataset.src;
-              if (src && !video.querySelector('source')) {
-                const source = document.createElement('source');
-                source.src = src;
-                source.type = 'video/mp4';
-                video.appendChild(source);
-                video.load();
-                video.play().catch(() => {});
+        const videoObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const video = entry.target;
+                const src = video.dataset.src;
+                if (src && !video.querySelector("source")) {
+                  const source = document.createElement("source");
+                  source.src = src;
+                  source.type = "video/mp4";
+                  video.appendChild(source);
+                  video.load();
+                  video.play().catch(() => {});
+                }
+                observer.unobserve(video);
               }
-              observer.unobserve(video);
-            }
-          });
-        }, { rootMargin: '100px 0px', threshold: 0.1 });
+            });
+          },
+          { rootMargin: "100px 0px", threshold: 0.1 },
+        );
 
-        lazyVideos.forEach(video => videoObserver.observe(video));
+        lazyVideos.forEach((video) => videoObserver.observe(video));
       })();
 
       // Scroll-triggered reveal animations for all sections
       (function initScrollAnimations() {
         // Select all animatable elements (excluding .afm-step which displays immediately)
-        const segmentCards = document.querySelectorAll('.afm-segment-card');
-        const unlockItems = document.querySelectorAll('.afm-unlock-item');
+        const segmentCards = document.querySelectorAll(".afm-segment-card");
+        const unlockItems = document.querySelectorAll(".afm-unlock-item");
 
         // Combine all elements
         const allElements = [...segmentCards, ...unlockItems];
@@ -3542,28 +3762,33 @@
         if (!allElements.length) return;
 
         // Respect reduced motion preference
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const prefersReducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
         if (prefersReducedMotion) {
-          allElements.forEach((el) => el.classList.add('afm-visible'));
+          allElements.forEach((el) => el.classList.add("afm-visible"));
           return;
         }
 
         const observerOptions = {
           root: null,
-          rootMargin: '0px 0px -60px 0px',
+          rootMargin: "0px 0px -60px 0px",
           threshold: 0.15,
         };
 
         const revealElement = (entries, observer) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              entry.target.classList.add('afm-visible');
+              entry.target.classList.add("afm-visible");
               observer.unobserve(entry.target);
             }
           });
         };
 
-        const observer = new IntersectionObserver(revealElement, observerOptions);
+        const observer = new IntersectionObserver(
+          revealElement,
+          observerOptions,
+        );
 
         allElements.forEach((el) => {
           observer.observe(el);
@@ -3573,7 +3798,7 @@
       function handleEmailSubmit(event) {
         event.preventDefault();
 
-        const input = document.getElementById('emailInput');
+        const input = document.getElementById("emailInput");
         if (!input) return;
 
         // native email validation (works with type="email" + required)
@@ -3583,7 +3808,7 @@
         }
 
         // Pre-fill modal email field with footer input
-        const modalEmail = document.getElementById('modalEmail');
+        const modalEmail = document.getElementById("modalEmail");
         if (modalEmail && input.value) {
           modalEmail.value = input.value.trim();
         }
@@ -3593,31 +3818,31 @@
 
       // Modal Functions
       function openModal() {
-        document.getElementById('afmModal').classList.add('active');
-        document.body.style.overflow = 'hidden';
+        document.getElementById("afmModal").classList.add("active");
+        document.body.style.overflow = "hidden";
       }
 
       function closeModal() {
-        document.getElementById('afmModal').classList.remove('active');
-        document.body.style.overflow = '';
+        document.getElementById("afmModal").classList.remove("active");
+        document.body.style.overflow = "";
         // Reset modal to step 1 after close animation
         setTimeout(resetModal, 300);
       }
 
       function resetModal() {
-        const step1 = document.getElementById('modalStep1');
-        const step2 = document.getElementById('modalStep2');
-        const form = document.getElementById('modalSignupForm');
-        const submitBtn = document.getElementById('modalSubmitBtn');
+        const step1 = document.getElementById("modalStep1");
+        const step2 = document.getElementById("modalStep2");
+        const form = document.getElementById("modalSignupForm");
+        const submitBtn = document.getElementById("modalSubmitBtn");
 
-        step1.classList.remove('hidden', 'fade-out', 'fade-in');
-        step2.classList.add('hidden');
-        step2.classList.remove('fade-in');
+        step1.classList.remove("hidden", "fade-out", "fade-in");
+        step2.classList.add("hidden");
+        step2.classList.remove("fade-in");
 
         if (form) form.reset();
         if (submitBtn) {
           submitBtn.disabled = false;
-          submitBtn.textContent = 'Join Now';
+          submitBtn.textContent = "Join Now";
         }
       }
 
@@ -3664,7 +3889,7 @@
                 "Content-Type": "application/x-www-form-urlencoded",
               },
               body: formData.toString(),
-            }
+            },
           );
 
           // Transition to success state
@@ -3680,30 +3905,30 @@
       }
 
       function transitionToStep2() {
-        const step1 = document.getElementById('modalStep1');
-        const step2 = document.getElementById('modalStep2');
+        const step1 = document.getElementById("modalStep1");
+        const step2 = document.getElementById("modalStep2");
 
         // Fade out step 1
-        step1.classList.add('fade-out');
+        step1.classList.add("fade-out");
 
         // After fade out, switch to step 2
         setTimeout(() => {
-          step1.classList.add('hidden');
-          step2.classList.remove('hidden');
-          step2.classList.add('fade-in');
+          step1.classList.add("hidden");
+          step2.classList.remove("hidden");
+          step2.classList.add("fade-in");
         }, 300);
       }
 
       // Close modal when clicking overlay
-      document.getElementById('afmModal').addEventListener('click', (e) => {
+      document.getElementById("afmModal").addEventListener("click", (e) => {
         if (e.target === e.currentTarget) {
           closeModal();
         }
       });
 
       // Close modal with Escape key
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
           closeModal();
         }
       });
@@ -3711,29 +3936,32 @@
       // Performance: Pause off-screen infinite animations
       (function initAnimationPauseObserver() {
         // Skip if user prefers reduced motion (animations already handled)
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+          return;
 
         // Elements with infinite animations to observe
         const animatedSelectors = [
-          '.afm-floating-badge', // badgeFloat
-          '.afm-portal-card', // portalVortex (::before)
-          '.afm-status-dot', // statusPulse
-          '.afm-hero-cta', // boltCharge (svg), ctaGlowPulse
-          '.afm-explore-guide', // guideFloat, arrowBounce
-          '.afm-footer-peek', // peekFloat
-          '.afm-activation-divider', // heartPulseSubtle
-          '.afm-steps-runner', // runnerPath, runnerWobble
-          '.afm-footer-portal', // footerPortalVortex (::before)
-          '.afm-footer-download-cta', // footerBoltPulse
+          ".afm-floating-badge", // badgeFloat
+          ".afm-portal-card", // portalVortex (::before)
+          ".afm-status-dot", // statusPulse
+          ".afm-hero-cta", // boltCharge (svg), ctaGlowPulse
+          ".afm-explore-guide", // guideFloat, arrowBounce
+          ".afm-footer-peek", // peekFloat
+          ".afm-activation-divider", // heartPulseSubtle
+          ".afm-steps-runner", // runnerPath, runnerWobble
+          ".afm-footer-portal", // footerPortalVortex (::before)
+          ".afm-footer-download-cta", // footerBoltPulse
         ];
 
-        const animatedElements = document.querySelectorAll(animatedSelectors.join(', '));
+        const animatedElements = document.querySelectorAll(
+          animatedSelectors.join(", "),
+        );
         if (!animatedElements.length) return;
 
         const observerOptions = {
           root: null,
           // Generous margin to start animations before fully visible
-          rootMargin: '100px 0px 100px 0px',
+          rootMargin: "100px 0px 100px 0px",
           threshold: 0,
         };
 
@@ -3741,20 +3969,23 @@
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               // Element entering viewport - resume animations
-              entry.target.classList.remove('afm-animation-paused');
+              entry.target.classList.remove("afm-animation-paused");
             } else {
               // Element leaving viewport - pause animations
-              entry.target.classList.add('afm-animation-paused');
+              entry.target.classList.add("afm-animation-paused");
             }
           });
         };
 
-        const animationObserver = new IntersectionObserver(toggleAnimation, observerOptions);
+        const animationObserver = new IntersectionObserver(
+          toggleAnimation,
+          observerOptions,
+        );
 
         animatedElements.forEach((el) => {
           // Start with animations paused for off-screen elements
           if (!isElementInViewport(el)) {
-            el.classList.add('afm-animation-paused');
+            el.classList.add("afm-animation-paused");
           }
           animationObserver.observe(el);
         });
@@ -3770,9 +4001,9 @@
     <!-- iOS/Safari Video Autoplay Fix - Synchronous user gesture path -->
     <script>
       (function () {
-        const layer = document.querySelector('.afm-video-layer');
-        const video = layer?.querySelector('video');
-        const touchTarget = layer?.querySelector('.afm-video-touch-target');
+        const layer = document.querySelector(".afm-video-layer");
+        const video = layer?.querySelector("video");
+        const touchTarget = layer?.querySelector(".afm-video-touch-target");
         if (!video || !layer) return;
 
         let sourceAttached = false;
@@ -3783,13 +4014,13 @@
         const onPlaying = () => {
           if (playbackStarted) return;
           playbackStarted = true;
-          layer.classList.add('afm-video-playing');
+          layer.classList.add("afm-video-playing");
         };
-        video.addEventListener('playing', onPlaying);
+        video.addEventListener("playing", onPlaying);
 
         // Show fallback on failure - keeps poster visible via CSS
         const showFallback = () => {
-          layer.classList.add('afm-video-failed');
+          layer.classList.add("afm-video-failed");
         };
 
         // Synchronously attach source - must happen in same call stack as user gesture
@@ -3803,14 +4034,14 @@
           }
 
           // Skip if source already exists
-          if (video.querySelector('source')) {
+          if (video.querySelector("source")) {
             sourceAttached = true;
             return true;
           }
 
-          const source = document.createElement('source');
+          const source = document.createElement("source");
           source.src = src;
-          source.type = 'video/mp4';
+          source.type = "video/mp4";
           video.appendChild(source);
           video.load();
           sourceAttached = true;
@@ -3820,7 +4051,7 @@
           video.playsInline = true;
 
           // Handle load errors
-          video.addEventListener('error', showFallback, { once: true });
+          video.addEventListener("error", showFallback, { once: true });
 
           return true;
         };
@@ -3837,7 +4068,7 @@
           }, PLAYBACK_TIMEOUT);
 
           const p = video.play();
-          if (p && typeof p.then === 'function') {
+          if (p && typeof p.then === "function") {
             p.then(() => {
               clearTimeout(playbackTimeout);
               onPlaying();
@@ -3861,8 +4092,8 @@
           };
 
           // touchstart for iOS, click for desktop fallback
-          touchTarget.addEventListener('touchstart', unlock, { passive: true });
-          touchTarget.addEventListener('click', unlock);
+          touchTarget.addEventListener("touchstart", unlock, { passive: true });
+          touchTarget.addEventListener("click", unlock);
         }
       })();
     </script>
