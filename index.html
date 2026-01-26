@@ -3645,6 +3645,8 @@
           email: emailInput.value.trim(),
           name: nameInput.value.trim(),
           phone: phoneInput.value.trim() || "",
+          ua: navigator.userAgent,
+          referrer: window.location.href,
         });
 
         try {
