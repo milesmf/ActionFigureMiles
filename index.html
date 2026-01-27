@@ -1572,15 +1572,20 @@
         aspect-ratio: 9 / 18;
         background: #1a1a1a;
         border-radius: 32px;
-        padding: 12px;
+        padding: 10px;
+        box-sizing: border-box;
         box-shadow:
           0 24px 48px rgba(0, 0, 0, 0.15),
           0 8px 16px rgba(0, 0, 0, 0.1),
           inset 0 0 0 2px rgba(255, 255, 255, 0.1);
         overflow: hidden;
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
       }
 
       .afm-howto-demo-screen {
+        flex: 1 1 auto;
         width: 100%;
         height: 100%;
         background: #f5eee0;
@@ -1589,6 +1594,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        /* Ensure proper clipping on all browsers */
+        -webkit-mask-image: -webkit-radial-gradient(white, black);
       }
 
       .afm-howto-demo-screen img,
@@ -1596,6 +1603,8 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        border-radius: inherit;
+        display: block;
       }
 
       .afm-howto-demo-placeholder {
@@ -2919,17 +2928,31 @@
         position: relative !important;
         overflow: hidden !important;
         border-radius: 32px !important; /* keep modern bevel */
+        display: flex !important;
+        align-items: stretch !important;
+        justify-content: center !important;
+        /* Force GPU layer for proper clipping on all devices */
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+        isolation: isolate;
       }
 
-      /* the inner screen must be the thing that fills the phone */
+      /* the inner screen must fill via flex, not absolute positioning */
       .afm-howto-demo-screen {
-        position: absolute !important;
-        inset: 12px !important; /* bezel thickness; tweak 10–16px */
+        position: relative !important;
+        flex: 1 1 auto !important;
+        width: 100% !important;
+        height: 100% !important;
         overflow: hidden !important;
         border-radius: 22px !important; /* inner glass radius */
+        /* Force GPU layer for proper rounded corner clipping */
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+        -webkit-mask-image: -webkit-radial-gradient(white, black);
+        mask-image: radial-gradient(white, black);
       }
 
-      /* media must fill the screen box */
+      /* media must fill the screen box with proper clipping */
       .afm-howto-demo-screen > video,
       .afm-howto-demo-screen > img {
         width: 100% !important;
@@ -2937,6 +2960,10 @@
         display: block !important;
         object-fit: cover !important;
         object-position: center !important;
+        border-radius: 22px !important;
+        /* Prevent any potential overflow */
+        max-width: 100% !important;
+        max-height: 100% !important;
       }
     </style>
   </head>
