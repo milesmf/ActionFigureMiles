@@ -2914,19 +2914,23 @@
         }
       }
 
-      .afm-howto-demo-phone,
+      /* FIX: keep modern phone frame, hard-clip the demo media */
+      .afm-howto-demo-phone {
+        overflow: hidden !important;
+      }
       .afm-howto-demo-screen {
-        overflow: hidden;
+        overflow: hidden !important;
+        border-radius: 22px !important;
       }
 
-      .afm-howto-demo-screen {
-        border-radius: 22px; /* must match existing screen radius */
-      }
-
-      .afm-howto-demo-screen img,
-      .afm-howto-demo-screen video {
-        object-fit: cover;
-        object-position: center;
+      /* FIX: prevent iOS/Safari weird sizing + stop letterboxing */
+      .afm-howto-demo-screen > video,
+      .afm-howto-demo-screen > img {
+        width: 100% !important;
+        height: 100% !important;
+        display: block !important;
+        object-fit: cover !important;
+        object-position: center !important;
       }
     </style>
   </head>
