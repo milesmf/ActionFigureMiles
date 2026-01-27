@@ -2914,24 +2914,19 @@
         }
       }
 
-      /* 1) Make the phone mock match typical phone/video aspect */
-      .afm-howto-demo-phone {
-        aspect-ratio: 9 / 16; /* was 9 / 18 */
+      .afm-howto-demo-phone,
+      .afm-howto-demo-screen {
+        overflow: hidden;
       }
 
-      /* 2) If you want ZERO cropping, use contain */
+      .afm-howto-demo-screen {
+        border-radius: 22px; /* must match existing screen radius */
+      }
+
       .afm-howto-demo-screen img,
       .afm-howto-demo-screen video {
-        object-fit: contain; /* was cover */
+        object-fit: cover;
         object-position: center;
-        background: #000; /* fills letterbox */
-      }
-
-      /* 3) Mobile guardrail: don’t let it exceed viewport height */
-      @media (max-width: 900px) {
-        .afm-howto-demo-phone {
-          max-height: 72vh;
-        }
       }
     </style>
   </head>
