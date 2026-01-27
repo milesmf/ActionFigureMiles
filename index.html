@@ -2914,16 +2914,22 @@
         }
       }
 
-      /* FIX: keep modern phone frame, hard-clip the demo media */
+      /* iOS Safari: lock the demo phone + screen fill */
       .afm-howto-demo-phone {
+        position: relative !important;
         overflow: hidden !important;
-      }
-      .afm-howto-demo-screen {
-        overflow: hidden !important;
-        border-radius: 22px !important;
+        border-radius: 32px !important; /* keep modern bevel */
       }
 
-      /* FIX: prevent iOS/Safari weird sizing + stop letterboxing */
+      /* the inner screen must be the thing that fills the phone */
+      .afm-howto-demo-screen {
+        position: absolute !important;
+        inset: 12px !important; /* bezel thickness; tweak 10–16px */
+        overflow: hidden !important;
+        border-radius: 22px !important; /* inner glass radius */
+      }
+
+      /* media must fill the screen box */
       .afm-howto-demo-screen > video,
       .afm-howto-demo-screen > img {
         width: 100% !important;
